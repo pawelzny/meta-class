@@ -1,0 +1,38 @@
+{
+    "name": "pawelzny/meta-class",
+    "description": "Framework agnostic MetaClass support for PHP classes",
+    "keywords": [
+        "meta",
+        "MetaClass"
+    ],
+    "type": "library",
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "Paweł Zadrożny",
+            "email": "pawel.zny@gmail.com",
+            "homepage": "https://pawelzny.com",
+            "role": "Owner and Developer"
+        }
+    ],
+    "support": {
+        "email": "pawel.zny@gmail.com"
+    },
+    "require": {
+        "php" : "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.6",
+        "friendsofphp/php-cs-fixer": "^2.0"
+    },
+    "scripts": {
+        "test": "phpunit",
+        "fixer": "php-cs-fixer fix --config=./.php_cs"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pawelzny\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

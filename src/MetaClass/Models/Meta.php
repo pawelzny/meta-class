@@ -2,6 +2,7 @@
 
 namespace Pawelzny\MetaClass\Models;
 
+use Pawelzny\Discovery\Discovery;
 use Pawelzny\MetaClass\Exceptions\ForbiddenException;
 use Pawelzny\MetaClass\Exceptions\MetaAttributeException;
 use Pawelzny\MetaClass\Exceptions\MetaMethodException;
@@ -20,6 +21,36 @@ class Meta
     public function __construct($class)
     {
         $this->class = $class;
+        $this->setModelFields();
+
+        if ($this->class->form) {
+            $this->form = \App::make($this->class->form, [$this->class->getFillable(), $this->fields]);
+        }
+    }
+
+    /**
+     * TODO: unhardcode to be available outside of Laravel
+     */
+    private function setModelFields()
+    {
+        $fields = Discovery::Schema()->listTableColumns($this->class->getTable());
+
+        $guarded = $this->class->getGuarded();
+        if (count($guarded) > 1 && ! in_array('*')) {
+            $filter = function ($field) {
+                return ! in_array($field->getName(), $this->class->getGuarded()) &&
+                       ! in_array($field->getName(), $this->class->getHidden());
+            };
+        } else {
+            $filter = function ($field) {
+                return in_array($field->getName(), $this->class->getFillable()) &&
+                       ! in_array($field->getName(), $this->class->getHidden());
+            };
+        }
+
+        $this->fields = array_map(function ($field) {
+            return $field->toArray();
+        }, array_filter($fields, $filter));
     }
 
     /**

@@ -19,7 +19,8 @@
         "email": "pawel.zny@gmail.com"
     },
     "require": {
-        "php" : "^7.0"
+        "php" : "^7.0",
+        "doctrine/dbal": "^2.5"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.6",

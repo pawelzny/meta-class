@@ -1,5 +1,6 @@
 <?php
 
+use Pawelzny\MetaClass\Models\Meta;
 use Pawelzny\MetaClass\Traits\MetaClass;
 use PHPUnit\Framework\TestCase;
 
@@ -13,7 +14,7 @@ class MetatorInit
     use MetaClass;
 
     // override default initMeta method to set initial, custom meta attribute
-    public function initMeta()
+    public function metaInit()
     {
         $this->meta()->init_attribute = ['init' => true];
     }
@@ -34,8 +35,8 @@ class MetaClassTraitTest extends TestCase
 
     public function testMetatorAccessMeta()
     {
-        $this->assertInstanceOf('\Pawelzny\MetaClass\Models\Meta', $this->metator->meta());
-        $this->assertInstanceOf('\Pawelzny\MetaClass\Models\Meta', $this->metatorInit->meta());
+        $this->assertInstanceOf(Meta::class, $this->metator->meta());
+        $this->assertInstanceOf(Meta::class, $this->metatorInit->meta());
     }
 
     public function testMetaInit()

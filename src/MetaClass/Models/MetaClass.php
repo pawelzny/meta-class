@@ -8,10 +8,6 @@ use Pawelzny\MetaClass\Exceptions\MetaMethodException;
 abstract class MetaClass
 {
     /**
-     * @var object Class instance
-     */
-    protected $class;
-    /**
      * @var array Meta methods register
      */
     protected $methods = [];
@@ -19,15 +15,6 @@ abstract class MetaClass
      * @var array Meta attributes register
      */
     protected $attributes = [];
-
-    /**
-     * MetaClass constructor.
-     * @param $class
-     */
-    public function __construct($class)
-    {
-        $this->class = $class;
-    }
 
     /**
      * Calls registered method. Throws MetaMethodException if method
@@ -54,9 +41,9 @@ abstract class MetaClass
     public function __set($property, $value)
     {
         if ($value instanceof \Closure) {
-            $this->methods[$property] = $value;
+            $this->setMethod($property, $value);
         } else {
-            $this->attributes[$property] = $value;
+            $this->setAttribute($property, $value);
         }
     }
 
@@ -74,4 +61,18 @@ abstract class MetaClass
 
         return $this->attributes[$attribute];
     }
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    abstract protected function setAttribute($name, $value);
+
+    /**
+     * @param string $name
+     * @param \Closure $closure
+     * @return $this
+     */
+    abstract protected function setMethod($name, \Closure $closure);
 }

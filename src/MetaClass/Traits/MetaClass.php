@@ -13,24 +13,17 @@ trait MetaClass
     protected $meta_class = Meta::class;
 
     /**
-     * Holds Meta class instance.
-     * @var Meta
-     */
-    private static $_meta_instance = null;
-
-    /**
      * Returns instance of Meta class
      * @return Meta
      */
     public function meta()
     {
         // Create new Meta class instance on first call.
-        if (static::$_meta_instance === null) {
-            static::$_meta_instance = new $this->meta_class($this);
+        if (gettype($this->meta_class) != 'object') {
+            $this->meta_class = new $this->meta_class($this);
             $this->metaInit();
         }
-
-        return static::$_meta_instance;
+        return $this->meta_class;
     }
 
     /**

@@ -14,7 +14,7 @@ trait SchemaDiscovery
     {
         if (gettype($this->meta_schema) != 'object') {
             $conn = ! is_null($this->meta_connection) ? $this->meta_connection : UnknownConnection::class;
-            (new Maybe(new $conn()))->bind(function ($connection) {
+            (new Maybe(new $conn()))->then(function ($connection) {
                 $this->meta_schema = new $this->meta_schema($this, $connection);
             });
         }

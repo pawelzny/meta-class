@@ -23,17 +23,20 @@ class Schema extends Discovery implements SchemaDiscoverable
      * @param $class
      * @param Connectable $connection
      */
-    public function __construct($class, Connectable $connection)
+    public function __construct(object $class, Connectable $connection)
     {
         parent::__construct($class);
 
         $this->connection = $connection;
         (new Maybe($this->connection))
-            ->bind(function () {
+            ->then(function () {
                 return $this->connection->connect();
             })
-            ->bind(function ($conn) {
-                $this->schema = $conn->getSchemaManager();
+            ->then(function ($connection) {
+                return $connection->getSchemaManager();
+            })
+            ->then(function ($sm) {
+                $this->schema = $sm;
             });
     }
 
@@ -45,7 +48,7 @@ class Schema extends Discovery implements SchemaDiscoverable
      */
     public function getModelFields()
     {
-        return (new Maybe($this->schema))->bind(function ($schema) {
+        return (new Maybe($this->schema))->then(function ($schema) {
             return $schema->listTableColumns($this->class->getTable());
         })->extract();
     }

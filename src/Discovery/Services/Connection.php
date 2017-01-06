@@ -31,8 +31,8 @@ abstract class Connection implements Connectable
             'driver' => $db_driver,
         ];
 
-        (new Maybe($this::NAME))->bind(function () use ($db_params) {
-            (new MaybeNot($this->connection))->bind(function () use ($db_params) {
+        (new Maybe($this::NAME))->then(function () use ($db_params) {
+            (new MaybeNot($this->connection))->then(function () use ($db_params) {
                 $this->connection = DriverManager::getConnection($db_params, new Configuration());
             });
         });

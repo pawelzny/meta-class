@@ -20,7 +20,7 @@ abstract class Monad
         return new static($value);
     }
 
-    public function bind(\Closure $function, array $args = [])
+    public function then(\Closure $function, array $args = [])
     {
         return $this->unit($this->exec($function, $this->value, $args));
     }
@@ -37,7 +37,7 @@ abstract class Monad
     protected function exec(\Closure $function, $value, array $args = [])
     {
         if ($value instanceof static) {
-            return $value->bind($function, $args);
+            return $value->then($function, $args);
         }
         array_unshift($args, $value);
 

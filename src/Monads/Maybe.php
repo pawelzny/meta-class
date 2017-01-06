@@ -9,20 +9,12 @@ class Maybe extends Monad
         return ! is_null($this->value);
     }
 
-    public function bind(\Closure $function, array $args = [])
+    public function then(\Closure $function, array $args = [])
     {
         if ($this->maybe()) {
-            return parent::bind($function, $args);
+            return parent::then($function, $args);
         }
 
         return new static(null);
-    }
-}
-
-class MaybeNot extends Maybe
-{
-    protected function maybe()
-    {
-        return ! parent::maybe();
     }
 }

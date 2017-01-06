@@ -5,6 +5,8 @@ namespace Pawelzny\Discovery\Services;
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\DriverManager;
 use Pawelzny\Discovery\Contracts\Connectable;
+use Pawelzny\Monads\Maybe;
+use Pawelzny\Monads\MaybeNot;
 
 abstract class Connection implements Connectable
 {
@@ -18,8 +20,7 @@ abstract class Connection implements Connectable
 
     protected $connection = null;
 
-    public function __construct($db_name = null, $db_user = null, $db_pass = null,
-                                $db_host = null, $db_port = null, $db_driver = null)
+    public function __construct($db_name, $db_user, $db_pass, $db_host, $db_port, $db_driver)
     {
         $db_params = [
             'dbname' => $db_name,
@@ -30,10 +31,11 @@ abstract class Connection implements Connectable
             'driver' => $db_driver,
         ];
 
-        $config = new Configuration();
-        if ($this->connection === null) {
-            $this->connection = DriverManager::getConnection($db_params, $config);
-        }
+        (new Maybe($this::NAME))->bind(function () use ($db_params) {
+            (new MaybeNot($this->connection))->bind(function () use ($db_params) {
+                $this->connection = DriverManager::getConnection($db_params, new Configuration());
+            });
+        });
     }
 
     public function connect()

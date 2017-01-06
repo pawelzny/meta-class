@@ -1,6 +1,6 @@
 <?php
 
-namespace Pawelzny\MetaClass\Discovery\Contracts;
+namespace Pawelzny\Discovery\Contracts;
 
 interface SchemaDiscoverable {
     /**

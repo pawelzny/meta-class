@@ -23,6 +23,7 @@ trait MetaClass
             $this->meta_class = new $this->meta_class($this);
             $this->metaInit();
         }
+
         return $this->meta_class;
     }
 

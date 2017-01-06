@@ -7,7 +7,6 @@ use Pawelzny\Discovery\Contracts\Connectable;
 use Pawelzny\Discovery\Contracts\SchemaDiscoverable;
 use Pawelzny\Monads\Maybe;
 
-
 class Schema extends Discovery implements SchemaDiscoverable
 {
     /**

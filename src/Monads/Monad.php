@@ -6,11 +6,13 @@ abstract class Monad
 {
     protected $value;
 
-    public function __construct($value) {
+    public function __construct($value)
+    {
         $this->value = $value;
     }
 
-    public function unit($value) {
+    public function unit($value)
+    {
         if ($value instanceof static) {
             return $value;
         }
@@ -18,18 +20,22 @@ abstract class Monad
         return new static($value);
     }
 
-    public function bind(\Closure $function, array $args = []) {
+    public function bind(\Closure $function, array $args = [])
+    {
         return $this->unit($this->exec($function, $this->value, $args));
     }
 
-    public function extract() {
+    public function extract()
+    {
         if ($this->value instanceof static) {
             return $this->value->extract();
         }
+
         return $this->value;
     }
 
-    protected function exec(\Closure $function, $value, array $args = []) {
+    protected function exec(\Closure $function, $value, array $args = [])
+    {
         if ($value instanceof static) {
             return $value->bind($function, $args);
         }

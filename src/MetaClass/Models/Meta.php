@@ -62,6 +62,7 @@ class Meta extends MetaClass
     protected function setAttribute($name, $value)
     {
         $this->attributes[$name] = $value;
+
         return $this;
     }
 
@@ -73,6 +74,7 @@ class Meta extends MetaClass
     protected function setMethod($name, \Closure $closure)
     {
         $this->methods[$name] = $closure;
+
         return $this;
     }
 }

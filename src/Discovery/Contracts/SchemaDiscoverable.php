@@ -2,7 +2,8 @@
 
 namespace Pawelzny\Discovery\Contracts;
 
-interface SchemaDiscoverable {
+interface SchemaDiscoverable
+{
     /**
      * Returns array of model schema columns.
      * If there is no connection to database or

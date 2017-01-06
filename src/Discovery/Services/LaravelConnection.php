@@ -6,6 +6,8 @@ use Pawelzny\Discovery\Contracts\Connectable;
 
 class LaravelConnection extends Connection implements Connectable
 {
+    const NAME = 'laravel';
+
     public function __construct()
     {
         $db = config('database.connections')[config('database.default')];

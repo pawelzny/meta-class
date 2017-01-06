@@ -14,6 +14,8 @@ abstract class Connection implements Connectable
     const MS_SQL_DRIVER = 'sqlsrv';
     const ORACLE_DRIVER = 'oci8';
 
+    const NAME = 'generic';
+
     protected $connection = null;
 
     public function __construct($db_name = null, $db_user = null, $db_pass = null,

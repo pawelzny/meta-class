@@ -6,4 +6,5 @@ use Pawelzny\Discovery\Contracts\Connectable;
 
 class UnknownConnection extends Connection implements Connectable
 {
+    const NAME = 'unknown';
 }

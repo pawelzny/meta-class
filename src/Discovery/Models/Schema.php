@@ -7,6 +7,7 @@ use Pawelzny\Discovery\Contracts\Connectable;
 use Pawelzny\Discovery\Services\UnknownConnection;
 use Pawelzny\MetaClass\Discovery\Contracts\SchemaDiscoverable;
 
+
 class Schema extends Discovery implements SchemaDiscoverable
 {
     /**
@@ -28,7 +29,7 @@ class Schema extends Discovery implements SchemaDiscoverable
         parent::__construct($class);
 
         $this->connection = $connection;
-        if (! is_null($this->connection->connect())) {
+        if ($this->isKnownConnection() && $this->isEstablishedConnection()) {
             $this->schema = $this->connection->connect()->getSchemaManager();
         }
     }
@@ -41,45 +42,31 @@ class Schema extends Discovery implements SchemaDiscoverable
      */
     public function getModelFields()
     {
-        if ($this->connection instanceof UnknownConnection) {
-            return null;
-        }
-        switch ($this->environment->name) {
-            case 'laravel/framework':
-                return $this->laravelModel();
-            default:
-                return $this->customModel();
-        }
+        $fields = null;
+        try {
+            $fields = $this->schema->listTableColumns($this->class->getTable());
+        } catch (\Exception $exception) {}
+
+        return $fields;
     }
 
     /**
-     * @return array
+     * Predicates if connection is known one
+     * @return bool
      */
-    protected function laravelModel()
+    protected function isKnownConnection()
     {
-        $fields = $this->schema->listTableColumns($this->class->getTable());
+        $c = get_class($this->connection);
 
-        $guarded = $this->class->getGuarded();
-        if (count($guarded) > 1 && ! in_array('*', $guarded)) {
-            $filter = function ($field) {
-                return ! in_array($field->getName(), $this->class->getGuarded()) &&
-                    ! in_array($field->getName(), $this->class->getHidden());
-            };
-        } else {
-            $filter = function ($field) {
-                return in_array($field->getName(), $this->class->getFillable()) &&
-                    ! in_array($field->getName(), $this->class->getHidden());
-            };
-        }
-
-        return array_filter($fields, $filter);
+        return $c::NAME != UnknownConnection::NAME;
     }
 
     /**
-     * @return array
+     * Predicates if connection can be established
+     * @return bool
      */
-    protected function customModel()
+    protected function isEstablishedConnection()
     {
-        return $this->schema->listTableColumns($this->class->getTable());
+        return ! is_null($this->connection->connect());
     }
 }

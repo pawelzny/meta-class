@@ -2,6 +2,12 @@
 
 Framework agnostic MetaClass support for PHP Classes.
 
+Gives model's ability to have meta attributes and meta methods,
+which are encapsulate behind `meta()` API.
+
+MetaClass built in extension `SchemaDiscover` is able to fetch
+model schema columns. Can be useful when model is not aware of it's schema.
+
 ## Installation:
 
 **If composer is installed globally in your OS:**
@@ -31,6 +37,9 @@ use Pawelzny\MetaClass\Traits\MetaClass;
 class Model {
     use MetaClass;
     
+    /**
+     * Optional hook invoked on MetaClass construction.
+     */
     protected function initMeta()
     {
         $this->meta()->custom_init_attribute = 'init attribute';
@@ -56,6 +65,89 @@ assert($model->meta()->hasMethod('custom_init_method')); // true
 assert($model->meta()->hasAttribute('undefined_attribute')); //false
 assert($model->meta()->hasMethod('undefined_method')); // false
 ```
+
+## Model schema columns autoload
+
+If model is separated from schema id is difficult to manage automatic jobs
+in example generating forms for administrative CRUD purposes.
+
+Add another trait to model to fetch schema columns.
+
+SchemaDiscovery uses `\Symfony\DBAL` library.
+
+Schema columns are set as `meta()->fields` attribute.
+
+### Requirements
+
+* Your model have to implement database table name getter `getTable()`.
+* Your model need `$meta_connection` property pointing to Connectable class.
+
+
+```php
+<?php
+
+use Pawelzny\Discovery\Connections\Connection;
+use Pawelzny\Discovery\Contracts\Connectable;
+use Pawelzny\Discovery\Traits\SchemaDiscovery;
+use Pawelzny\MetaClass\Traits\MetaClass;
+
+class CustomConnection extends Connection implements Connectable
+{
+    /**
+     * Connection adapter identifier.
+     * Needs to be not empty string value.
+     * @return string
+     */
+    const NAME = 'custom';
+    
+    /**
+     * @return array ['dbname', 'user', 'password', 'host', 'port', 'driver']
+     */
+    protected function getCredentials()
+    {
+        /* 
+         * get_config() function is just an example of how you should do this.
+         * never use passwords with plain text in your source code under version control.
+         */
+        return [
+            'dbname' => get_config('database'),
+            'user' => get_config('username'),
+            'password' => get_config('password'),
+            'host' => get_config('host'),
+            'port' => get_config('port'),
+            'driver' => Connection::MYSQL_DRIVER,
+        ];
+    }
+}
+
+class Model {
+    use MetaClass, SchemaDiscovery;
+    
+    protected $table = 'models';
+    protected $meta_connection = CustomConnection::class;
+    
+    protected function initMeta()
+    {
+        $this->meta()->custom_init_attribute = 'init attribute';
+        $this->meta()->custom_init_method = function () { return 'custom method'; };
+    }
+    
+    /**
+     * If your framework do not implements
+     * database table getter you need to add it manually.
+     */
+    public function getTable()
+    {
+        return $this->table;
+    }
+}
+```
+
+### Predefined Connections
+
+Use one of this predefined Connection adapters.
+
+1. `\Pawelzny\Discovery\Services\LaravelConnection::class`
 
 ## MetaClass API
 

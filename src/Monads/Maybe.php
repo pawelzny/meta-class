@@ -2,16 +2,18 @@
 
 namespace Pawelzny\Monads;
 
-class Maybe extends Monad
-{
-    protected function maybe()
-    {
-        return ! is_null($this->value);
-    }
+use Pawelzny\Monads\Contracts\MonadInterface;
 
-    public function then(\Closure $function, array $args = [])
+class Maybe extends Monad implements MonadInterface
+{
+    /**
+     * @param callable $function
+     * @param array $args
+     * @return MonadInterface
+     */
+    public function then(callable $function, array $args = [])
     {
-        if ($this->maybe()) {
+        if (! is_null($this->value)) {
             return parent::then($function, $args);
         }
 

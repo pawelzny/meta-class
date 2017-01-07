@@ -2,10 +2,17 @@
 
 abstract class Discovery
 {
-    protected $class = null;
+    /**
+     * @var null|mixed
+     */
+    protected $model = null;
 
-    public function __construct($class)
+    /**
+     * Discovery constructor.
+     * @param $model
+     */
+    public function __construct($model)
     {
-        $this->class = $class;
+        $this->model = $model;
     }
 }

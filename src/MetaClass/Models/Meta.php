@@ -3,24 +3,32 @@
 namespace Pawelzny\MetaClass\Models;
 
 use Pawelzny\Discovery\Traits\SchemaDiscovery;
+use Pawelzny\Monads\Maybe;
 
 class Meta extends MetaClass
 {
     /**
      * @var object Class instance
      */
-    protected $class;
+    protected $model;
 
-    public function __construct($class)
+    /**
+     * Meta constructor.
+     * @param $model
+     */
+    public function __construct($model)
     {
-        $this->class = $class;
+        $this->model = $model;
+
         if ($this->hasTrait(SchemaDiscovery::class)) {
-            try {
-                $this->setAttribute('fields', $this->class->discover()->getModelFields());
-            } catch (\Exception $exception) {
-                /** discover() method has been wrongly overridden */
-                throw new \Exception("Method discover() do not call it's parent method");
-            }
+            $getModelFields = function ($discover) {
+                return $discover->getModelFields();
+            };
+
+            $maybe = new Maybe($this->model->discover());
+            $fields = $maybe->then($maybe($getModelFields))->extract();
+
+            $this->setAttribute('fields', $fields);
         }
     }
 
@@ -51,7 +59,7 @@ class Meta extends MetaClass
      */
     public function hasTrait($trait)
     {
-        return in_array($trait, class_uses($this->class));
+        return in_array($trait, class_uses($this->model));
     }
 
     /**
@@ -67,11 +75,11 @@ class Meta extends MetaClass
     }
 
     /**
-     * @param string $name
-     * @param \Closure $closure
+     * @param $name
+     * @param callable $closure
      * @return $this
      */
-    protected function setMethod($name, \Closure $closure)
+    protected function setMethod($name, callable $closure)
     {
         $this->methods[$name] = $closure;
 

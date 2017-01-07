@@ -40,7 +40,7 @@ abstract class MetaClass
      */
     public function __set($property, $value)
     {
-        if ($value instanceof \Closure) {
+        if (is_callable($value)) {
             $this->setMethod($property, $value);
         } else {
             $this->setAttribute($property, $value);
@@ -70,9 +70,9 @@ abstract class MetaClass
     abstract protected function setAttribute($name, $value);
 
     /**
-     * @param string $name
-     * @param \Closure $closure
-     * @return $this
+     * @param $name
+     * @param callable $closure
+     * @return mixed
      */
-    abstract protected function setMethod($name, \Closure $closure);
+    abstract protected function setMethod($name, callable $closure);
 }

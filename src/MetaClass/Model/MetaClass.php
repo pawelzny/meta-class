@@ -1,16 +1,18 @@
 <?php
 
-namespace Pawelzny\MetaClass\Models;
+namespace Pawelzny\MetaClass\Model;
 
+use Pawelzny\MetaClass\Contracts\MetaExpansible;
 use Pawelzny\MetaClass\Exceptions\MetaAttributeException;
 use Pawelzny\MetaClass\Exceptions\MetaMethodException;
 
-abstract class MetaClass
+abstract class MetaClass implements MetaExpansible
 {
     /**
      * @var array Meta methods register
      */
     protected $methods = [];
+
     /**
      * @var array Meta attributes register
      */
@@ -37,6 +39,7 @@ abstract class MetaClass
      * Puts new meta method and meta attributes in the registry.
      * @param $property
      * @param $value
+     * @return void
      */
     public function __set($property, $value)
     {
@@ -63,16 +66,24 @@ abstract class MetaClass
     }
 
     /**
+     * Adds new attribute to the registry.
      * @param string $name
      * @param mixed $value
-     * @return $this
+     * @return MetaExpansible
      */
-    abstract protected function setAttribute($name, $value);
+    abstract protected function setAttribute(string $name, $value): MetaExpansible;
 
     /**
+     * Adds new method to the registry.
      * @param $name
      * @param callable $closure
-     * @return mixed
+     * @return MetaExpansible
      */
-    abstract protected function setMethod($name, callable $closure);
+    abstract protected function setMethod(string $name, callable $closure): MetaExpansible;
+
+    /**
+     * MetaClass config executor
+     * @return void
+     */
+    abstract protected function configurator();
 }

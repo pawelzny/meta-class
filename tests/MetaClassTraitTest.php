@@ -1,7 +1,7 @@
 <?php
 
-use Pawelzny\MetaClass\Models\Meta;
-use Pawelzny\MetaClass\Traits\MetaClass;
+use Pawelzny\MetaClass\MetaClass;
+use Pawelzny\MetaClass\Model\Meta;
 use PHPUnit\Framework\TestCase;
 
 class Metator

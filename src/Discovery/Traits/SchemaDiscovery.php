@@ -2,9 +2,9 @@
 
 namespace Pawelzny\Discovery\Traits;
 
+use Pawelzny\Discovery\Connections\UnknownConnection;
 use Pawelzny\Discovery\Contracts\Connectable;
 use Pawelzny\Discovery\Models\Schema;
-use Pawelzny\Discovery\Connections\UnknownConnection;
 use Pawelzny\Monads\Maybe;
 
 trait SchemaDiscovery

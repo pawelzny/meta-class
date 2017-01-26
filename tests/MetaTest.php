@@ -1,6 +1,6 @@
 <?php
 
-use Pawelzny\MetaClass\Models\Meta;
+use Pawelzny\MetaClass\Model\Meta;
 use PHPUnit\Framework\TestCase;
 
 class MetaClassTest extends TestCase
@@ -10,93 +10,45 @@ class MetaClassTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-
-        $class = new \stdClass();
-        $class->name = 'test class';
-
-        $this->meta = new Meta($class);
+        // MetaClass consumes objects
+        $this->meta = new Meta(new stdClass());
     }
 
-    public function testConstructor()
+    public function testMetaAttributeSetter()
     {
-        $meta_class = new ReflectionClass($this->meta);
-        $property = $meta_class->getProperty('class');
-        $property->setAccessible(true);
-        $std_class = $property->getValue($this->meta);
-        $this->assertInstanceOf('stdClass', $std_class);
-        $this->objectHasAttribute('name', $std_class);
+        $this->meta->testAttribute = 'test attribute';
+
+        $this->assertFalse(property_exists($this->meta, 'testAttribute'));
+        $this->assertEquals('test attribute', $this->meta->testAttribute);
     }
 
-    public function testSetMethod()
+    public function testMetaMethodSetter()
     {
-        $this->meta->test_method = function () {
-            return true;
+        $this->meta->testMethod = function () {
+            return 'test method';
         };
 
-        $class = new ReflectionClass($this->meta);
-        $property = $class->getProperty('methods');
-        $property->setAccessible(true);
-        $this->assertArrayHasKey('test_method', $property->getValue($this->meta));
-    }
-
-    public function testSetAttribute()
-    {
-        $this->meta->test_attribute = ['test' => true];
-
-        $class = new ReflectionClass($this->meta);
-        $property = $class->getProperty('attributes');
-        $property->setAccessible(true);
-        $this->assertArrayHasKey('test_attribute', $property->getValue($this->meta));
-    }
-
-    public function testCallMethod()
-    {
-        $this->meta->test_method = function () {
-            return ['test' => true];
-        };
-
-        $this->assertInternalType('array', $this->meta->test_method());
-        $this->assertArrayHasKey('test', $this->meta->test_method());
-    }
-
-    /**
-     * @expectedException \Pawelzny\MetaClass\Exceptions\MetaMethodException
-     */
-    public function testCallUndefinedMethod()
-    {
-        $this->meta->undefined_method();
-    }
-
-    public function testGetAttribute()
-    {
-        $this->meta->test_attribute = ['test' => true];
-
-        $this->assertArrayHasKey('test', $this->meta->test_attribute);
-    }
-
-    /**
-     * @expectedException \Pawelzny\MetaClass\Exceptions\MetaAttributeException
-     */
-    public function testGetUndefinedAttribute()
-    {
-        $this->meta->undefined_attribute;
+        $this->assertFalse(method_exists($this->meta, 'testMethod'));
+        $this->assertEquals('test method', $this->meta->testMethod());
     }
 
     public function testHasAttribute()
     {
-        $this->meta->test_attribute = 'test';
+        $this->meta->testAttribute = 'test attribute';
 
-        $this->assertTrue($this->meta->hasAttribute('test_attribute'));
-        $this->assertFalse($this->meta->hasAttribute('undefined_attribute'));
+        $this->assertTrue($this->meta->hasAttribute('testAttribute'));
+        $this->assertFalse($this->meta->hasAttribute('fakeAttribute'));
     }
 
     public function testHasMethod()
     {
-        $this->meta->test_method = function () {
-            return ['test' => true];
+        $this->meta->testMethod = function () {
+            return 'I am test method';
         };
 
-        $this->assertTrue($this->meta->hasMethod('test_method'));
-        $this->assertFalse($this->meta->hasMethod('undefined_method'));
+        $this->assertTrue($this->meta->hasMethod('testMethod'));
+        $this->assertEquals('I am test method', $this->meta->testMethod());
+
+        $this->assertFalse($this->meta->hasMethod('fakeMethod'));
     }
 }

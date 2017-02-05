@@ -2,24 +2,30 @@
 
 namespace Pawelzny\MetaClass;
 
-use Pawelzny\MetaClass\Model\Meta;
+use Pawelzny\MetaClass\Model\MetaCompose;
 
 trait MetaClass
 {
-    private static $meta_class = null;
+    /**
+     * Cached MetaClass object
+     * @var null|\Pawelzny\MetaClass\Contracts\MetaComposable
+     */
+    private $_meta_class = null;
 
     /**
      * Returns instance of Meta class
-     * @return Meta
+     * @return \Pawelzny\MetaClass\Contracts\MetaComposable
      */
     public function meta()
     {
-        if (static::$meta_class === null) {
-            static::$meta_class = new Meta($this);
+        if ($this->_meta_class === null) {
+            $this->_meta_class = $this->getMetaClass();
+
+            $this->_meta_class->compose();
             $this->metaInit();
         }
 
-        return static::$meta_class;
+        return $this->_meta_class;
     }
 
     /**
@@ -28,5 +34,17 @@ trait MetaClass
      */
     protected function metaInit()
     {
+    }
+
+    /**
+     * Create MetaClass object from existing meta_class property
+     * or default \Pawelzny\MetaClass\Model\Meta class if no custom meta_class exists
+     * @return \Pawelzny\MetaClass\Contracts\MetaComposable
+     */
+    private function getMetaClass()
+    {
+        return property_exists($this, 'meta_class') && isset($this->meta_class)
+            ? new $this->meta_class($this)
+            : new MetaCompose($this);
     }
 }

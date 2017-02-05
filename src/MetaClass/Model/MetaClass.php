@@ -71,7 +71,7 @@ abstract class MetaClass implements MetaExpansible
      * @param mixed $value
      * @return MetaExpansible
      */
-    abstract protected function setAttribute(string $name, $value): MetaExpansible;
+    abstract protected function setAttribute($name, $value);
 
     /**
      * Adds new method to the registry.
@@ -79,11 +79,12 @@ abstract class MetaClass implements MetaExpansible
      * @param callable $closure
      * @return MetaExpansible
      */
-    abstract protected function setMethod(string $name, callable $closure): MetaExpansible;
+    abstract protected function setMethod($name, callable $closure);
 
     /**
-     * MetaClass config executor
-     * @return void
+     * Predicates if Object has own not null property.
+     * @param string $name
+     * @return bool
      */
-    abstract protected function configurator();
+    abstract protected function hasProperty($name);
 }

@@ -43,7 +43,7 @@ class Schema extends Discovery implements SchemaDiscoverable
      * can't sniff schema, returns null.
      * @return array|null
      */
-    public function getModelFields()
+    public function getModelSchema()
     {
         $listTableColumns = function ($table) {
             return $this->schema->listTableColumns($table);

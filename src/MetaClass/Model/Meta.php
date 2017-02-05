@@ -7,64 +7,71 @@ use Pawelzny\MetaClass\Contracts\MetaExpansible;
 class Meta extends MetaClass implements MetaExpansible
 {
     /**
-     * Configurator will look for this property inside Model instance.
-     * @var string
-     */
-    protected $meta_config_property = 'meta_config';
-
-    /**
      * Model instance
      * @var object
      */
-    private $model;
-
-    /**
-     * MetaConfig instance
-     * @var object
-     */
-    private $config;
+    protected $model = null;
 
     /**
      * Meta constructor.
      * @param object $model
      */
-    public function __construct($model)
+    public function __construct($model = null)
     {
-        $this->model = $model;
-        $this->configurator();
+        $this->setModel($model);
     }
 
     /**
-     * Predicates if Object has meta method in the registry.
+     * Predicates if MetaExpansible has model instance.
+     * @return bool
+     */
+    public function hasModel()
+    {
+        return $this->hasProperty('model');
+    }
+
+    /**
+     * Sets model instance
+     * @param $model
+     * @return MetaExpansible
+     */
+    public function setModel($model)
+    {
+        if (! $this->hasModel()) {
+            $this->model = $model;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Predicates if MetaExpansible has meta method in the registry.
      * @param string $name
      * @return bool
      */
-    public function hasMethod(string $name): bool
+    public function hasMethod($name)
     {
         return array_key_exists($name, $this->methods);
     }
 
     /**
-     * Predicates if Object has meta attribute in the registry.
+     * Predicates if MetaExpansible has meta attribute in the registry.
      * @param string $name
      * @return bool
      */
-    public function hasAttribute(string $name): bool
+    public function hasAttribute($name)
     {
         return array_key_exists($name, $this->attributes);
     }
 
     /**
-     * Adds new attribute to the registry.
+     * Predicates if Object has own not null property.
      * @param string $name
-     * @param mixed $value
-     * @return MetaExpansible
+     * @return bool
      */
-    protected function setAttribute(string $name, $value): MetaExpansible
+    protected function hasProperty($name)
     {
-        $this->attributes[$name] = $value;
-
-        return $this;
+        return property_exists($this, $name) && isset($this->{$name});
     }
 
     /**
@@ -73,7 +80,7 @@ class Meta extends MetaClass implements MetaExpansible
      * @param callable $closure
      * @return MetaExpansible
      */
-    protected function setMethod(string $name, callable $closure): MetaExpansible
+    protected function setMethod($name, callable $closure)
     {
         $this->methods[$name] = $closure;
 
@@ -81,13 +88,15 @@ class Meta extends MetaClass implements MetaExpansible
     }
 
     /**
-     * MetaClass config executor
+     * Adds new attribute to the registry.
+     * @param string $name
+     * @param mixed $value
+     * @return MetaExpansible
      */
-    protected function configurator()
+    protected function setAttribute($name, $value)
     {
-        if (! $this->config && property_exists($this->model, $this->meta_config_property)) {
-            $this->config = new $this->model->{$this->meta_config_property}();
-            $this->config->execute();
-        }
+        $this->attributes[$name] = $value;
+
+        return $this;
     }
 }

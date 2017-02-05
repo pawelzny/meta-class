@@ -10,5 +10,5 @@ interface SchemaDiscoverable
      * can't sniff schema, returns null.
      * @return array|null
      */
-    public function getModelFields();
+    public function getModelSchema();
 }

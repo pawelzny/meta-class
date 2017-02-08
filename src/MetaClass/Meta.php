@@ -1,12 +1,12 @@
 <?php
 
-namespace Pawelzny\MetaClass\Model;
+namespace Pawelzny\MetaClass;
 
 use Pawelzny\MetaClass\Contracts\MetaExpansible;
 use Pawelzny\MetaClass\Exceptions\MetaAttributeException;
 use Pawelzny\MetaClass\Exceptions\MetaMethodException;
 
-abstract class MetaClass implements MetaExpansible
+class Meta implements MetaExpansible
 {
     /**
      * @var array Meta methods register
@@ -21,8 +21,8 @@ abstract class MetaClass implements MetaExpansible
     /**
      * Calls registered method. Throws MetaMethodException if method
      * does not exist.
-     * @param $method
-     * @param $arguments
+     * @param string $method
+     * @param array $arguments
      * @return mixed
      * @throws MetaMethodException
      */
@@ -37,8 +37,8 @@ abstract class MetaClass implements MetaExpansible
 
     /**
      * Puts new meta method and meta attributes in the registry.
-     * @param $property
-     * @param $value
+     * @param string $property
+     * @param mixed $value
      * @return void
      */
     public function __set($property, $value)
@@ -52,7 +52,7 @@ abstract class MetaClass implements MetaExpansible
 
     /**
      * Retrieves meta methods and meta attributes from the registry.
-     * @param $attribute
+     * @param string $attribute
      * @return mixed
      * @throws MetaAttributeException
      */
@@ -66,12 +66,24 @@ abstract class MetaClass implements MetaExpansible
     }
 
     /**
-     * Adds new attribute to the registry.
+     * Predicates if MetaExpansible has meta method in the registry.
      * @param string $name
-     * @param mixed $value
-     * @return MetaExpansible
+     * @return bool
      */
-    abstract protected function setAttribute($name, $value);
+    public function hasMethod($name)
+    {
+        return array_key_exists($name, $this->methods);
+    }
+
+    /**
+     * Predicates if MetaExpansible has meta attribute in the registry.
+     * @param string $name
+     * @return bool
+     */
+    public function hasAttribute($name)
+    {
+        return array_key_exists($name, $this->attributes);
+    }
 
     /**
      * Adds new method to the registry.
@@ -79,12 +91,23 @@ abstract class MetaClass implements MetaExpansible
      * @param callable $closure
      * @return MetaExpansible
      */
-    abstract protected function setMethod($name, callable $closure);
+    protected function setMethod($name, callable $closure)
+    {
+        $this->methods[$name] = $closure;
+
+        return $this;
+    }
 
     /**
-     * Predicates if Object has own not null property.
+     * Adds new attribute to the registry.
      * @param string $name
-     * @return bool
+     * @param mixed $value
+     * @return MetaExpansible
      */
-    abstract protected function hasProperty($name);
+    protected function setAttribute($name, $value)
+    {
+        $this->attributes[$name] = $value;
+
+        return $this;
+    }
 }

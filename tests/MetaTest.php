@@ -1,6 +1,6 @@
 <?php
 
-use Pawelzny\MetaClass\Model\Meta;
+use Pawelzny\MetaClass\MetaModel;
 use PHPUnit\Framework\TestCase;
 
 class MetaClassTest extends TestCase
@@ -11,7 +11,7 @@ class MetaClassTest extends TestCase
     {
         parent::setUp();
         // MetaClass consumes objects
-        $this->meta = new Meta(new stdClass());
+        $this->meta = new MetaModel(new stdClass());
     }
 
     public function testMetaAttributeSetter()

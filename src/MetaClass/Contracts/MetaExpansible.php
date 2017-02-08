@@ -5,29 +5,28 @@ namespace Pawelzny\MetaClass\Contracts;
 interface MetaExpansible
 {
     /**
-     * Predicates if MetaExpansible has meta method in the registry.
-     * @param string $name
-     * @return bool
+     * Calls registered method. Throws MetaMethodException if method
+     * does not exist.
+     * @param string $method
+     * @param array $arguments
+     * @return mixed
+     * @throws \Pawelzny\MetaClass\Exceptions\MetaMethodException
      */
-    public function hasMethod($name);
+    public function __call($method, $arguments);
 
     /**
-     * Predicates if MetaExpansible has meta attribute in the registry.
-     * @param string $name
-     * @return bool
+     * Puts new meta method and meta attributes in the registry.
+     * @param string $property
+     * @param mixed $value
+     * @return void
      */
-    public function hasAttribute($name);
+    public function __set($property, $value);
 
     /**
-     * Predicates if MetaExpansible has model instance.
-     * @return bool
+     * Retrieves meta methods and meta attributes from the registry.
+     * @param string $attribute
+     * @return mixed
+     * @throws \Pawelzny\MetaClass\Exceptions\MetaAttributeException
      */
-    public function hasModel();
-
-    /**
-     * Sets model instance
-     * @param $model
-     * @return MetaExpansible
-     */
-    public function setModel($model);
+    public function __get($attribute);
 }

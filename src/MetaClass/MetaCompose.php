@@ -25,9 +25,8 @@ use Pawelzny\MetaClass\Exceptions\ComposableException;
  *      ->compose(); // compose meta data for $some_object
  *
  * // Declarative usage
- *
  * // First build your custom MetaCompose class
- * class CustomCompose extends MetaCompose
+ * class CustomCompose extends MetaCompose implements Composable
  * {
  *      protected $components = [CustomComponent::class, BestComponent::class];
  *      protected $compose_with = ['some_data' => 'abc'];

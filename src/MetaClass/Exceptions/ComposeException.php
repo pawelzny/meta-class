@@ -2,7 +2,7 @@
 
 namespace Pawelzny\MetaClass\Exceptions;
 
-class ComposableException extends \Exception
+class ComposeException extends \Exception
 {
     /**
      * NotComposableComponentException constructor.

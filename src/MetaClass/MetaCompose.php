@@ -4,7 +4,8 @@ namespace Pawelzny\MetaClass;
 
 use Pawelzny\MetaClass\Contracts\Composable;
 use Pawelzny\MetaClass\Contracts\MetaExpansible;
-use Pawelzny\MetaClass\Exceptions\ComposableException;
+use Pawelzny\MetaClass\Exceptions\ComposeException;
+use Pawelzny\Support;
 
 /**
  * Class MetaCompose.
@@ -66,16 +67,15 @@ use Pawelzny\MetaClass\Exceptions\ComposableException;
 class MetaCompose extends MetaModel implements MetaExpansible, Composable
 {
     /**
-     * Associative array of Composable extensions.
-     * which are booted on MetaCompose initialization.
-     * All components must implement interface: \Pawelzny\MetaClass\Contracts\Composable
+     * Registry with Components classes used by MetaCompose class
+     * All Components must implement interface: \Pawelzny\MetaClass\Contracts\Composable
      *
      * @var array $components
      */
     protected $components = [];
 
     /**
-     * Predeclared array with standard input for components.
+     * Registry with arguments for components.
      *
      * @var array $args
      */
@@ -97,7 +97,7 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      *
      * @api
      * @return Composable
-     * @throws ComposableException
+     * @throws ComposeException
      */
     public function compose()
     {
@@ -107,8 +107,8 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
              */
             $obj = new $class;
 
-            if (! $this->isComposable($obj)) {
-                throw new ComposableException($obj);
+            if (! Support\hasInterface($obj, Composable::class)) {
+                throw new ComposeException($obj);
             }
 
             $composed_data = $obj->with($this->getArgs())->compose()->andReturn();
@@ -216,17 +216,6 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
     }
 
     /**
-     * Predicate if MetaClass is schema discoverable.
-     *
-     * @param $class
-     * @return bool
-     */
-    protected function isComposable($class)
-    {
-        return $class !== null && in_array(Composable::class, class_implements($class));
-    }
-
-    /**
      * Sanitize Component name.
      * If name is index of array or null then return snake_case class name.
      *
@@ -239,7 +228,7 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
     {
         if (is_int($name) || $name === null) {
             $_component = new \ReflectionClass($component);
-            $name = to_snake_case($_component->getShortName());
+            $name = Support\toSnakeCase($_component->getShortName());
         }
 
         if ($prefix) {

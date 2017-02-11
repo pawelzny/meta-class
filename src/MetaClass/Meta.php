@@ -9,18 +9,19 @@ use Pawelzny\MetaClass\Exceptions\MetaMethodException;
 class Meta implements MetaExpansible
 {
     /**
-     * @var array Meta methods register
+     * @var array $methods Meta methods registry
      */
     protected $methods = [];
 
     /**
-     * @var array Meta attributes register
+     * @var array $attributes Meta attributes registry
      */
     protected $attributes = [];
 
     /**
      * Calls registered method. Throws MetaMethodException if method
      * does not exist.
+     *
      * @param string $method
      * @param array $arguments
      * @return mixed
@@ -37,6 +38,7 @@ class Meta implements MetaExpansible
 
     /**
      * Puts new meta method and meta attributes in the registry.
+     *
      * @param string $property
      * @param mixed $value
      * @return void
@@ -52,6 +54,7 @@ class Meta implements MetaExpansible
 
     /**
      * Retrieves meta methods and meta attributes from the registry.
+     *
      * @param string $attribute
      * @return mixed
      * @throws MetaAttributeException
@@ -66,7 +69,9 @@ class Meta implements MetaExpansible
     }
 
     /**
-     * Predicates if MetaExpansible has meta method in the registry.
+     * Predicates if Meta class has meta method in the registry.
+     *
+     * @api
      * @param string $name
      * @return bool
      */
@@ -76,7 +81,9 @@ class Meta implements MetaExpansible
     }
 
     /**
-     * Predicates if MetaExpansible has meta attribute in the registry.
+     * Predicates if Meta class has meta attribute in the registry.
+     *
+     * @api
      * @param string $name
      * @return bool
      */
@@ -87,9 +94,11 @@ class Meta implements MetaExpansible
 
     /**
      * Adds new method to the registry.
-     * @param $name
+     *
+     * @api
+     * @param string $name
      * @param callable $closure
-     * @return MetaExpansible
+     * @return static
      */
     protected function setMethod($name, callable $closure)
     {
@@ -100,9 +109,11 @@ class Meta implements MetaExpansible
 
     /**
      * Adds new attribute to the registry.
+     *
+     * @api
      * @param string $name
      * @param mixed $value
-     * @return MetaExpansible
+     * @return static
      */
     protected function setAttribute($name, $value)
     {

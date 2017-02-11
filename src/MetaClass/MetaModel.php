@@ -8,12 +8,14 @@ class MetaModel extends Meta implements MetaExpansible
 {
     /**
      * Model instance
-     * @var object
+     *
+     * @var object $model
      */
     protected $model = null;
 
     /**
      * Meta constructor.
+     *
      * @param object $model
      */
     public function __construct($model = null)
@@ -23,8 +25,10 @@ class MetaModel extends Meta implements MetaExpansible
 
     /**
      * Sets model instance once
+     *
+     * @api
      * @param object $model
-     * @return \Pawelzny\MetaClass\Contracts\MetaExpansible
+     * @return static
      */
     public function setModel($model)
     {

@@ -1,8 +1,9 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use Pawelzny\Support;
 
-class HelpersTest extends TestCase
+class NormalizeTest extends TestCase
 {
     public function testToSnakeCase()
     {
@@ -33,7 +34,7 @@ class HelpersTest extends TestCase
 
         foreach ($test_cases as $case => $expected)
         {
-            $this->assertEquals($expected, to_snake_case($case));
+            $this->assertEquals($expected, Support\toSnakeCase($case));
         }
     }
 }

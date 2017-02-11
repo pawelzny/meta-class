@@ -1,5 +1,7 @@
 <?php
 
+use Pawelzny\MetaClass\Exceptions\MetaAttributeException;
+use Pawelzny\MetaClass\Exceptions\MetaMethodException;
 use Pawelzny\MetaClass\Meta;
 use PHPUnit\Framework\TestCase;
 
@@ -49,5 +51,21 @@ class MetaTest extends TestCase
         $this->assertEquals('I am test method', $this->meta->testMethod());
 
         $this->assertFalse($this->meta->hasMethod('fakeMethod'));
+    }
+
+    public function testMetaAttributeException()
+    {
+        $this->expectException(MetaAttributeException::class);
+
+        $meta = new Meta;
+        $meta->not_defiend_attr;
+    }
+
+    public function testMetaMethodException()
+    {
+        $this->expectException(MetaMethodException::class);
+
+        $meta = new Meta;
+        $meta->not_defiend_method();
     }
 }

@@ -2,6 +2,7 @@
 
 require_once "factory/Model.php";
 
+use Pawelzny\MetaClass\Exceptions\ComposeException;
 use Pawelzny\MetaClass\MetaCompose;
 use PHPUnit\Framework\TestCase;
 
@@ -53,5 +54,14 @@ class MetaComposeTest extends TestCase
 
         $this->assertEquals('abc', $meta->super_component['some_argument']);
         $this->assertEquals('test', $meta->super_component['env']);
+    }
+
+    public function testComposableException()
+    {
+        $this->expectException(ComposeException::class);
+        $meta = new MetaCompose;
+
+        $meta->setComponents(Model::class);
+        $meta->compose();
     }
 }

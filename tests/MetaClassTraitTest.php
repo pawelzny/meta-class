@@ -1,17 +1,15 @@
 <?php
 
-use Pawelzny\MetaClass\MetaClass;
+require_once "factory/Model.php";
+
 use Pawelzny\MetaClass\MetaCompose;
-use Pawelzny\MetaClass\MetaModel;
 use PHPUnit\Framework\TestCase;
 
 class MetaClassTraitTest extends TestCase
 {
     public function testAccessMeta()
     {
-        $class = new class() {
-            use MetaClass;
-        };
+        $class = new ModelWithTrait;
 
         $this->assertSame(MetaCompose::class, get_class($class->meta()));
         $this->assertFalse($class->meta()->hasAttribute('extra_attr')); // property should not exist in any scope
@@ -26,14 +24,7 @@ class MetaClassTraitTest extends TestCase
 
     public function testMetaInit()
     {
-        $class = new class() {
-            use MetaClass;
-
-            public function metaInit()
-            {
-                $this->meta()->init_attribute = ['init' => true];
-            }
-        };
+        $class = new ModelWithInit;
 
         $this->assertTrue($class->meta()->hasAttribute('init_attribute'));
         $this->assertInternalType('array', $class->meta()->init_attribute);
@@ -42,13 +33,12 @@ class MetaClassTraitTest extends TestCase
 
     public function testCustomMetaClass()
     {
-        $class = new class() {
-            use MetaClass;
+        $class = new ModelWithComponent;
 
-            protected $meta_class = MetaModel::class;
-        };
+        $this->assertSame(MetaTestClass::class, get_class($class->meta()));
+        $this->assertTrue($class->meta()->hasAttribute('component'));
 
-        $this->assertSame(MetaModel::class, get_class($class->meta()));
-        $this->assertNotSame(MetaCompose::class, get_class($class->meta()));
+        $this->assertEquals('test', $class->meta()->component['env']);
+        $this->assertEquals('Component', $class->meta()->component['name']);
     }
 }

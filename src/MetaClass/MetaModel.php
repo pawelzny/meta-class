@@ -28,7 +28,7 @@ class MetaModel extends Meta implements MetaExpansible
      */
     public function setModel($model)
     {
-        if ($this->model !== null) {
+        if ($this->model === null) {
             $this->model = $model;
         }
 

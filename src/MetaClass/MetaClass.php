@@ -2,6 +2,8 @@
 
 namespace Pawelzny\MetaClass;
 
+use Pawelzny\MetaClass\Contracts\Composable;
+
 trait MetaClass
 {
     /**
@@ -19,7 +21,7 @@ trait MetaClass
         if ($this->_meta_class === null) {
             $this->_meta_class = $this->getMetaClass();
 
-            if ($this->hasInterface('Composable')) {
+            if ($this->hasInterface(Composable::class)) {
                 $this->_meta_class->compose();
             }
             $this->metaInit();

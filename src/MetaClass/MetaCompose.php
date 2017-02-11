@@ -11,21 +11,27 @@ use Pawelzny\MetaClass\Exceptions\ComposableException;
  * This class is meant to be extend by custom Meta Composable classes.
  *
  * In fact MetaCompose is fully functional class with all needed setters and getters.
- * But if one prefer more declarative programming style MetaCompose it's
+ * But if one prefer more declarative programming style, MetaCompose is
  * perfect for further extending.
  *
  * @example
  *
- * // Imperative usage
- * $some_obj = new SomeClass;
+ * // Imperative way
  *
- * $meta = new MetaCompose($some_obj); // create meta object for $some_object
+ * $user = new User;
+ * $meta = new MetaCompose($user); // create meta object for $user
  * $meta->setComponents([CustomComponent::class, BestComponent::class])
  *      ->with(['some_data' => 'abc'])
  *      ->compose(); // compose meta data for $some_object
+ * $meta->extra_attribute = 'I am cool';
  *
- * // Declarative usage
- * // First build your custom MetaCompose class
+ * echo $meta->custom_component;
+ * echo $meta->best_component;
+ * echo $meta->extra_attribute;
+ *
+ * // Declarative way
+ *
+ * // First step: build your custom MetaCompose class
  * class CustomCompose extends MetaCompose implements Composable
  * {
  *      protected $components = [CustomComponent::class, BestComponent::class];
@@ -34,17 +40,26 @@ use Pawelzny\MetaClass\Exceptions\ComposableException;
  *
  * class User
  * {
- *      // second use MetaClass trait to autoload MetaCompose class.
+ *      // Second step: use MetaClass trait to autoload and initialize MetaCompose class.
  *      use \Pawelzny\MetaClass\MetaClass;
  *
- *      // declare that you want to use your CustomCompose::class instead of default MetaCompose::class
+ *      // Third step: declare that you want to use
+ *      // CustomCompose::class instead of default MetaCompose::class
  *      protected $meta_class = CustomCompose::class;
+ *
+ *      // Optional step: Initialize meta attributes and function.
+ *      // This method is called only once on Meta object construction.
+ *      protected function metaInit()
+ *      {
+ *          $this->meta()->extra_attribute = 'I am cool';
+ *      }
  * }
  *
  * $user = new User;
- * $meta = $user->meta(); // CustomCompose::class is fully initialized with composed components.
- * echo $meta->customcomponent;
- * echo $meta->bestcomponent;
+ * $meta = $user->meta(); // Meta is fully initialized with composed components and.
+ * echo $meta->custom_component;
+ * echo $meta->best_component;
+ * echo $meta->extra_attribute;
  *
  * @package Pawelzny\MetaClass
  */
@@ -55,16 +70,16 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      * which are booted on MetaCompose initialization.
      * All components must implement interface: \Pawelzny\MetaClass\Contracts\Composable
      *
-     * @var array
+     * @var array $components
      */
     protected $components = [];
 
     /**
      * Predeclared array with standard input for components.
      *
-     * @var array
+     * @var array $args
      */
-    protected $compose_with = [];
+    protected $args = [];
 
     /**
      * MetaCompose constructor.
@@ -96,14 +111,15 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
                 throw new ComposableException($obj);
             }
 
-            $this->setAttribute($component, $obj->with($this->getComposeWith())->compose()->andReturn());
+            $composed_data = $obj->with($this->getArgs())->compose()->andReturn();
+            $this->setAttribute($this->registerAs($class, $component), $composed_data);
         }
 
         return $this;
     }
 
     /**
-     * Registers component's inputs. This method is needed only for expressions.
+     * Registers component's arguments. This method is needed only for expressions.
      * If computed value is needed use this method to insert more components_input.
      * $component_inputs will be passed to every registered component.
      * WARNING! There is no validation, no sanitizing and no collision control.
@@ -111,12 +127,12 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      * By default MetaCompose uses `model` key for $model instance.
      *
      * @api
-     * @param array $items
-     * @return \Pawelzny\MetaClass\Contracts\Composable
+     * @param array $args Arguments
+     * @return static
      */
-    public function with(array $items = [])
+    public function with(array $args = [])
     {
-        $this->compose_with = array_merge($this->compose_with, $items);
+        $this->args = array_merge($this->args, $args);
 
         return $this;
     }
@@ -126,7 +142,7 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      * This is dummy interface implementation.
      * There is no usage in MetaCompose context.
      *
-     * @return \Pawelzny\MetaClass\MetaCompose
+     * @return mixed
      */
     public function andReturn()
     {
@@ -134,63 +150,55 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
     }
 
     /**
-     * Returns component's compose_with data inputs.
+     * Returns component's arguments.
+     * If key is specified returns only single value instead of whole array.
      *
      * @api
-     * @return array
+     * @param null $key specific argument
+     * @return mixed
      */
-    public function getComposeWith()
+    public function getArgs($key = null)
     {
-        return $this->compose_with;
+        if ($key) {
+            return array_key_exists($key, $this->args)
+                ? $this->args[$key]
+                : null;
+        }
+
+        return $this->args;
     }
 
     /**
-     * Registers component used by MetaCompose.
-     * This must not be component object but fully qualified class names with namespaces.
-     * Second parameter is optional.
-     * If $name is not specified, component will be registered under lower case class name
-     * without namespace.
+     * Registers components used by MetaCompose.
+     * Takes one or array of fully qualified class name with namespace.
+     *
+     * Component will be registered under given class name converted to snake_case.
+     * Components could be registered under aliases by passing in associative array.
      *
      * @api
      * @example
      *
-     * MetaCompose::setComponent(CustomComponent::class, "custom");
-     * MetaCompose::setComponent(BestComponent::class);
+     * $meta = new MetaCompose;
      *
-     * @param string $name
-     * @param string $component
-     * @return $this
-     */
-    public function setComponent($component, $name = null)
-    {
-        $this->components[$this->registerAs($component, $name)] = $component;
-
-        return $this;
-    }
-
-    /**
-     * Registers multiple components used by MetaCompose.
-     * These must not be components objects but fully qualified class names with namespaces.
-     * Components array may be associative and every component can get alias name.
-     * When $components variable is index based array, every component will be
-     * registered using it's lower case class name.
+     * // register 'custom_component'.
+     * $meta->setComponents(CustomComponent::class);
      *
-     * @api
-     * @example
+     * // register 'best_component' and 'super_component'.
+     * $meta->setComponents([BestComponent::class, SuperComponent::class]);
      *
-     * MetaCompose::setComponents([
-     *  CustomComponent::class,
-     *  'best' => \Best\Component::class,
-     *  'the_best' => \TheBest\Component::class
+     * // register 'best' and 'the_best' components
+     * $meta->setComponents([
+     *      'best' => \Best\Component::class,
+     *      'the_best' => \TheBest\Component::class
      * ]);
      *
-     * @param array $components
-     * @return \Pawelzny\MetaClass\Contracts\Composable
+     * @param array|string $components
+     * @return static
      */
-    public function setComponents(array $components = [])
+    public function setComponents($components)
     {
-        foreach($components as $name => $component) {
-            $this->setComponent(new $component, $name);
+        foreach((array) $components as $name => $component) {
+            $this->components[$this->registerAs($component, $name)] = $component;
         }
 
         return $this;
@@ -213,24 +221,29 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      * @param $class
      * @return bool
      */
-    private function isComposable($class)
+    protected function isComposable($class)
     {
-        return $class !== null && in_array('Composable', class_implements($class));
+        return $class !== null && in_array(Composable::class, class_implements($class));
     }
 
     /**
      * Sanitize Component name.
-     * If name is index of array or null then return lower case class name.
+     * If name is index of array or null then return snake_case class name.
      *
      * @param string $component
-     * @param null $name
+     * @param string|int $name
+     * @param string $prefix
      * @return string
      */
-    private function registerAs($component, $name = null)
+    protected function registerAs($component, $name = null, $prefix = null)
     {
         if (is_int($name) || $name === null) {
             $_component = new \ReflectionClass($component);
-            $name = strtolower($_component->getShortName());
+            $name = to_snake_case($_component->getShortName());
+        }
+
+        if ($prefix) {
+            $name = $prefix . $name;
         }
 
         return $name;

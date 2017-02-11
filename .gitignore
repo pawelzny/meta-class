@@ -4,6 +4,7 @@
 
 # Files
 composer.phar
+/apigen.phar
 
 # External Libraries
 /vendor/

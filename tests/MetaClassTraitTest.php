@@ -1,48 +1,44 @@
 <?php
 
-use Pawelzny\MetaClass\Models\Meta;
-use Pawelzny\MetaClass\Traits\MetaClass;
+require_once "factory/Model.php";
+
+use Pawelzny\MetaClass\MetaCompose;
 use PHPUnit\Framework\TestCase;
-
-class Metator
-{
-    use MetaClass;
-}
-
-class MetatorInit
-{
-    use MetaClass;
-
-    // override default initMeta method to set initial, custom meta attribute
-    public function metaInit()
-    {
-        $this->meta()->init_attribute = ['init' => true];
-    }
-}
 
 class MetaClassTraitTest extends TestCase
 {
-    protected $metator;
-    protected $metatorInit;
-
-    public function setUp()
+    public function testAccessMeta()
     {
-        parent::setUp();
+        $class = new ModelWithTrait;
 
-        $this->metator = new Metator();
-        $this->metatorInit = new MetatorInit();
-    }
+        $this->assertSame(MetaCompose::class, get_class($class->meta()));
+        $this->assertFalse($class->meta()->hasAttribute('extra_attr')); // property should not exist in any scope
 
-    public function testMetatorAccessMeta()
-    {
-        $this->assertInstanceOf(Meta::class, $this->metator->meta());
-        $this->assertInstanceOf(Meta::class, $this->metatorInit->meta());
+        $class->meta()->extra_attr = "This is meta extra attribute"; // create new meta attribute
+
+        $this->assertFalse(property_exists($class, 'extra_attr')); // property should not exist in object scope
+        $this->assertTrue($class->meta()->hasAttribute('extra_attr')); // property should exist in meta scope
+
+        $this->assertEquals('This is meta extra attribute', $class->meta()->extra_attr);
     }
 
     public function testMetaInit()
     {
-        $this->assertFalse($this->metator->meta()->hasAttribute('init_attribute'));
-        $this->assertTrue($this->metatorInit->meta()->hasAttribute('init_attribute'));
-        $this->assertInternalType('array', $this->metatorInit->meta()->init_attribute);
+        $class = new ModelWithInit;
+
+        $this->assertTrue($class->meta()->hasAttribute('init_attribute'));
+        $this->assertInternalType('array', $class->meta()->init_attribute);
+        $this->assertTrue($class->meta()->init_attribute['init']);
+    }
+
+    public function testCustomMetaClass()
+    {
+        $class = new ModelWithComponent;
+
+        $this->assertSame(MetaTestClass::class, get_class($class->meta()));
+        $this->assertTrue($class->meta()->hasAttribute('component'));
+
+        $this->assertEquals('test', $class->meta()->component['env']);
+        $this->assertEquals('Component', $class->meta()->component['name']);
     }
 }

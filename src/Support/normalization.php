@@ -9,7 +9,8 @@ namespace Pawelzny\Support;
  * @param string $string
  * @return string
  */
-function toSnakeCase($string) {
+function toSnakeCase($string)
+{
     $regex = ['/([a-z\d])([A-Z])/', '/([^_])([A-Z][a-z])/'];
 
     return strtolower(preg_replace($regex, '$1_$2', $string));

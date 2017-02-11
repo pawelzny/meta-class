@@ -21,7 +21,6 @@ return PhpCsFixer\Config::create()
         'blank_line_before_return' => true,
         'hash_to_slash_comment' => true,
         'method_separation' => true,
-        'new_with_braces' => true,
         'no_blank_lines_after_class_opening' => true,
         'no_blank_lines_after_phpdoc' => true,
         'no_empty_comment' => true,

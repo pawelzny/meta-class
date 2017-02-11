@@ -6,6 +6,7 @@ class Component implements Composable
 {
     protected $properties;
     protected $test_case;
+
     public function compose()
     {
         $this->test_case = [
@@ -22,12 +23,14 @@ class Component implements Composable
 
         return $this;
     }
+
     public function with(array $properties = [])
     {
         $this->properties = $properties;
 
         return $this;
     }
+
     public function andReturn()
     {
         return $this->test_case;

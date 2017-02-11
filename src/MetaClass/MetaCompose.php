@@ -197,7 +197,7 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      */
     public function setComponents($components)
     {
-        foreach((array) $components as $name => $component) {
+        foreach ((array) $components as $name => $component) {
             $this->components[$this->registerAs($component, $name)] = $component;
         }
 

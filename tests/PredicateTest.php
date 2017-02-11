@@ -3,8 +3,8 @@
 use Pawelzny\MetaClass\Contracts\Composable;
 use Pawelzny\MetaClass\Meta;
 use Pawelzny\MetaClass\MetaCompose;
-use PHPUnit\Framework\TestCase;
 use Pawelzny\Support;
+use PHPUnit\Framework\TestCase;
 
 class PredicateTest extends TestCase
 {

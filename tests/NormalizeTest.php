@@ -1,7 +1,7 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use Pawelzny\Support;
+use PHPUnit\Framework\TestCase;
 
 class NormalizeTest extends TestCase
 {
@@ -18,7 +18,7 @@ class NormalizeTest extends TestCase
             'Some4Numbers234' => 'some4_numbers234',
             'TEST123String' => 'test123_string',
             'hello_world' => 'hello_world',
-            'multiple__underscores'=> 'multiple__underscores',
+            'multiple__underscores' => 'multiple__underscores',
             '_underscoreFirstAndLast_' => '_underscore_first_and_last_',
             'hello_World' => 'hello_world',
             'HelloWorld' => 'hello_world',
@@ -32,8 +32,7 @@ class NormalizeTest extends TestCase
             '56789DigitsFirst' => '56789_digits_first',
         ];
 
-        foreach ($test_cases as $case => $expected)
-        {
+        foreach ($test_cases as $case => $expected) {
             $this->assertEquals($expected, Support\toSnakeCase($case));
         }
     }

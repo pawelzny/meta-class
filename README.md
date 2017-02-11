@@ -1,12 +1,24 @@
 # MetaClass
 
-Framework agnostic MetaClass support for PHP Classes.
+Dependency free, framework agnostic MetaClass support for PHP Classes.
+Easy to use encapsulation for meta data and meta methods.
 
-Gives model's ability to have meta attributes and meta methods,
-which are encapsulate behind `meta()` API.
+**API Documentation** can be found at [https://pawelzny.com/meta-class/]()
 
-MetaClass built in extension `SchemaDiscover` is able to fetch
-model schema columns. Can be useful when model is not aware of it's schema.
+Licensed under ISC condition Copyright (c) 2017, Paweł Zadrożny.
+
+## What this package is
+
+* PHP classes extension container for meta data and meta methods.
+* Ability to perform actions on object which is not related to business logic.
+* Ability to store information needed for automation application logic.
+* Delegation of logic with extensible components composition.
+
+## What this package is not
+
+* This is no Python-like PHP extension used to redefine classes behaviour.
+* Workaround for bad inheritance architecture.
+* Another complex library which slows down application execution.
 
 ## Installation:
 
@@ -20,201 +32,198 @@ composer require pawelzny/meta-class
 php composer.phar require pawelzny/meta-class
 ```
 
-## Get started
+# Get started
 
-Use MetaClass Trait to enable meta methods and meta attributes.
-For now on Class has access to public `$this->meta()` method which
-gives access to meta attributes and meta methods.
+## Basic usage
 
-Class has also access to protected `$this->initMeta()` method which
-initialize meta attributes and methods once on init.
+Basic functionality is available thanks to single Trait implemented in your class.
 
 ```php
 <?php
 
-use Pawelzny\MetaClass\Traits\MetaClass;
+class User
+{
+    use \Pawelzny\MetaClass\MetaClass;
+    
+    // rest of your User Class
+}
+```
 
-class Model {
-    use MetaClass;
+With MetaClass trait model gets access to `meta()` method which is an interface for meta data.
+Using `meta()` interface is as easy as assigning values and closures to dynamic attributes.
+
+```php
+<?php
+
+$user = new User;
+$user->meta()->special_attribute = "I am so special!";
+$user->meta()->secretMethod = function () {
+    return 'shh .. I am secret!';
+};
+```
+
+## Meta data initialization
+
+MetaClass Trait gives access to another method `metaInit()` which is invoke once on MetaClass boot.
+This is perfect place to initialize default values and methods.
+
+```php
+<?php
+
+class User
+{
+    use \Pawelzny\MetaClass\MetaClass;
+    
+    protected function metaInit()
+    {
+        $this->meta()->booted_values = ['start_at' => microtime(true)];
+    }
+}
+
+$user = new User;
+echo $user->meta()->booted_values['start_at'];
+```
+
+
+# Advance Meta data with components
+
+On default, MetaClass trait boot MetaCompose class which provides all basic
+functionality. MetaCompose fits best for further extension.
+
+## Create Component
+
+Components could be use for more complex logic composition. 
+Instead of putting all logic in metaInit, some parts should be encapsulated.
+
+All components must implements Composable interface.
+Which enforce implementation of three method:
+
+* `compose()` used for computation process
+* `with()` used as arguments setter
+* `andReturn()` to return back computations
+
+
+```php
+<?php
+
+use \Pawelzny\MetaClass\Contracts\Composable;
+
+class CustomComponent implements Composable
+{
+    protected $args = [];
+    protected $output;
     
     /**
-     * Optional hook invoked on MetaClass construction.
+     * Method used for computation.
+     * @return static
      */
-    protected function initMeta()
+    public function compose(){
+        // lets keep this easy for presentation purposes
+        // compose expect to get integer value
+        // and will multiply it by 2.
+        
+        $this->output = $this->args['value'] * 2;
+        
+        return $this;
+    }
+    
+    /**
+     * Args setter
+     * @param array $args
+     * @returns static
+     */
+    public function with(array $args = [])
     {
-        $this->meta()->custom_init_attribute = 'init attribute';
-        $this->meta()->custom_init_method = function () { return 'custom method'; };
+        $this->args = $args;
+        return $this;
+    }
+
+    /**
+     * @return mixed computed data
+     */
+    public function andReturn()
+    {
+        return $this->output;
     }
 }
 ```
 
-You can add new attributes and methods on runtime:
+Example above represents basic implementation of Component.
+All registered components are stacked and invoke one by one with given arguments.
 
-```php
-<?php
-$model = new Model();
-$model->meta()->custom_meta_attribute = 'this is meta attribute';
-$model->meta()->custom_meta_method = function () { return 'meta function'; };
-
-assert($model->meta()->hasAttribute('custom_meta_attribute')); // true
-assert($model->meta()->hasAttribute('custom_init_attribute')); // true
-
-assert($model->meta()->hasMethod('custom_meta_method')); // true
-assert($model->meta()->hasMethod('custom_init_method')); // true
-
-assert($model->meta()->hasAttribute('undefined_attribute')); //false
-assert($model->meta()->hasMethod('undefined_method')); // false
-```
-
-## Model schema columns autoload
-
-If model is separated from schema id is difficult to manage automatic jobs
-in example generating forms for administrative CRUD purposes.
-
-Add another trait to model to fetch schema columns.
-
-SchemaDiscovery uses `\Symfony\DBAL` library.
-
-Schema columns are set as `meta()->fields` attribute.
-
-### Requirements
-
-* Your model have to implement database table name getter `getTable()`.
-* Your model need `$meta_connection` property pointing to Connectable class.
-
+## Create Composition
 
 ```php
 <?php
 
-use Pawelzny\Discovery\Connections\Connection;
-use Pawelzny\Discovery\Contracts\Connectable;
-use Pawelzny\Discovery\Traits\SchemaDiscovery;
-use Pawelzny\MetaClass\Traits\MetaClass;
+use \Pawelzny\MetaClass\MetaCompose;
+use \Pawelzny\MetaClass\Contracts\Composable;
 
-class CustomConnection extends Connection implements Connectable
+class CustomComposition extends MetaCompose implements Composable
 {
     /**
-     * Connection adapter identifier.
-     * Needs to be not empty string value.
-     * @return string
+     * Custom component registry. Components are stacked 
+     * as fully qualified class name with namespace.
+     * It may be plain string "\Nested\Namespace\CustomComponent",
+     * but better option is to use magic constant. 
+     * Whenever you change Component name, compiler throw exception.
+     * 
+     * @var array $components
      */
-    const NAME = 'custom';
+    protected $components = [CustomComponent::class];
     
     /**
-     * @return array ['dbname', 'user', 'password', 'host', 'port', 'driver']
+     * In this example, CustomComponent expected "value" argument.
+     * 
+     * @var array $args
      */
-    protected function getCredentials()
-    {
-        /* 
-         * get_config() function is just an example of how you should do this.
-         * never use passwords with plain text in your source code under version control.
-         */
-        return [
-            'dbname' => get_config('database'),
-            'user' => get_config('username'),
-            'password' => get_config('password'),
-            'host' => get_config('host'),
-            'port' => get_config('port'),
-            'driver' => Connection::MYSQL_DRIVER,
-        ];
-    }
-}
-
-class Model {
-    use MetaClass, SchemaDiscovery;
-    
-    protected $table = 'models';
-    protected $meta_connection = CustomConnection::class;
-    
-    protected function initMeta()
-    {
-        $this->meta()->custom_init_attribute = 'init attribute';
-        $this->meta()->custom_init_method = function () { return 'custom method'; };
-    }
-    
-    /**
-     * If your framework do not implements
-     * database table getter you need to add it manually.
-     */
-    public function getTable()
-    {
-        return $this->table;
-    }
+    protected $args = ['value' => 23];
 }
 ```
 
-### Predefined Connections
+Example above represents implementation of custom meta composition class.
+All needed is inherit from MetaCompose class, and could be override if needed.
 
-Use one of this predefined Connection adapters.
+One of inherited method is `compose()` method because interface enforce it.
+Compose invoke every component, passes args and gets it's computed value.
+Then this value is stored in meta attribute under namespace which is snake_case component's name.
+In this example it's "custom_component" namespace. We will get there for a second.
 
-1. `\Pawelzny\Discovery\Services\LaravelConnection::class`
+## Use Custom Composition inside Model
 
-## MetaClass API
+So we have component and compose classes. Now we need to declare to use it inside model.
 
-Access directly from class which uses MetaClass Trait.
 ```php
 <?php
 
-use Pawelzny\MetaClass\Traits\MetaClass;
-
-class MyModel
+class User
 {
-    use MetaClass;
+    use \Pawelzny\MetaClass\MetaClass;
     
-    public function getValue()
-    {
-        return $this->meta()->value;
-    }
+    /**
+     * MetaClass checks if this $meta_class attribute exists.
+     * If it is, then creates Meta object from it instead of default MetaCompose class.
+     * Because CustomComposition class has components and args, all will be invoke one by one
+     * and result of components computation will be stored inside meta object.
+     * 
+     * @var \Pawelzny\MetaClass\Contracts\Composable $meta_class
+     */
+    protected $meta_class = CustomComposition::class;
     
-    protected function initMeta()
-    {
-        $this->meta()->value = 'initial value';
-    }
+    // rest of user class
 }
+
+$user = new User;
+assert($user->meta()->custom_component === 46); // 23 as input argument multiply by 2
 ```
 
-### `MetaClass: meta()`
+# TODO
 
-Gives access to MetaClass instance.
+**Order by priority**
 
-### `void: initMeta()`
-
-Gives ability to initiate meta attributes and meta methods on MetaClass initialization.
-
-## Meta API
-
-Gives access through `meta()` interface.
-```php
-<?php
-
-use Pawelzny\MetaClass\Traits\MetaClass;
-
-class MyModel
-{
-    use MetaClass;
-    
-    public function hasValue()
-    {
-        return $this->meta()->hasAttribute('value');
-    }
-    
-    public function hasMethod()
-    {
-        return $this->meta()->hasMethod('custom');
-    }
-    
-    protected function initMeta()
-    {
-        $this->meta()->value = 'initial value';
-        $this->meta()->custom = function () { return null; };
-    }
-}
-```
-
-### `boolean: hasAttribute(string $name)`
-
-Checks if MetaClass instance has attribute
-
-### `boolean: hasMethod(string $name)`
-
-Checks if MetaClass instance has method
+- [ ] Component abstraction
+- [ ] Exceptions clean up
+- [ ] Tests clean up, refactor and more cases
+- [ ] Working example code 
+- [ ] Contribution guide
+- [ ] Changelog

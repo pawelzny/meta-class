@@ -11,6 +11,7 @@
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTestsThatDoNotTestAnything="true"
          beStrictAboutTodoAnnotatedTests="true"
+         procesIsolation="true"
          colors="true"
          verbose="true">
     <testsuite>

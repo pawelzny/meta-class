@@ -18,3 +18,8 @@ fi
 
 # generate docs using apigen.phar
 php apigen.phar generate -s ${source} -d ${destination} --template-theme ${template}
+
+# generate metrics for package
+if [ -f vendor/bin/phpmetrics ] ; then
+    ./vendor/bin/phpmetrics --report-html=docs/metrics src
+fi

@@ -1,6 +1,7 @@
 <?php
 
 use Pawelzny\MetaClass\Exceptions\MetaAttributeException;
+use Pawelzny\MetaClass\Exceptions\MetaClassException;
 use Pawelzny\MetaClass\Exceptions\MetaMethodException;
 use Pawelzny\MetaClass\Meta;
 use PHPUnit\Framework\TestCase;
@@ -67,5 +68,13 @@ class MetaTest extends TestCase
 
         $meta = new Meta;
         $meta->not_defiend_method();
+    }
+
+    public function testMetaClassException()
+    {
+        $this->expectException(MetaClassException::class);
+
+        $meta = new Meta;
+        $meta->something_wrong();
     }
 }

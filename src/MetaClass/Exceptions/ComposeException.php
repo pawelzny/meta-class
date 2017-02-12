@@ -2,17 +2,18 @@
 
 namespace Pawelzny\MetaClass\Exceptions;
 
-class ComposeException extends \Exception
+class ComposeException extends MetaClassException
 {
+    protected $message = "Component does not implement \\Pawelzny\\MetaClass\\Contracts\\Composable Interface: ";
+
     /**
      * NotComposableComponentException constructor.
-     * @param $component
+     * @param object $component
      * @param int $code
      * @param \Exception|null $previous
      */
     public function __construct($component, $code = 0, \Exception $previous = null)
     {
-        $message = "Component does not implement \\Pawelzny\\MetaClass\\Contracts\\Composable Interface: " . get_class($component);
-        parent::__construct($message, $code, $previous);
+        $this->message = $this->message . get_class($component);
     }
 }

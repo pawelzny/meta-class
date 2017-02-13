@@ -2,8 +2,10 @@
 
 namespace Pawelzny\MetaClass\Exceptions;
 
-class MetaAttributeException extends \Exception
+class MetaAttributeException extends MetaClassException
 {
+    protected $message = "Undefined meta attribute: ";
+
     /**
      * MetaAttributeException constructor.
      * @param string $attribute
@@ -12,7 +14,6 @@ class MetaAttributeException extends \Exception
      */
     public function __construct($attribute = "", $code = 0, \Exception $previous = null)
     {
-        $message = "Undefined meta attribute: $attribute";
-        parent::__construct($message, $code, $previous);
+        $this->message = $this->message . $attribute;
     }
 }

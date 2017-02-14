@@ -5,6 +5,11 @@ namespace Pawelzny\MetaClass;
 use Pawelzny\MetaClass\Contracts\Composable;
 use Pawelzny\Support;
 
+/**
+ * Class MetaClass
+ *
+ * @package Pawelzny\MetaClass
+ */
 trait MetaClass
 {
     /**

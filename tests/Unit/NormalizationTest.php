@@ -3,7 +3,7 @@
 use Pawelzny\Support;
 use PHPUnit\Framework\TestCase;
 
-class NormalizeTest extends TestCase
+class NormalizationTest extends TestCase
 {
     public function testToSnakeCase()
     {

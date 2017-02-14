@@ -104,6 +104,9 @@
 	<h1>Class Meta</h1>
 
 
+	<div class="description">
+	<p>Class Meta</p>
+	</div>
 
 	<dl class="tree well">
 		<dd style="padding-left:0px">
@@ -138,9 +141,9 @@
 		
 		
 		<b>Namespace:</b> <a href="namespace-Pawelzny.html">Pawelzny</a>\<a href="namespace-Pawelzny.MetaClass.html">MetaClass</a><br>
-		
+		<b>Package:</b> Pawelzny\MetaClass<br>
 
-			<b>Located at</b> <a href="source-class-Pawelzny.MetaClass.Meta.html#9-124" title="Go to source code">MetaClass/Meta.php</a>
+			<b>Located at</b> <a href="source-class-Pawelzny.MetaClass.Meta.html#9-129" title="Go to source code">MetaClass/Meta.php</a>
 		<br>
 	</div>
 
@@ -160,7 +163,7 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#___call">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#21-37" title="Go to source code">__call</a>( <span>string <var>$method</var></span>, <span>array <var>$arguments</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#26-42" title="Go to source code">__call</a>( <span>string <var>$method</var></span>, <span>array <var>$arguments</var></span> )</code>
 
 			<div class="description short">
 				<p>Calls registered method. Throws MetaMethodException if method
@@ -208,7 +211,7 @@ does not exist.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___set">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#39-53" title="Go to source code">__set</a>( <span>string <var>$property</var></span>, <span>mixed <var>$value</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#44-58" title="Go to source code">__set</a>( <span>string <var>$property</var></span>, <span>mixed <var>$value</var></span> )</code>
 
 			<div class="description short">
 				<p>Puts new meta method and meta attributes in the registry.</p>
@@ -246,7 +249,7 @@ does not exist.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___get">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#55-69" title="Go to source code">__get</a>( <span>string <var>$attribute</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#60-74" title="Go to source code">__get</a>( <span>string <var>$attribute</var></span> )</code>
 
 			<div class="description short">
 				<p>Retrieves meta methods and meta attributes from the registry.</p>
@@ -290,7 +293,7 @@ does not exist.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_hasMethod">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#71-81" title="Go to source code">hasMethod</a>( <span>string <var>$name</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#76-86" title="Go to source code">hasMethod</a>( <span>string <var>$name</var></span> )</code>
 
 			<div class="description short">
 				<p>Predicates if Meta class has meta method in the registry.</p>
@@ -331,7 +334,7 @@ does not exist.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_hasAttribute">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#83-93" title="Go to source code">hasAttribute</a>( <span>string <var>$name</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#88-98" title="Go to source code">hasAttribute</a>( <span>string <var>$name</var></span> )</code>
 
 			<div class="description short">
 				<p>Predicates if Meta class has meta attribute in the registry.</p>
@@ -372,7 +375,7 @@ does not exist.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_setMethod">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#95-108" title="Go to source code">setMethod</a>( <span>string <var>$name</var></span>, <span>callable <var>$closure</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#100-113" title="Go to source code">setMethod</a>( <span>string <var>$name</var></span>, <span>callable <var>$closure</var></span> )</code>
 
 			<div class="description short">
 				<p>Adds new method to the registry.</p>
@@ -415,7 +418,7 @@ does not exist.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_setAttribute">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#110-123" title="Go to source code">setAttribute</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#115-128" title="Go to source code">setAttribute</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
 
 			<div class="description short">
 				<p>Adds new attribute to the registry.</p>
@@ -470,7 +473,7 @@ does not exist.</p>
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Pawelzny.MetaClass.Meta.html#11-14" title="Go to source code"><var>$methods</var></a>
+					<a href="source-class-Pawelzny.MetaClass.Meta.html#16-19" title="Go to source code"><var>$methods</var></a>
 
 				<div class="description short">
 					<p>$methods Meta methods registry</p>
@@ -495,7 +498,7 @@ does not exist.</p>
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Pawelzny.MetaClass.Meta.html#16-19" title="Go to source code"><var>$attributes</var></a>
+					<a href="source-class-Pawelzny.MetaClass.Meta.html#21-24" title="Go to source code"><var>$attributes</var></a>
 
 				<div class="description short">
 					<p>$attributes Meta attributes registry</p>

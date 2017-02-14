@@ -6,7 +6,7 @@ use Pawelzny\MetaClass\MetaCompose;
 use Pawelzny\Support;
 use PHPUnit\Framework\TestCase;
 
-class PredicateTest extends TestCase
+class PredicatesTest extends TestCase
 {
     public function testHasInterface()
     {

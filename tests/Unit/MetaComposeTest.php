@@ -1,9 +1,9 @@
 <?php
 
-require_once "factory/Model.php";
-
 use Pawelzny\MetaClass\Exceptions\ComposeException;
 use Pawelzny\MetaClass\MetaCompose;
+use Pawelzny\Tests\Repository\Component\Component;
+use Pawelzny\Tests\Repository\Model\Model;
 use PHPUnit\Framework\TestCase;
 
 class MetaComposeTest extends TestCase

@@ -15,53 +15,6 @@ use Pawelzny\Support;
  * But if one prefer more declarative programming style, MetaCompose is
  * perfect for further extending.
  *
- * @example
- *
- * // Imperative way
- *
- * $user = new User;
- * $meta = new MetaCompose($user); // create meta object for $user
- * $meta->setComponents([CustomComponent::class, BestComponent::class])
- *      ->with(['some_data' => 'abc'])
- *      ->compose(); // compose meta data for $some_object
- * $meta->extra_attribute = 'I am cool';
- *
- * echo $meta->custom_component;
- * echo $meta->best_component;
- * echo $meta->extra_attribute;
- *
- * // Declarative way
- *
- * // First step: build your custom MetaCompose class
- * class CustomCompose extends MetaCompose implements Composable
- * {
- *      protected $components = [CustomComponent::class, BestComponent::class];
- *      protected $compose_with = ['some_data' => 'abc'];
- * }
- *
- * class User
- * {
- *      // Second step: use MetaClass trait to autoload and initialize MetaCompose class.
- *      use \Pawelzny\MetaClass\MetaClass;
- *
- *      // Third step: declare that you want to use
- *      // CustomCompose::class instead of default MetaCompose::class
- *      protected $meta_class = CustomCompose::class;
- *
- *      // Optional step: Initialize meta attributes and function.
- *      // This method is called only once on Meta object construction.
- *      protected function metaInit()
- *      {
- *          $this->meta()->extra_attribute = 'I am cool';
- *      }
- * }
- *
- * $user = new User;
- * $meta = $user->meta(); // Meta is fully initialized with composed components and.
- * echo $meta->custom_component;
- * echo $meta->best_component;
- * echo $meta->extra_attribute;
- *
  * @package Pawelzny\MetaClass
  */
 class MetaCompose extends MetaModel implements MetaExpansible, Composable
@@ -96,7 +49,7 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      * Compose meta features from declared $components.
      *
      * @api
-     * @return Composable
+     * @return static
      * @throws ComposeException
      */
     public function compose()
@@ -176,22 +129,6 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      * Components could be registered under aliases by passing in associative array.
      *
      * @api
-     * @example
-     *
-     * $meta = new MetaCompose;
-     *
-     * // register 'custom_component'.
-     * $meta->setComponents(CustomComponent::class);
-     *
-     * // register 'best_component' and 'super_component'.
-     * $meta->setComponents([BestComponent::class, SuperComponent::class]);
-     *
-     * // register 'best' and 'the_best' components
-     * $meta->setComponents([
-     *      'best' => \Best\Component::class,
-     *      'the_best' => \TheBest\Component::class
-     * ]);
-     *
      * @param array|string $components
      * @return static
      */

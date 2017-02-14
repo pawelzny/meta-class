@@ -36,7 +36,8 @@
             "src/Support/predicates.php"
         ],
         "psr-4": {
-            "Pawelzny\\": "src/"
+            "Pawelzny\\": "src/",
+            "Pawelzny\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable"

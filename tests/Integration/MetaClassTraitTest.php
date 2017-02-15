@@ -26,9 +26,9 @@ class MetaClassTraitTest extends TestCase
         $this->assertFalse($class->meta()->hasMethod('extra_method'));
 
         // create new meta attribute and method
-        $class->meta()->custom_meta_attr = "This is custom meta attribute";
+        $class->meta()->custom_meta_attr = 'This is custom meta attribute';
         $class->meta()->custom_meta_method = function () {
-            return "This is custom meta method";
+            return 'This is custom meta method';
         };
 
         // properties should not exist in object scope

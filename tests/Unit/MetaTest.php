@@ -8,69 +8,60 @@ use PHPUnit\Framework\TestCase;
 
 class MetaTest extends TestCase
 {
+    protected $meta;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->meta = new Meta;
+        $this->meta->test_attribute = 'test attribute';
+        $this->meta->testMethod = function () {
+            return 'test method';
+        };
+    }
+
     public function testMetaAttributeSetter()
     {
-        $meta = new Meta;
-        $meta->testAttribute = 'test attribute';
-
-        $this->assertFalse(property_exists($meta, 'testAttribute'));
-        $this->assertEquals('test attribute', $meta->testAttribute);
+        $this->assertFalse(property_exists($this->meta, 'test_attribute'));
+        $this->assertEquals('test attribute', $this->meta->test_attribute);
     }
 
     public function testMetaMethodSetter()
     {
-        $meta = new Meta;
-        $meta->testMethod = function () {
-            return 'test method';
-        };
-
-        $this->assertFalse(method_exists($meta, 'testMethod'));
-        $this->assertEquals('test method', $meta->testMethod());
+        $this->assertFalse(method_exists($this->meta, 'testMethod'));
+        $this->assertEquals('test method', $this->meta->testMethod());
     }
 
     public function testHasAttribute()
     {
-        $meta = new Meta;
-        $meta->testAttribute = 'test attribute';
-
-        $this->assertTrue($meta->hasAttribute('testAttribute'));
-        $this->assertFalse($meta->hasAttribute('fakeAttribute'));
+        $this->assertTrue($this->meta->hasAttribute('test_attribute'));
+        $this->assertFalse($this->meta->hasAttribute('fake_attribute'));
     }
 
     public function testHasMethod()
     {
-        $meta = new Meta;
-        $meta->testMethod = function () {
-            return 'I am test method';
-        };
+        $this->assertTrue($this->meta->hasMethod('testMethod'));
+        $this->assertEquals('test method', $this->meta->testMethod());
 
-        $this->assertTrue($meta->hasMethod('testMethod'));
-        $this->assertEquals('I am test method', $meta->testMethod());
-
-        $this->assertFalse($meta->hasMethod('fakeMethod'));
+        $this->assertFalse($this->meta->hasMethod('fakeMethod'));
     }
 
     public function testMetaAttributeException()
     {
         $this->expectException(MetaAttributeException::class);
-
-        $meta = new Meta;
-        $meta->not_defiend_attr;
+        $this->meta->not_defiend_attr;
     }
 
     public function testMetaMethodException()
     {
         $this->expectException(MetaMethodException::class);
-
-        $meta = new Meta;
-        $meta->not_defiend_method();
+        $this->meta->notDefiendMethod();
     }
 
     public function testMetaClassException()
     {
         $this->expectException(MetaClassException::class);
-
-        $meta = new Meta;
-        $meta->something_wrong();
+        $this->meta->somethingWrong();
     }
 }

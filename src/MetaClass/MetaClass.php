@@ -15,9 +15,9 @@ trait MetaClass
     /**
      * Cached MetaClass object
      *
-     * @var null|\Pawelzny\MetaClass\Contracts\Composable $_meta_class
+     * @var \Pawelzny\MetaClass\Contracts\Composable $_meta_class
      */
-    private $_meta_class = null;
+    private $_meta_class;
 
     /**
      * Returns instance of Meta class
@@ -58,7 +58,7 @@ trait MetaClass
      */
     private function metaFactory()
     {
-        return property_exists($this, 'meta_class') && isset($this->meta_class)
+        return property_exists($this, 'meta_class') && $this->meta_class !== null
             ? new $this->meta_class($this)
             : new MetaCompose($this);
     }

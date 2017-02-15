@@ -106,6 +106,7 @@
 
 			<h3>Functions</h3>
 			<ul>
+				<li><a href="function-Pawelzny.Support.getClassName.html">Pawelzny\Support\getClassName</a></li>
 				<li><a href="function-Pawelzny.Support.hasInterface.html">Pawelzny\Support\hasInterface</a></li>
 				<li><a href="function-Pawelzny.Support.toSnakeCase.html">Pawelzny\Support\toSnakeCase</a></li>
 			</ul>
@@ -142,14 +143,21 @@
 </span><span id="23" class="l"><a href="#23">23 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __set(<span class="php-var">$property</span>, <span class="php-var">$value</span>);
 </span><span id="24" class="l"><a href="#24">24 </a>
 </span><span id="25" class="l"><a href="#25">25 </a>    <span class="php-comment">/**
-</span></span><span id="26" class="l"><a href="#26">26 </a><span class="php-comment">     * Retrieves meta methods and meta attributes from the registry.
-</span></span><span id="27" class="l"><a href="#27">27 </a><span class="php-comment">     * @param string $attribute
-</span></span><span id="28" class="l"><a href="#28">28 </a><span class="php-comment">     * @return mixed
-</span></span><span id="29" class="l"><a href="#29">29 </a><span class="php-comment">     * @throws \Pawelzny\MetaClass\Exceptions\MetaAttributeException
-</span></span><span id="30" class="l"><a href="#30">30 </a><span class="php-comment">     */</span>
-</span><span id="31" class="l"><a href="#31">31 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __get(<span class="php-var">$attribute</span>);
-</span><span id="32" class="l"><a href="#32">32 </a>}
-</span><span id="33" class="l"><a href="#33">33 </a></span></code></pre>
+</span></span><span id="26" class="l"><a href="#26">26 </a><span class="php-comment">     * Is triggered by calling isset() or empty() on object.
+</span></span><span id="27" class="l"><a href="#27">27 </a><span class="php-comment">     * @param $name
+</span></span><span id="28" class="l"><a href="#28">28 </a><span class="php-comment">     * @return boolean
+</span></span><span id="29" class="l"><a href="#29">29 </a><span class="php-comment">     */</span>
+</span><span id="30" class="l"><a href="#30">30 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __isset(<span class="php-var">$name</span>);
+</span><span id="31" class="l"><a href="#31">31 </a>
+</span><span id="32" class="l"><a href="#32">32 </a>    <span class="php-comment">/**
+</span></span><span id="33" class="l"><a href="#33">33 </a><span class="php-comment">     * Retrieves meta methods and meta attributes from the registry.
+</span></span><span id="34" class="l"><a href="#34">34 </a><span class="php-comment">     * @param string $attribute
+</span></span><span id="35" class="l"><a href="#35">35 </a><span class="php-comment">     * @return mixed
+</span></span><span id="36" class="l"><a href="#36">36 </a><span class="php-comment">     * @throws \Pawelzny\MetaClass\Exceptions\MetaAttributeException
+</span></span><span id="37" class="l"><a href="#37">37 </a><span class="php-comment">     */</span>
+</span><span id="38" class="l"><a href="#38">38 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __get(<span class="php-var">$attribute</span>);
+</span><span id="39" class="l"><a href="#39">39 </a>}
+</span><span id="40" class="l"><a href="#40">40 </a></span></code></pre>
 	</div>
 
 	<div id="footer">
@@ -157,6 +165,6 @@
 	</div>
 </div>
 <script src="resources/combined.js?96bcbeb67fd7786400552bcc545e97f7edf0baa7"></script>
-<script src="elementlist.js?cec61300d3714633018efe785b0c3127ec93b173"></script>
+<script src="elementlist.js?4eca466e7bc25390c57cb4e3f31ee293d1a963ee"></script>
 </body>
 </html>

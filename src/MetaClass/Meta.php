@@ -58,6 +58,16 @@ class Meta implements MetaExpansible
     }
 
     /**
+     * Is triggered by calling isset() or empty() on object.
+     * @param $name
+     * @return boolean
+     */
+    public function __isset($name)
+    {
+        return ! empty($this->attributes) && ! empty($this->methods);
+    }
+
+    /**
      * Retrieves meta methods and meta attributes from the registry.
      *
      * @param string $attribute

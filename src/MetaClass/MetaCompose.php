@@ -67,7 +67,7 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
             }
 
             $composed_data = $obj->with($this->getArgs())->compose()->andReturn();
-            $this->setAttribute($this->registerAs($class, $component), $composed_data);
+            $this->setAttribute(Support\getClassName($class, $component), $composed_data);
         }
 
         return $this;
@@ -137,7 +137,7 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
     public function setComponents($components)
     {
         foreach ((array) $components as $name => $component) {
-            $this->components[$this->registerAs($component, $name)] = $component;
+            $this->components[Support\getClassName($component, $name)] = $component;
         }
 
         return $this;
@@ -152,28 +152,5 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
     public function getComponents()
     {
         return $this->components;
-    }
-
-    /**
-     * Sanitize Component name.
-     * If name is index of array or null then return snake_case class name.
-     *
-     * @param string $component
-     * @param string|int $name
-     * @param string $prefix
-     * @return string
-     */
-    protected function registerAs($component, $name = null, $prefix = null)
-    {
-        if (is_int($name) || $name === null) {
-            $_component = new \ReflectionClass($component);
-            $name = Support\toSnakeCase($_component->getShortName());
-        }
-
-        if ($prefix) {
-            $name = $prefix . $name;
-        }
-
-        return $name;
     }
 }

@@ -7,6 +7,8 @@ use Pawelzny\MetaClass\Contracts\MetaExpansible;
 use Pawelzny\MetaClass\Exceptions\ComposeException;
 use Pawelzny\Support;
 
+/** @noinspection ClassReImplementsParentInterfaceInspection */
+
 /**
  * Class MetaCompose.
  * This class is meant to be extend by custom Meta Composable classes.
@@ -61,7 +63,7 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
             $obj = new $class;
 
             if (! Support\hasInterface($obj, Composable::class)) {
-                throw new ComposeException($obj);
+                throw new ComposeException(get_class($obj));
             }
 
             $composed_data = $obj->with($this->getArgs())->compose()->andReturn();

@@ -23,6 +23,13 @@ interface MetaExpansible
     public function __set($property, $value);
 
     /**
+     * Is triggered by calling isset() or empty() on object.
+     * @param $name
+     * @return boolean
+     */
+    public function __isset($name);
+
+    /**
      * Retrieves meta methods and meta attributes from the registry.
      * @param string $attribute
      * @return mixed

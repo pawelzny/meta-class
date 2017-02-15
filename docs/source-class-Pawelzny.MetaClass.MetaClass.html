@@ -106,6 +106,7 @@
 
 			<h3>Functions</h3>
 			<ul>
+				<li><a href="function-Pawelzny.Support.getClassName.html">Pawelzny\Support\getClassName</a></li>
 				<li><a href="function-Pawelzny.Support.hasInterface.html">Pawelzny\Support\hasInterface</a></li>
 				<li><a href="function-Pawelzny.Support.toSnakeCase.html">Pawelzny\Support\toSnakeCase</a></li>
 			</ul>
@@ -134,9 +135,9 @@
 </span><span id="15" class="l"><a href="#15">15 </a>    <span class="php-comment">/**
 </span></span><span id="16" class="l"><a href="#16">16 </a><span class="php-comment">     * Cached MetaClass object
 </span></span><span id="17" class="l"><a href="#17">17 </a><span class="php-comment">     *
-</span></span><span id="18" class="l"><a href="#18">18 </a><span class="php-comment">     * @var null|\Pawelzny\MetaClass\Contracts\Composable $_meta_class
+</span></span><span id="18" class="l"><a href="#18">18 </a><span class="php-comment">     * @var \Pawelzny\MetaClass\Contracts\Composable $_meta_class
 </span></span><span id="19" class="l"><a href="#19">19 </a><span class="php-comment">     */</span>
-</span><span id="20" class="l"><a href="#20">20 </a>    <span class="php-keyword1">private</span> <span class="php-var">$_meta_class</span> = <span class="php-keyword1">null</span>;
+</span><span id="20" class="l"><a href="#20">20 </a>    <span class="php-keyword1">private</span> <span class="php-var">$_meta_class</span>;
 </span><span id="21" class="l"><a href="#21">21 </a>
 </span><span id="22" class="l"><a href="#22">22 </a>    <span class="php-comment">/**
 </span></span><span id="23" class="l"><a href="#23">23 </a><span class="php-comment">     * Returns instance of Meta class
@@ -177,7 +178,7 @@
 </span></span><span id="58" class="l"><a href="#58">58 </a><span class="php-comment">     */</span>
 </span><span id="59" class="l"><a href="#59">59 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> metaFactory()
 </span><span id="60" class="l"><a href="#60">60 </a>    {
-</span><span id="61" class="l"><a href="#61">61 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">property_exists</span>(<span class="php-var">$this</span>, <span class="php-quote">'meta_class'</span>) &amp;&amp; <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;meta_class)
+</span><span id="61" class="l"><a href="#61">61 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">property_exists</span>(<span class="php-var">$this</span>, <span class="php-quote">'meta_class'</span>) &amp;&amp; <span class="php-var">$this</span>-&gt;meta_class !== <span class="php-keyword1">null</span>
 </span><span id="62" class="l"><a href="#62">62 </a>            ? <span class="php-keyword1">new</span> <span class="php-var">$this</span>-&gt;meta_class(<span class="php-var">$this</span>)
 </span><span id="63" class="l"><a href="#63">63 </a>            : <span class="php-keyword1">new</span> MetaCompose(<span class="php-var">$this</span>);
 </span><span id="64" class="l"><a href="#64">64 </a>    }
@@ -190,6 +191,6 @@
 	</div>
 </div>
 <script src="resources/combined.js?96bcbeb67fd7786400552bcc545e97f7edf0baa7"></script>
-<script src="elementlist.js?cec61300d3714633018efe785b0c3127ec93b173"></script>
+<script src="elementlist.js?4eca466e7bc25390c57cb4e3f31ee293d1a963ee"></script>
 </body>
 </html>

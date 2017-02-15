@@ -7,8 +7,6 @@ use Pawelzny\MetaClass\Contracts\MetaExpansible;
 use Pawelzny\MetaClass\Exceptions\ComposeException;
 use Pawelzny\Support;
 
-/** @noinspection ClassReImplementsParentInterfaceInspection */
-
 /**
  * Class MetaCompose.
  * This class is meant to be extend by custom Meta Composable classes.
@@ -39,7 +37,7 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
     /**
      * MetaCompose constructor.
      *
-     * @param null $model
+     * @param mixed $model
      */
     public function __construct($model = null)
     {
@@ -109,7 +107,7 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      * If key is specified returns only single value instead of whole array.
      *
      * @api
-     * @param null $key specific argument
+     * @param string $key specific argument
      * @return mixed
      */
     public function getArgs($key = null)

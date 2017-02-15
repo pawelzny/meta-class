@@ -106,6 +106,7 @@
 
 			<h3>Functions</h3>
 			<ul>
+				<li><a href="function-Pawelzny.Support.getClassName.html">Pawelzny\Support\getClassName</a></li>
 				<li><a href="function-Pawelzny.Support.hasInterface.html">Pawelzny\Support\hasInterface</a></li>
 				<li><a href="function-Pawelzny.Support.toSnakeCase.html">Pawelzny\Support\toSnakeCase</a></li>
 			</ul>
@@ -156,7 +157,7 @@
 </span><span id="37" class="l"><a href="#37"> 37 </a>    <span class="php-comment">/**
 </span></span><span id="38" class="l"><a href="#38"> 38 </a><span class="php-comment">     * MetaCompose constructor.
 </span></span><span id="39" class="l"><a href="#39"> 39 </a><span class="php-comment">     *
-</span></span><span id="40" class="l"><a href="#40"> 40 </a><span class="php-comment">     * @param null $model
+</span></span><span id="40" class="l"><a href="#40"> 40 </a><span class="php-comment">     * @param mixed $model
 </span></span><span id="41" class="l"><a href="#41"> 41 </a><span class="php-comment">     */</span>
 </span><span id="42" class="l"><a href="#42"> 42 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __construct(<span class="php-var">$model</span> = <span class="php-keyword1">null</span>)
 </span><span id="43" class="l"><a href="#43"> 43 </a>    {
@@ -180,11 +181,11 @@
 </span><span id="61" class="l"><a href="#61"> 61 </a>            <span class="php-var">$obj</span> = <span class="php-keyword1">new</span> <span class="php-var">$class</span>;
 </span><span id="62" class="l"><a href="#62"> 62 </a>
 </span><span id="63" class="l"><a href="#63"> 63 </a>            <span class="php-keyword1">if</span> (! Support\hasInterface(<span class="php-var">$obj</span>, Composable::<span class="php-keyword1">class</span>)) {
-</span><span id="64" class="l"><a href="#64"> 64 </a>                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> ComposeException(<span class="php-var">$obj</span>);
+</span><span id="64" class="l"><a href="#64"> 64 </a>                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> ComposeException(<span class="php-keyword2">get_class</span>(<span class="php-var">$obj</span>));
 </span><span id="65" class="l"><a href="#65"> 65 </a>            }
 </span><span id="66" class="l"><a href="#66"> 66 </a>
 </span><span id="67" class="l"><a href="#67"> 67 </a>            <span class="php-var">$composed_data</span> = <span class="php-var">$obj</span>-&gt;with(<span class="php-var">$this</span>-&gt;getArgs())-&gt;compose()-&gt;andReturn();
-</span><span id="68" class="l"><a href="#68"> 68 </a>            <span class="php-var">$this</span>-&gt;setAttribute(<span class="php-var">$this</span>-&gt;registerAs(<span class="php-var">$class</span>, <span class="php-var">$component</span>), <span class="php-var">$composed_data</span>);
+</span><span id="68" class="l"><a href="#68"> 68 </a>            <span class="php-var">$this</span>-&gt;setAttribute(Support\getClassName(<span class="php-var">$class</span>, <span class="php-var">$component</span>), <span class="php-var">$composed_data</span>);
 </span><span id="69" class="l"><a href="#69"> 69 </a>        }
 </span><span id="70" class="l"><a href="#70"> 70 </a>
 </span><span id="71" class="l"><a href="#71"> 71 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
@@ -226,7 +227,7 @@
 </span></span><span id="107" class="l"><a href="#107">107 </a><span class="php-comment">     * If key is specified returns only single value instead of whole array.
 </span></span><span id="108" class="l"><a href="#108">108 </a><span class="php-comment">     *
 </span></span><span id="109" class="l"><a href="#109">109 </a><span class="php-comment">     * @api
-</span></span><span id="110" class="l"><a href="#110">110 </a><span class="php-comment">     * @param null $key specific argument
+</span></span><span id="110" class="l"><a href="#110">110 </a><span class="php-comment">     * @param string $key specific argument
 </span></span><span id="111" class="l"><a href="#111">111 </a><span class="php-comment">     * @return mixed
 </span></span><span id="112" class="l"><a href="#112">112 </a><span class="php-comment">     */</span>
 </span><span id="113" class="l"><a href="#113">113 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getArgs(<span class="php-var">$key</span> = <span class="php-keyword1">null</span>)
@@ -254,7 +255,7 @@
 </span><span id="135" class="l"><a href="#135">135 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setComponents(<span class="php-var">$components</span>)
 </span><span id="136" class="l"><a href="#136">136 </a>    {
 </span><span id="137" class="l"><a href="#137">137 </a>        <span class="php-keyword1">foreach</span> ((<span class="php-keyword1">array</span>) <span class="php-var">$components</span> <span class="php-keyword1">as</span> <span class="php-var">$name</span> =&gt; <span class="php-var">$component</span>) {
-</span><span id="138" class="l"><a href="#138">138 </a>            <span class="php-var">$this</span>-&gt;components[<span class="php-var">$this</span>-&gt;registerAs(<span class="php-var">$component</span>, <span class="php-var">$name</span>)] = <span class="php-var">$component</span>;
+</span><span id="138" class="l"><a href="#138">138 </a>            <span class="php-var">$this</span>-&gt;components[Support\getClassName(<span class="php-var">$component</span>, <span class="php-var">$name</span>)] = <span class="php-var">$component</span>;
 </span><span id="139" class="l"><a href="#139">139 </a>        }
 </span><span id="140" class="l"><a href="#140">140 </a>
 </span><span id="141" class="l"><a href="#141">141 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
@@ -270,31 +271,8 @@
 </span><span id="151" class="l"><a href="#151">151 </a>    {
 </span><span id="152" class="l"><a href="#152">152 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;components;
 </span><span id="153" class="l"><a href="#153">153 </a>    }
-</span><span id="154" class="l"><a href="#154">154 </a>
-</span><span id="155" class="l"><a href="#155">155 </a>    <span class="php-comment">/**
-</span></span><span id="156" class="l"><a href="#156">156 </a><span class="php-comment">     * Sanitize Component name.
-</span></span><span id="157" class="l"><a href="#157">157 </a><span class="php-comment">     * If name is index of array or null then return snake_case class name.
-</span></span><span id="158" class="l"><a href="#158">158 </a><span class="php-comment">     *
-</span></span><span id="159" class="l"><a href="#159">159 </a><span class="php-comment">     * @param string $component
-</span></span><span id="160" class="l"><a href="#160">160 </a><span class="php-comment">     * @param string|int $name
-</span></span><span id="161" class="l"><a href="#161">161 </a><span class="php-comment">     * @param string $prefix
-</span></span><span id="162" class="l"><a href="#162">162 </a><span class="php-comment">     * @return string
-</span></span><span id="163" class="l"><a href="#163">163 </a><span class="php-comment">     */</span>
-</span><span id="164" class="l"><a href="#164">164 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> registerAs(<span class="php-var">$component</span>, <span class="php-var">$name</span> = <span class="php-keyword1">null</span>, <span class="php-var">$prefix</span> = <span class="php-keyword1">null</span>)
-</span><span id="165" class="l"><a href="#165">165 </a>    {
-</span><span id="166" class="l"><a href="#166">166 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_int</span>(<span class="php-var">$name</span>) || <span class="php-var">$name</span> === <span class="php-keyword1">null</span>) {
-</span><span id="167" class="l"><a href="#167">167 </a>            <span class="php-var">$_component</span> = <span class="php-keyword1">new</span> \ReflectionClass(<span class="php-var">$component</span>);
-</span><span id="168" class="l"><a href="#168">168 </a>            <span class="php-var">$name</span> = Support\toSnakeCase(<span class="php-var">$_component</span>-&gt;getShortName());
-</span><span id="169" class="l"><a href="#169">169 </a>        }
-</span><span id="170" class="l"><a href="#170">170 </a>
-</span><span id="171" class="l"><a href="#171">171 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$prefix</span>) {
-</span><span id="172" class="l"><a href="#172">172 </a>            <span class="php-var">$name</span> = <span class="php-var">$prefix</span> . <span class="php-var">$name</span>;
-</span><span id="173" class="l"><a href="#173">173 </a>        }
-</span><span id="174" class="l"><a href="#174">174 </a>
-</span><span id="175" class="l"><a href="#175">175 </a>        <span class="php-keyword1">return</span> <span class="php-var">$name</span>;
-</span><span id="176" class="l"><a href="#176">176 </a>    }
-</span><span id="177" class="l"><a href="#177">177 </a>}
-</span><span id="178" class="l"><a href="#178">178 </a></span></code></pre>
+</span><span id="154" class="l"><a href="#154">154 </a>}
+</span><span id="155" class="l"><a href="#155">155 </a></span></code></pre>
 	</div>
 
 	<div id="footer">
@@ -302,6 +280,6 @@
 	</div>
 </div>
 <script src="resources/combined.js?96bcbeb67fd7786400552bcc545e97f7edf0baa7"></script>
-<script src="elementlist.js?cec61300d3714633018efe785b0c3127ec93b173"></script>
+<script src="elementlist.js?4eca466e7bc25390c57cb4e3f31ee293d1a963ee"></script>
 </body>
 </html>

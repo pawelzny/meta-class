@@ -84,6 +84,7 @@
 			<ul>
 				<li><a href="class-Pawelzny.MetaClass.Exceptions.ComposeException.html">ComposeException</a></li>
 				<li><a href="class-Pawelzny.MetaClass.Exceptions.MetaAttributeException.html">MetaAttributeException</a></li>
+				<li><a href="class-Pawelzny.MetaClass.Exceptions.MetaClassException.html">MetaClassException</a></li>
 				<li class="active"><a href="class-Pawelzny.MetaClass.Exceptions.MetaMethodException.html">MetaMethodException</a></li>
 			</ul>
 
@@ -111,6 +112,13 @@ Exception
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by">
+			<a href="class-Pawelzny.MetaClass.Exceptions.MetaClassException.html"><span>Pawelzny\MetaClass\Exceptions\MetaClassException</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:60px">
+			<img src="resources/inherit.png" alt="Extended by">
 <b><span>Pawelzny\MetaClass\Exceptions\MetaMethodException</span></b>			
 			
 			
@@ -130,7 +138,7 @@ Exception
 		<b>Namespace:</b> <a href="namespace-Pawelzny.html">Pawelzny</a>\<a href="namespace-Pawelzny.MetaClass.html">MetaClass</a>\<a href="namespace-Pawelzny.MetaClass.Exceptions.html">Exceptions</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Pawelzny.MetaClass.Exceptions.MetaMethodException.html#5-18" title="Go to source code">MetaClass/Exceptions/MetaMethodException.php</a>
+			<b>Located at</b> <a href="source-class-Pawelzny.MetaClass.Exceptions.MetaMethodException.html#5-19" title="Go to source code">MetaClass/Exceptions/MetaMethodException.php</a>
 		<br>
 	</div>
 
@@ -150,7 +158,7 @@ Exception
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Exceptions.MetaMethodException.html#7-17" title="Go to source code">__construct</a>( <span>string <var>$method</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>integer <var>$code</var> = <span class="php-num">0</span></span>, <span>Exception <var>$previous</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Exceptions.MetaMethodException.html#9-18" title="Go to source code">__construct</a>( <span>string <var>$method</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>integer <var>$code</var> = <span class="php-num">0</span></span>, <span>Exception <var>$previous</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>MetaMethodException constructor.</p>
@@ -173,8 +181,6 @@ Exception
 
 
 
-					<h4>Overrides</h4>
-					<div class="list"><code>Exception::__construct</code></div>
 
 			</div>
 			</div></td>
@@ -208,6 +214,33 @@ Exception
 
 		<div class="panel panel-default">
             <div class="panel-heading"><h2>Properties summary</h2></div>
+			<table class="summary table table-bordered table-striped properties" id="properties">
+		<tr data-order="message" id="$message">
+			<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-Pawelzny.MetaClass.Exceptions.MetaMethodException.html#7" title="Go to source code"><var>$message</var></a>
+
+				<div class="description short">
+					
+				</div>
+
+				<div class="description detailed hidden">
+					
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$message" class="anchor">#</a>
+					<code><span class="php-quote">&quot;Undefined meta method: &quot;</span></code>
+				</div>
+			</td>
+		</tr>
+			</table>
 		</div>
 
 		<div class="panel panel-default">
@@ -215,8 +248,7 @@ Exception
 			<p class="elementList">
 				<code><var>$code</var></code>, 
 				<code><var>$file</var></code>, 
-				<code><var>$line</var></code>, 
-				<code><var>$message</var></code>
+				<code><var>$line</var></code>
 			</p>
 		</div>
 

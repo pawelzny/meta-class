@@ -1,7 +1,13 @@
 <?php
 
+namespace Pawelzny\Tests\Repository\Component;
+
 use Pawelzny\MetaClass\Contracts\Composable;
 
+/**
+ * Class Component
+ * @package Pawelzny\Tests\Repository\Component
+ */
 class Component implements Composable
 {
     protected $properties;

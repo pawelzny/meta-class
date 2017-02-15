@@ -156,54 +156,7 @@ perfect for further extending.</p>
 		<b>Namespace:</b> <a href="namespace-Pawelzny.html">Pawelzny</a>\<a href="namespace-Pawelzny.MetaClass.html">MetaClass</a><br>
 		<b>Package:</b> Pawelzny\MetaClass<br>
 
-				<b>Example:</b>
-				<p>// Imperative way</p>
-
-<p>$user = new User;
-$meta = new MetaCompose($user); // create meta object for $user
-$meta->setComponents([CustomComponent::class, BestComponent::class])
-     ->with(['some_data' => 'abc'])
-     ->compose(); // compose meta data for $some_object
-$meta->extra_attribute = 'I am cool';</p>
-
-<p>echo $meta->custom_component;
-echo $meta->best_component;
-echo $meta->extra_attribute;</p>
-
-<p>// Declarative way</p>
-
-<p>// First step: build your custom MetaCompose class
-class CustomCompose extends MetaCompose implements Composable
-{
-     protected $components = [CustomComponent::class, BestComponent::class];
-     protected $compose_with = ['some_data' => 'abc'];
-}</p>
-
-<p>class User
-{
-     // Second step: use MetaClass trait to autoload and initialize MetaCompose class.
-     use \Pawelzny\MetaClass\MetaClass;</p>
-
-<pre><code> // Third step: declare that you want to use
- // CustomCompose::class instead of default MetaCompose::class
- protected $meta_class = CustomCompose::class;
-
- // Optional step: Initialize meta attributes and function.
- // This method is called only once on Meta object construction.
- protected function metaInit()
- {
-     $this-&gt;meta()-&gt;extra_attribute = 'I am cool';
- }
-</code></pre>
-
-<p>}</p>
-
-<p>$user = new User;
-$meta = $user->meta(); // Meta is fully initialized with composed components and.
-echo $meta->custom_component;
-echo $meta->best_component;
-echo $meta->extra_attribute;</p><br>
-			<b>Located at</b> <a href="source-class-Pawelzny.MetaClass.MetaCompose.html#10-240" title="Go to source code">MetaClass/MetaCompose.php</a>
+			<b>Located at</b> <a href="source-class-Pawelzny.MetaClass.MetaCompose.html#10-177" title="Go to source code">MetaClass/MetaCompose.php</a>
 		<br>
 	</div>
 
@@ -223,7 +176,7 @@ echo $meta->extra_attribute;</p><br>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___construct">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#84-93" title="Go to source code">__construct</a>( <span>null <var>$model</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#37-46" title="Go to source code">__construct</a>( <span>null <var>$model</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>MetaCompose constructor.</p>
@@ -252,14 +205,14 @@ echo $meta->extra_attribute;</p><br>
 
 			<td class="attributes"><code>
 				 public 
-				<code><a href="class-Pawelzny.MetaClass.Contracts.Composable.html">Pawelzny\MetaClass\Contracts\Composable</a></code>
+				static
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_compose">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#95-119" title="Go to source code">compose</a>( )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#48-72" title="Go to source code">compose</a>( )</code>
 
 			<div class="description short">
 				<p>Compose meta features from declared $components.</p>
@@ -272,7 +225,7 @@ echo $meta->extra_attribute;</p><br>
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-Pawelzny.MetaClass.Contracts.Composable.html">Pawelzny\MetaClass\Contracts\Composable</a></code>
+						static
 					</div>
 
 					<h4>Throws</h4>
@@ -301,7 +254,7 @@ echo $meta->extra_attribute;</p><br>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_with">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#121-138" title="Go to source code">with</a>( <span>array <var>$args</var> = []</span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#74-91" title="Go to source code">with</a>( <span>array <var>$args</var> = []</span> )</code>
 
 			<div class="description short">
 				<p>Registers component's arguments. This method is needed only for expressions.
@@ -352,7 +305,7 @@ WARNING! There is no validation, no sanitizing and no collision control.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_andReturn">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#140-150" title="Go to source code">andReturn</a>( )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#93-103" title="Go to source code">andReturn</a>( )</code>
 
 			<div class="description short">
 				<p>Returns compose computed value.
@@ -391,7 +344,7 @@ There is no usage in MetaCompose context.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getArgs">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#152-169" title="Go to source code">getArgs</a>( <span>null <var>$key</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#105-122" title="Go to source code">getArgs</a>( <span>null <var>$key</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Returns component's arguments.
@@ -434,7 +387,7 @@ If key is specified returns only single value instead of whole array.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_setComponents">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#171-205" title="Go to source code">setComponents</a>( <span>array|string <var>$components</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#124-142" title="Go to source code">setComponents</a>( <span>array|string <var>$components</var></span> )</code>
 
 			<div class="description short">
 				<p>Registers components used by MetaCompose.
@@ -461,22 +414,6 @@ Components could be registered under aliases by passing in associative array.</p
 					</div>
 
 
-					<h4>Example</h4>
-					<div class="list">
-							<p>$meta = new MetaCompose;</p>
-
-<p>// register 'custom_component'.
-$meta->setComponents(CustomComponent::class);</p>
-
-<p>// register 'best_component' and 'super_component'.
-$meta->setComponents([BestComponent::class, SuperComponent::class]);</p>
-
-<p>// register 'best' and 'the_best' components
-$meta->setComponents([
-     'best' => \Best\Component::class,
-     'the_best' => \TheBest\Component::class
-]);</p><br>
-					</div>
 					<h4>Api</h4>
 					<div class="list">
 					</div>
@@ -496,7 +433,7 @@ $meta->setComponents([
 
 			<td class="name"><div>
 			<a class="anchor" href="#_getComponents">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#207-216" title="Go to source code">getComponents</a>( )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#144-153" title="Go to source code">getComponents</a>( )</code>
 
 			<div class="description short">
 				<p>Gets all registered components.</p>
@@ -532,7 +469,7 @@ $meta->setComponents([
 
 			<td class="name"><div>
 			<a class="anchor" href="#_registerAs">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#218-239" title="Go to source code">registerAs</a>( <span>string <var>$component</var></span>, <span>string|integer <var>$name</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$prefix</var> = <span class="php-keyword1">null</span></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.MetaCompose.html#155-176" title="Go to source code">registerAs</a>( <span>string <var>$component</var></span>, <span>string|integer <var>$name</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$prefix</var> = <span class="php-keyword1">null</span></span> )</code>
 
 			<div class="description short">
 				<p>Sanitize Component name.
@@ -606,7 +543,7 @@ If name is index of array or null then return snake_case class name.</p>
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Pawelzny.MetaClass.MetaCompose.html#69-75" title="Go to source code"><var>$components</var></a>
+					<a href="source-class-Pawelzny.MetaClass.MetaCompose.html#22-28" title="Go to source code"><var>$components</var></a>
 
 				<div class="description short">
 					<p>Registry with Components classes used by MetaCompose class
@@ -633,7 +570,7 @@ All Components must implement interface: \Pawelzny\MetaClass\Contracts\Composabl
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Pawelzny.MetaClass.MetaCompose.html#77-82" title="Go to source code"><var>$args</var></a>
+					<a href="source-class-Pawelzny.MetaClass.MetaCompose.html#30-35" title="Go to source code"><var>$args</var></a>
 
 				<div class="description short">
 					<p>Registry with arguments for components.</p>

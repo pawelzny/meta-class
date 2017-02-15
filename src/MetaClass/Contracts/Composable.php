@@ -2,6 +2,11 @@
 
 namespace Pawelzny\MetaClass\Contracts;
 
+/**
+ * Interface Composable
+ *
+ * @package Pawelzny\MetaClass\Contracts
+ */
 interface Composable
 {
     /**

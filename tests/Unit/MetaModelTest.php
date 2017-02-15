@@ -1,8 +1,7 @@
 <?php
 
-require_once "factory/Model.php";
-
 use Pawelzny\MetaClass\MetaModel;
+use Pawelzny\Tests\Repository\Model\Model;
 use PHPUnit\Framework\TestCase;
 
 class MetaModelTest extends TestCase

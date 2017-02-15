@@ -6,6 +6,11 @@ use Pawelzny\MetaClass\Contracts\MetaExpansible;
 use Pawelzny\MetaClass\Exceptions\MetaAttributeException;
 use Pawelzny\MetaClass\Exceptions\MetaMethodException;
 
+/**
+ * Class Meta
+ *
+ * @package Pawelzny\MetaClass
+ */
 class Meta implements MetaExpansible
 {
     /**
@@ -73,7 +78,7 @@ class Meta implements MetaExpansible
      *
      * @api
      * @param string $name
-     * @return bool
+     * @return boolean
      */
     public function hasMethod($name)
     {
@@ -85,7 +90,7 @@ class Meta implements MetaExpansible
      *
      * @api
      * @param string $name
-     * @return bool
+     * @return boolean
      */
     public function hasAttribute($name)
     {

@@ -2,7 +2,6 @@
 
 use Pawelzny\Support;
 use Pawelzny\Tests\Repository\Component\Component;
-use Pawelzny\Tests\Repository\Model\Model;
 use PHPUnit\Framework\TestCase;
 
 class NormalizationTest extends TestCase

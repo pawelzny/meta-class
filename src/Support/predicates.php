@@ -5,8 +5,8 @@ namespace Pawelzny\Support;
 /**
  * Predicates if object implements given interface
  *
- * @param $object
- * @param string $interface fully qualified interface name with namespace
+ * @param  $object
+ * @param  string $interface fully qualified interface name with namespace
  * @return bool
  */
 function hasInterface($object, $interface)

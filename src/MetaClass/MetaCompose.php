@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * MetaComponent.
+ *
+ * @package Pawelzny\MetaClass
+ * @author  Paweł Zadrożny <pawel.zny@gmail.com>
+ * @license ISC https://github.com/pawelzny/meta-class/blob/master/LICENSE.md
+ */
 namespace Pawelzny\MetaClass;
 
 use Pawelzny\MetaClass\Contracts\Composable;
@@ -23,21 +29,21 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      * Registry with Components classes used by MetaCompose class
      * All Components must implement interface: \Pawelzny\MetaClass\Contracts\Composable
      *
-     * @var array $components
+     * @var array $components Components registry
      */
     protected $components = [];
 
     /**
      * Registry with arguments for components.
      *
-     * @var array $args
+     * @var array $args Arguments registry.
      */
     protected $args = [];
 
     /**
      * MetaCompose constructor.
      *
-     * @param mixed $model
+     * @param mixed $model Any object.
      */
     public function __construct($model = null)
     {
@@ -56,7 +62,9 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
     {
         foreach ($this->getComponents() as $component => $class) {
             /**
-             * @var Composable $obj
+             * New instance of Component class.
+             *
+             * @var Composable $obj Component instance.
              */
             $obj = new $class;
 
@@ -79,8 +87,9 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      *
      * By default MetaCompose uses `model` key for $model instance.
      *
-     * @api
      * @param array $args Arguments
+     *
+     * @api
      * @return static
      */
     public function with(array $args = [])
@@ -106,8 +115,9 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      * Returns component's arguments.
      * If key is specified returns only single value instead of whole array.
      *
-     * @api
      * @param string $key specific argument
+     *
+     * @api
      * @return mixed
      */
     public function getArgs($key = null)
@@ -128,8 +138,9 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      * Component will be registered under given class name converted to snake_case.
      * Components could be registered under aliases by passing in associative array.
      *
+     * @param array|string $components Components to register.
+     *
      * @api
-     * @param array|string $components
      * @return static
      */
     public function setComponents($components)

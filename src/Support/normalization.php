@@ -5,8 +5,8 @@ namespace Pawelzny\Support;
 /**
  * Converts PascalCase to snake_case string
  *
- * @see http://stackoverflow.com/a/35719689
- * @param string $string
+ * @see    http://stackoverflow.com/a/35719689
+ * @param  string $string
  * @return string
  */
 function toSnakeCase($string)
@@ -20,8 +20,8 @@ function toSnakeCase($string)
  * Sanitize Component name.
  * If name is index of array or null then return snake_case class name.
  *
- * @param mixed $component
- * @param string|int $name
+ * @param  mixed      $component
+ * @param  string|int $name
  * @return string
  */
 function getClassName($component, $name = null)
@@ -31,5 +31,6 @@ function getClassName($component, $name = null)
     }
 
     $component = new \ReflectionClass($component);
+
     return toSnakeCase($component->getShortName());
 }

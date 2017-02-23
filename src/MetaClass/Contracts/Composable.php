@@ -11,6 +11,7 @@ interface Composable
 {
     /**
      * Compose meta features from declared components
+     *
      * @return \Pawelzny\MetaClass\Contracts\Composable
      */
     public function compose();

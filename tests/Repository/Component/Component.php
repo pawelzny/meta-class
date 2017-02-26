@@ -8,37 +8,22 @@ use Pawelzny\MetaClass\Contracts\Composable;
  * Class Component
  * @package Pawelzny\Tests\Repository\Component
  */
-class Component implements Composable
+class Component extends \Pawelzny\MetaClass\Component implements Composable
 {
-    protected $properties;
-    protected $test_case;
-
     public function compose()
     {
-        $this->test_case = [
+        $this->result = [
             'name' => static::class,
         ];
 
-        if (array_key_exists('some_argument', $this->properties)) {
-            $this->test_case['some_argument'] = 'abc';
+        if (array_key_exists('some_argument', $this->args)) {
+            $this->result['some_argument'] = 'abc';
         }
 
-        if (array_key_exists('env', $this->properties)) {
-            $this->test_case['env'] = 'test';
+        if (array_key_exists('env', $this->args)) {
+            $this->result['env'] = 'test';
         }
 
         return $this;
-    }
-
-    public function with(array $properties = [])
-    {
-        $this->properties = $properties;
-
-        return $this;
-    }
-
-    public function andReturn()
-    {
-        return $this->test_case;
     }
 }

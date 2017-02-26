@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Interface Pawelzny\MetaClass\Contracts\Composable</title>
+	<title>Class Pawelzny\MetaClass\Component</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
 	<link rel="stylesheet" href="resources/style.css?49f43d3208c5d7e33fa16d36107a345bf11cc00d">
@@ -28,7 +28,7 @@
 
 				<ul class="nav navbar-nav">
 					<li>
-						<a href="namespace-Pawelzny.MetaClass.Contracts.html" title="Summary of Pawelzny\MetaClass\Contracts"><span>Namespace</span></a>
+						<a href="namespace-Pawelzny.MetaClass.html" title="Summary of Pawelzny\MetaClass"><span>Namespace</span></a>
 					</li>
 					<li class="active">
 <span>Class</span>					</li>
@@ -58,7 +58,7 @@
 							MetaClass<span></span>
 						</a>
 							<ul>
-					<li class="active">
+					<li>
 						<a href="namespace-Pawelzny.MetaClass.Contracts.html">
 							Contracts						</a>
 							</li>
@@ -90,13 +90,19 @@
 
 
 		<div id="elements">
-
-			<h3>Interfaces</h3>
+			<h3>Classes</h3>
 			<ul>
-				<li class="active"><a href="class-Pawelzny.MetaClass.Contracts.Composable.html">Composable</a></li>
-				<li><a href="class-Pawelzny.MetaClass.Contracts.MetaExpansible.html">MetaExpansible</a></li>
+				<li class="active"><a href="class-Pawelzny.MetaClass.Component.html">Component</a></li>
+				<li><a href="class-Pawelzny.MetaClass.Meta.html">Meta</a></li>
+				<li><a href="class-Pawelzny.MetaClass.MetaCompose.html">MetaCompose</a></li>
+				<li><a href="class-Pawelzny.MetaClass.MetaModel.html">MetaModel</a></li>
 			</ul>
 
+
+			<h3>Traits</h3>
+			<ul>
+				<li><a href="class-Pawelzny.MetaClass.MetaClass.html">MetaClass</a></li>
+			</ul>
 
 
 
@@ -109,7 +115,7 @@
 <div id="right">
 	<div id="rightInner">
 <div id="content" class="class">
-	<h1>Interface Composable</h1>
+	<h1>Class Component</h1>
 
 
 	<div class="description">
@@ -125,28 +131,30 @@ registered component. These components may use them or not.</p>
 returning computed value.</p>
 	</div>
 
+	<dl class="tree well">
+		<dd style="padding-left:0px">
+<b><span>Pawelzny\MetaClass\Component</span></b>			
+			 implements 
+				<a href="class-Pawelzny.MetaClass.Contracts.Composable.html"><span>Pawelzny\MetaClass\Contracts\Composable</span></a>
+			
+			
+		</dd>
+	</dl>
 
 
 
 
-	<div>
-		<h3>Direct known implementers</h3>
-		<p class="elementList">
-			<code><a href="class-Pawelzny.MetaClass.Component.html">Pawelzny\MetaClass\Component</a></code>, 
-			<code><a href="class-Pawelzny.MetaClass.MetaCompose.html">Pawelzny\MetaClass\MetaCompose</a></code>
-		</p>
-	</div>
 
 
 
 
 	<div class="alert alert-info">
+		<b>Abstract</b><br>
 		
-		
-		<b>Namespace:</b> <a href="namespace-Pawelzny.html">Pawelzny</a>\<a href="namespace-Pawelzny.MetaClass.html">MetaClass</a>\<a href="namespace-Pawelzny.MetaClass.Contracts.html">Contracts</a><br>
+		<b>Namespace:</b> <a href="namespace-Pawelzny.html">Pawelzny</a>\<a href="namespace-Pawelzny.MetaClass.html">MetaClass</a><br>
 		<b>Package:</b> Pawelzny\MetaClass\Contracts<br>
 
-			<b>Located at</b> <a href="source-class-Pawelzny.MetaClass.Contracts.Composable.html#12-53" title="Go to source code">MetaClass/Contracts/Composable.php</a>
+			<b>Located at</b> <a href="source-class-Pawelzny.MetaClass.Component.html#7-60" title="Go to source code">MetaClass/Component.php</a>
 		<br>
 	</div>
 
@@ -166,7 +174,7 @@ returning computed value.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_with">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Contracts.Composable.html#28-36" title="Go to source code">with</a>( <span>array <var>$args</var> = []</span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Component.html#23-38" title="Go to source code">with</a>( <span>array <var>$args</var> = []</span> )</code>
 
 			<div class="description short">
 				<p>Passes required arguments to Composable component.
@@ -192,15 +200,20 @@ This method can be omitted.</p>
 					</div>
 
 
+					<h4>Api</h4>
+					<div class="list">
+					</div>
 
 
+					<h4>Implementation of</h4>
+					<div class="list"><code><a href="class-Pawelzny.MetaClass.Contracts.Composable.html#_with">Pawelzny\MetaClass\Contracts\Composable::with()</a></code></div>
 			</div>
 			</div></td>
 		</tr>
 		<tr data-order="compose" id="_compose">
 
 			<td class="attributes"><code>
-				 public 
+				abstract public 
 				<code><a href="class-Pawelzny.MetaClass.Contracts.Composable.html">Pawelzny\MetaClass\Contracts\Composable</a></code>
 				
 				</code>
@@ -208,7 +221,7 @@ This method can be omitted.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_compose">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Contracts.Composable.html#38-45" title="Go to source code">compose</a>( )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Component.html#40-48" title="Go to source code">compose</a>( )</code>
 
 			<div class="description short">
 				<p>Compose method is meant to execute computations,
@@ -229,8 +242,13 @@ close all used files and external connections.</p>
 					</div>
 
 
+					<h4>Api</h4>
+					<div class="list">
+					</div>
 
 
+					<h4>Implementation of</h4>
+					<div class="list"><code><a href="class-Pawelzny.MetaClass.Contracts.Composable.html#_compose">Pawelzny\MetaClass\Contracts\Composable::compose()</a></code></div>
 			</div>
 			</div></td>
 		</tr>
@@ -245,7 +263,7 @@ close all used files and external connections.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_andReturn">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Contracts.Composable.html#47-52" title="Go to source code">andReturn</a>( )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Component.html#50-59" title="Go to source code">andReturn</a>( )</code>
 
 			<div class="description short">
 				<p>Ends method chain and returns computed value.</p>
@@ -262,8 +280,13 @@ close all used files and external connections.</p>
 					</div>
 
 
+					<h4>Api</h4>
+					<div class="list">
+					</div>
 
 
+					<h4>Implementation of</h4>
+					<div class="list"><code><a href="class-Pawelzny.MetaClass.Contracts.Composable.html#_andReturn">Pawelzny\MetaClass\Contracts\Composable::andReturn()</a></code></div>
 			</div>
 			</div></td>
 		</tr>
@@ -274,6 +297,67 @@ close all used files and external connections.</p>
 
 
 
+
+
+
+
+
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h2>Properties summary</h2></div>
+			<table class="summary table table-bordered table-striped properties" id="properties">
+		<tr data-order="args" id="$args">
+			<td class="attributes"><code>
+				protected  
+				array
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-Pawelzny.MetaClass.Component.html#9-14" title="Go to source code"><var>$args</var></a>
+
+				<div class="description short">
+					<p>Arguments for compose</p>
+				</div>
+
+				<div class="description detailed hidden">
+					<p>Arguments for compose</p>
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$args" class="anchor">#</a>
+					<code>[]</code>
+				</div>
+			</td>
+		</tr>
+		<tr data-order="result" id="$result">
+			<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-Pawelzny.MetaClass.Component.html#16-21" title="Go to source code"><var>$result</var></a>
+
+				<div class="description short">
+					<p>Compose result</p>
+				</div>
+
+				<div class="description detailed hidden">
+					<p>Compose result</p>
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$result" class="anchor">#</a>
+					<code></code>
+				</div>
+			</td>
+		</tr>
+			</table>
+		</div>
 
 
 

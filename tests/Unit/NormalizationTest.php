@@ -1,7 +1,6 @@
 <?php
 
 use Pawelzny\Support\Normalization;
-use Pawelzny\Tests\Repository\Component\Component;
 use PHPUnit\Framework\TestCase;
 
 class NormalizationTest extends TestCase

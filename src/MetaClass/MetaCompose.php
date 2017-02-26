@@ -11,12 +11,11 @@ namespace Pawelzny\MetaClass;
 use Pawelzny\MetaClass\Contracts\Composable;
 use Pawelzny\MetaClass\Contracts\MetaExpansible;
 use Pawelzny\MetaClass\Exceptions\ComposeException;
-use Pawelzny\Support\Predication;
 use Pawelzny\Support\Mutation;
+use Pawelzny\Support\Predication;
 
 /**
- * Class MetaCompose.
- * This class is meant to be extend by custom Meta Composable classes.
+ * MetaCompose is meant to be extend by custom Meta Composable classes.
  *
  * In fact MetaCompose is fully functional class with all needed setters and getters.
  * But if one prefer more declarative programming style, MetaCompose is
@@ -88,7 +87,7 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      *
      * By default MetaCompose uses `model` key for $model instance.
      *
-     * @param array $args Arguments
+     * @param  array $args Arguments
      *
      * @api
      * @return static
@@ -116,7 +115,7 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      * Returns component's arguments.
      * If key is specified returns only single value instead of whole array.
      *
-     * @param string $key specific argument
+     * @param  string $key specific argument
      *
      * @api
      * @return mixed
@@ -139,7 +138,7 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
      * Component will be registered under given class name converted to snake_case.
      * Components could be registered under aliases by passing in associative array.
      *
-     * @param array|string $components Components to register.
+     * @param  array|string $components Components to register.
      *
      * @api
      * @return static

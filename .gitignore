@@ -8,3 +8,4 @@ apigen.phar
 
 # External Libraries
 /vendor/
+/tests/reports/

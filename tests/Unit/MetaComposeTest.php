@@ -54,6 +54,7 @@ class MetaComposeTest extends TestCase
 
         $this->assertEquals('abc', $meta->super_component['some_argument']);
         $this->assertEquals('test', $meta->super_component['env']);
+        $this->assertSame($meta, $meta->andReturn());
     }
 
     public function testComposableException()

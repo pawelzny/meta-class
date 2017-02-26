@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Pawelzny\MetaClass\Meta</title>
+
+	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
+	<link rel="stylesheet" href="resources/style.css?49f43d3208c5d7e33fa16d36107a345bf11cc00d">
+
+</head>
+
+<body>
+	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a href="index.html" class="navbar-brand">Overview</a>
+			</div>
+			<div class="collapse navbar-collapse">
+
+                <form id="search" class="navbar-form navbar-left" role="search">
+                    <input type="hidden" name="cx" value="">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div class="form-group">
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search">
+					</div>
+				</form>
+
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="namespace-Pawelzny.MetaClass.html" title="Summary of Pawelzny\MetaClass"><span>Namespace</span></a>
+					</li>
+					<li class="active">
+<span>Class</span>					</li>
+
+
+
+
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div id="left">
+	<div id="menu">
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+					<li class="active">
+						<a href="namespace-Pawelzny.html">
+							Pawelzny<span></span>
+						</a>
+							<ul>
+					<li class="active">
+						<a href="namespace-Pawelzny.MetaClass.html">
+							MetaClass<span></span>
+						</a>
+							<ul>
+					<li>
+						<a href="namespace-Pawelzny.MetaClass.Contracts.html">
+							Contracts						</a>
+							</li>
+					<li>
+						<a href="namespace-Pawelzny.MetaClass.Exceptions.html">
+							Exceptions						</a>
+							</li>
+								</ul></li>
+					<li>
+						<a href="namespace-Pawelzny.Support.html">
+							Support<span></span>
+						</a>
+							<ul>
+					<li>
+						<a href="namespace-Pawelzny.Support.Mutation.html">
+							Mutation						</a>
+							</li>
+					<li>
+						<a href="namespace-Pawelzny.Support.Normalization.html">
+							Normalization						</a>
+							</li>
+					<li>
+						<a href="namespace-Pawelzny.Support.Predication.html">
+							Predication						</a>
+							</li>
+								</ul></li></ul></li>
+			</ul>
+		</div>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Pawelzny.MetaClass.Meta.html">Meta</a></li>
+				<li><a href="class-Pawelzny.MetaClass.MetaCompose.html">MetaCompose</a></li>
+				<li><a href="class-Pawelzny.MetaClass.MetaModel.html">MetaModel</a></li>
+			</ul>
+
+
+			<h3>Traits</h3>
+			<ul>
+				<li><a href="class-Pawelzny.MetaClass.MetaClass.html">MetaClass</a></li>
+			</ul>
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+	<div id="rightInner">
+<div id="content" class="class">
+	<h1>Class Meta</h1>
+
+
+	<div class="description">
+	<p>Class Meta is an basic implementation.
+It's not an abstract but should be treated like one.</p>
+	</div>
+
+	<dl class="tree well">
+		<dd style="padding-left:0px">
+<b><span>Pawelzny\MetaClass\Meta</span></b>			
+			 implements 
+				<a href="class-Pawelzny.MetaClass.Contracts.MetaExpansible.html"><span>Pawelzny\MetaClass\Contracts\MetaExpansible</span></a>
+			
+			
+		</dd>
+	</dl>
+
+
+	<div>
+		<h3>Direct known subclasses</h3>
+		<p class="elementList">
+			<code><a href="class-Pawelzny.MetaClass.MetaModel.html">Pawelzny\MetaClass\MetaModel</a></code>
+		</p>
+	</div>
+
+	<div>
+		<h3>Indirect known subclasses</h3>
+		<p class="elementList">
+			<code><a href="class-Pawelzny.MetaClass.MetaCompose.html">Pawelzny\MetaClass\MetaCompose</a></code>
+		</p>
+	</div>
+
+
+
+
+
+	<div class="alert alert-info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Pawelzny.html">Pawelzny</a>\<a href="namespace-Pawelzny.MetaClass.html">MetaClass</a><br>
+		<b>Package:</b> Pawelzny\MetaClass<br>
+
+			<b>Located at</b> <a href="source-class-Pawelzny.MetaClass.Meta.html#15-168" title="Go to source code">MetaClass/Meta.php</a>
+		<br>
+	</div>
+
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading"><h2>Methods summary</h2></div>
+			<table class="summary table table-bordered table-striped methods" id="methods">
+		<tr data-order="__call" id="___call">
+
+			<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___call">#</a>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#37-57" title="Go to source code">__call</a>( <span>string <var>$method</var></span>, <span>array <var>$arguments</var></span> )</code>
+
+			<div class="description short">
+				<p>Meta stores it's methods in registry to allow dynamic creation
+of new methods.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Meta stores it's methods in registry to allow dynamic creation
+of new methods.</p>
+
+<p>__call search for method in registry and invoke it if exist.
+Otherwise throws MetaMethodException.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$method</var></dt>
+						<dd></dd>
+						<dt><var>$arguments</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
+
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-Pawelzny.MetaClass.Exceptions.MetaMethodException.html">Pawelzny\MetaClass\Exceptions\MetaMethodException</a></code>
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="list"><code><a href="class-Pawelzny.MetaClass.Contracts.MetaExpansible.html#___call">Pawelzny\MetaClass\Contracts\MetaExpansible::__call()</a></code></div>
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="__set" id="___set">
+
+			<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___set">#</a>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#59-75" title="Go to source code">__set</a>( <span>string <var>$property</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+			<div class="description short">
+				<p>Detects if set value is callable and if it is, puts new method
+in methods registry. Otherwise puts value in attributes registry.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Detects if set value is callable and if it is, puts new method
+in methods registry. Otherwise puts value in attributes registry.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$property</var></dt>
+						<dd></dd>
+						<dt><var>$value</var></dt>
+						<dd></dd>
+					</dl></div>
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="list"><code><a href="class-Pawelzny.MetaClass.Contracts.MetaExpansible.html#___set">Pawelzny\MetaClass\Contracts\MetaExpansible::__set()</a></code></div>
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="__isset" id="___isset">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___isset">#</a>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#77-88" title="Go to source code">__isset</a>( <span> <var>$name</var></span> )</code>
+
+			<div class="description short">
+				<p>Is used when isset() or empty() function are called on
+meta object.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Is used when isset() or empty() function are called on
+meta object.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$name</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="list"><code><a href="class-Pawelzny.MetaClass.Contracts.MetaExpansible.html#___isset">Pawelzny\MetaClass\Contracts\MetaExpansible::__isset()</a></code></div>
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="__get" id="___get">
+
+			<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___get">#</a>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#90-109" title="Go to source code">__get</a>( <span>string <var>$attribute</var></span> )</code>
+
+			<div class="description short">
+				<p>Meta stores it's attributes in registry to allow dynamic
+setting and getting them.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Meta stores it's attributes in registry to allow dynamic
+setting and getting them.</p>
+
+<p>__get search for attribute in registry and returns it's value.
+Otherwise throws an MetaAttributeException.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$attribute</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						mixed
+					</div>
+
+					<h4>Throws</h4>
+					<div class="list">
+						<code><a href="class-Pawelzny.MetaClass.Exceptions.MetaAttributeException.html">Pawelzny\MetaClass\Exceptions\MetaAttributeException</a></code>
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="list"><code><a href="class-Pawelzny.MetaClass.Contracts.MetaExpansible.html#___get">Pawelzny\MetaClass\Contracts\MetaExpansible::__get()</a></code></div>
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="hasMethod" id="_hasMethod">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_hasMethod">#</a>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#111-122" title="Go to source code">hasMethod</a>( <span>string <var>$name</var></span> )</code>
+
+			<div class="description short">
+				<p>Predicates if Meta class has meta method in the registry.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Predicates if Meta class has meta method in the registry.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$name</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
+
+
+					<h4>Api</h4>
+					<div class="list">
+					</div>
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="hasAttribute" id="_hasAttribute">
+
+			<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_hasAttribute">#</a>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#124-135" title="Go to source code">hasAttribute</a>( <span>string <var>$name</var></span> )</code>
+
+			<div class="description short">
+				<p>Predicates if Meta class has meta attribute in the registry.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Predicates if Meta class has meta attribute in the registry.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$name</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						boolean
+					</div>
+
+
+					<h4>Api</h4>
+					<div class="list">
+					</div>
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setMethod" id="_setMethod">
+
+			<td class="attributes"><code>
+				 protected 
+				static
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setMethod">#</a>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#137-151" title="Go to source code">setMethod</a>( <span>string <var>$name</var></span>, <span>callable <var>$method</var></span> )</code>
+
+			<div class="description short">
+				<p>Adds new method to the registry.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Adds new method to the registry.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$name</var></dt>
+						<dd></dd>
+						<dt><var>$method</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						static
+					</div>
+
+
+					<h4>Api</h4>
+					<div class="list">
+					</div>
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="setAttribute" id="_setAttribute">
+
+			<td class="attributes"><code>
+				 protected 
+				static
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_setAttribute">#</a>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#153-167" title="Go to source code">setAttribute</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+			<div class="description short">
+				<p>Adds new attribute to the registry.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Adds new attribute to the registry.</p>
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$name</var></dt>
+						<dd></dd>
+						<dt><var>$value</var></dt>
+						<dd></dd>
+					</dl></div>
+
+					<h4>Returns</h4>
+					<div class="list">
+						static
+					</div>
+
+
+					<h4>Api</h4>
+					<div class="list">
+					</div>
+
+
+			</div>
+			</div></td>
+		</tr>
+			</table>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+		<div class="panel panel-default">
+            <div class="panel-heading"><h2>Properties summary</h2></div>
+			<table class="summary table table-bordered table-striped properties" id="properties">
+		<tr data-order="methods" id="$methods">
+			<td class="attributes"><code>
+				protected  
+				array
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-Pawelzny.MetaClass.Meta.html#23-28" title="Go to source code"><var>$methods</var></a>
+
+				<div class="description short">
+					<p>Meta methods registry</p>
+				</div>
+
+				<div class="description detailed hidden">
+					<p>Meta methods registry</p>
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$methods" class="anchor">#</a>
+					<code>[]</code>
+				</div>
+			</td>
+		</tr>
+		<tr data-order="attributes" id="$attributes">
+			<td class="attributes"><code>
+				protected  
+				array
+			</code></td>
+
+			<td class="name">
+					<a href="source-class-Pawelzny.MetaClass.Meta.html#30-35" title="Go to source code"><var>$attributes</var></a>
+
+				<div class="description short">
+					<p>Meta attributes registry</p>
+				</div>
+
+				<div class="description detailed hidden">
+					<p>Meta attributes registry</p>
+
+				</div>
+			</td>
+			<td class="value">
+				<div>
+					<a href="#$attributes" class="anchor">#</a>
+					<code>[]</code>
+				</div>
+			</td>
+		</tr>
+			</table>
+		</div>
+
+
+
+
+
+
+</div>
+	</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

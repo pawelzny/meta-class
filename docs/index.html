@@ -1,156 +1,344 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/highlight/styles/darcula.css">
+    <link rel="stylesheet" href="static/fontawesome/css/font-awesome.min.css">
+    <style>
+        html, body, footer, p {
+            font-family: 'Raleway', sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+        }
 
-	<title>Overview</title>
+        h1, h2, h3, h4, h5 {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 200;
+        }
 
-	<link rel="stylesheet" href="resources/bootstrap.min.css?973e37a8502921d56bc02bb55321f45b072b6f71">
-	<link rel="stylesheet" href="resources/style.css?49f43d3208c5d7e33fa16d36107a345bf11cc00d">
+        pre {
+            padding: 0;
+            margin: 0;
+            background: none;
+            border: 0;
+        }
 
+        pre code {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            font-size: 0.8em;
+            margin-top: 40px;
+            margin-bottom: 60px;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        .blog-icon img {
+            margin-top: -5px;
+            padding-top: 0;
+            height: 30px;
+            width: 30px;
+        }
+
+        .menu a {
+            display: block;
+            text-align: left;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+    </style>
+    <title>MetaClass - Pawelzny</title>
 </head>
-
 <body>
-	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a href="index.html" class="navbar-brand">Overview</a>
-			</div>
-			<div class="collapse navbar-collapse">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand blog-icon" href="https://pawelzny.com"><img alt="Pawelzny" src="https://pawelzny.com/favicon.png"></a>
+        </div>
 
-                <form id="search" class="navbar-form navbar-left" role="search">
-                    <input type="hidden" name="cx" value="">
-                    <input type="hidden" name="ie" value="UTF-8">
-                    <div class="form-group">
-                        <input type="text" name="q" class="search-query form-control" placeholder="Search" autofocus>
-					</div>
-				</form>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="api/index.html">API</a></li>
+                <li><a href="metrics/index.html">Metrics</a></li>
+                <li><a href="https://github.com/pawelzny/meta-class/">MetaClass on Github</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://twitter.com/pawelzny"><i class="fa fa-twitter-square"></i></a></li>
+                <li><a href="https://github.com/pawelzny"><i class="fa fa-github-square"></i></a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container-fluid" style="padding-top: 60px;">
+    <div class="row">
+        <div class="hide-xs col-md-4 col-lg-2 menu">
+            <div data-spy="affix" data-offset-top="0" data-offset-bottom="30">
+                <h2>Table of contents</h2>
 
-				<ul class="nav navbar-nav">
-					<li>
-<span>Namespace</span>					</li>
-					<li>
-<span>Class</span>					</li>
+                <h3>Get Started</h3>
+                <a href="#installation">Installation</a>
+                <a href="#basic-usage">Basic usage</a>
+                <a href="#meta-data-initialization">Meta data initialization</a>
 
+                <h3>Components</h3>
+                <a href="#create-component">Create component</a>
+                <a href="#composition">Composition</a>
+                <a href="#using-composition">Using composition</a>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <div class="row section">
+                <h1 id="installation">Installation</h1>
 
+                <p>Install package with Composer:</p>
+                <p>I assume, you have composer in your working PATH</p>
 
+<pre><code class="bash">
+$ composer require pawelzny/meta-class
 
+</code></pre>
+            </div>
 
-				</ul>
-			</div>
-		</div>
-	</nav>
+            <div class="row section">
+                <h1 id="basic-usage">Basic Usage</h1>
+                <p>Basic functionality is avzailable thanks to single Trait implemented in your class.</p>
+                <p>
+                    Thanks to Trait
+                    <a href="api/class-Pawelzny.MetaClass.MetaClass.html"><code>\Pawelzny\MetaClass\MetaClass</code></a>
+                    any model gets access to public
+                    <a href="api/class-Pawelzny.MetaClass.MetaClass.html#_meta"><code>meta()</code></a>
+                    method which is an interface for meta data.
+                </p>
 
-	<div id="left">
-	<div id="menu">
+<pre><code class="php">
+class User
+{
+    use \Pawelzny\MetaClass\MetaClass;
 
-		<div id="groups">
-				<h3>Namespaces</h3>
-			<ul>
-					<li>
-						<a href="namespace-Pawelzny.html">
-							Pawelzny<span></span>
-						</a>
-							<ul>
-					<li>
-						<a href="namespace-Pawelzny.MetaClass.html">
-							MetaClass<span></span>
-						</a>
-							<ul>
-					<li>
-						<a href="namespace-Pawelzny.MetaClass.Contracts.html">
-							Contracts						</a>
-							</li>
-					<li>
-						<a href="namespace-Pawelzny.MetaClass.Exceptions.html">
-							Exceptions						</a>
-							</li>
-								</ul></li>
-					<li>
-						<a href="namespace-Pawelzny.Support.html">
-							Support						</a>
-							</li>
-								</ul></li>
-			</ul>
-		</div>
+    // rest of User model
+}
 
+$user = new User;
+$user->meta()->special_attribute = 'I am so special!';
+$user->meta()->secretMethod = function () {
+    return 'shh .. I am secret!';
+};
 
-		<div id="elements">
-			<h3>Classes</h3>
-			<ul>
-				<li><a href="class-Pawelzny.MetaClass.Meta.html">Pawelzny\MetaClass\Meta</a></li>
-				<li><a href="class-Pawelzny.MetaClass.MetaCompose.html">Pawelzny\MetaClass\MetaCompose</a></li>
-				<li><a href="class-Pawelzny.MetaClass.MetaModel.html">Pawelzny\MetaClass\MetaModel</a></li>
-			</ul>
+</code></pre>
 
-			<h3>Interfaces</h3>
-			<ul>
-				<li><a href="class-Pawelzny.MetaClass.Contracts.Composable.html">Pawelzny\MetaClass\Contracts\Composable</a></li>
-				<li><a href="class-Pawelzny.MetaClass.Contracts.MetaExpansible.html">Pawelzny\MetaClass\Contracts\MetaExpansible</a></li>
-			</ul>
+            </div>
 
-			<h3>Traits</h3>
-			<ul>
-				<li><a href="class-Pawelzny.MetaClass.MetaClass.html">Pawelzny\MetaClass\MetaClass</a></li>
-			</ul>
+            <div class="row section">
+                <h1 id="meta-data-initialization">Meta data initialization</h1>
+                <p>
+                    <a href="api/class-Pawelzny.MetaClass.MetaClass.html"><code>\Pawelzny\MetaClass\MetaClass</code></a>
+                    uses protected method
+                    <a href="api/class-Pawelzny.MetaClass.MetaClass.html#_metaInit"><code>metaInit()</code></a>
+                    to initialize meta data on boot. It is invoke only once.
+                </p>
+                <p>
+                    Can be override for custom initialization.
+                    It's a perfect place to initialize basic meta data on startup.
+                </p>
 
-			<h3>Exceptions</h3>
-			<ul>
-				<li><a href="class-Pawelzny.MetaClass.Exceptions.ComposeException.html">Pawelzny\MetaClass\Exceptions\ComposeException</a></li>
-				<li><a href="class-Pawelzny.MetaClass.Exceptions.MetaAttributeException.html">Pawelzny\MetaClass\Exceptions\MetaAttributeException</a></li>
-				<li><a href="class-Pawelzny.MetaClass.Exceptions.MetaClassException.html">Pawelzny\MetaClass\Exceptions\MetaClassException</a></li>
-				<li><a href="class-Pawelzny.MetaClass.Exceptions.MetaMethodException.html">Pawelzny\MetaClass\Exceptions\MetaMethodException</a></li>
-			</ul>
+<pre><code class="php">
+class User
+{
+    use \Pawelzny\MetaClass\MetaClass;
 
+    protected function metaInit()
+    {
+        $this->meta()->booted_args = ['start_at' => microtime(true)];
+    }
+}
 
-			<h3>Functions</h3>
-			<ul>
-				<li><a href="function-Pawelzny.Support.getClassName.html">Pawelzny\Support\getClassName</a></li>
-				<li><a href="function-Pawelzny.Support.hasInterface.html">Pawelzny\Support\hasInterface</a></li>
-				<li><a href="function-Pawelzny.Support.toSnakeCase.html">Pawelzny\Support\toSnakeCase</a></li>
-			</ul>
-		</div>
-	</div>
+$user = new User;
+echo $user->meta()->booted_args['start_at'];
+
+</code></pre>
+
+                <p>
+                    For booting complex meta data Components are more preferable.
+                </p>
+            </div>
+
+            <div class="row section">
+                <h1 id="create-component">Create Component</h1>
+                <p>
+                    Components are preferable way to boot more complex logic.
+                    They are booted on startup like <a href="api/class-Pawelzny.MetaClass.MetaClass.html#_metaInit"><code>metaInit()</code></a>,
+                    but uses composition instead of direct value assignment.
+                </p>
+                <p>
+                    All components must implement <a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html"><code>Composable</code></a> interface
+                    which exposes three public methods:
+                    <ul>
+                        <li><a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html#_with"><code>with()</code></a>: Arguments supply</li>
+                        <li><a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html#_compose"><code>compose()</code></a>: Perform computations</li>
+                        <li><a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html#_andReturn"><code>andReturn()</code></a>: And return value</li>
+                    </ul>
+                </p>
+
+                <pre><code class="php">
+use \Pawelzny\MetaClass\Contracts\Composable;
+
+class CustomComponent implements Composable
+{
+    protected $args = [];
+    protected $output;
+
+    /**
+     * Args supplier
+     */
+    public function with(array $args = [])
+    {
+        $this->args = $args;
+
+        return $this;
+    }
+
+    /**
+     * Computations
+     */
+    public function compose()
+    {
+        // let keep it simple for example purposes
+        $this->output = $this->args['value'] * 2;
+
+        return $this;
+    }
+
+    /**
+     * Return computed data
+     */
+    public function andReturn()
+    {
+        return $this->output;
+    }
+}
+                </code></pre>
+            </div>
+
+            <div class="row section">
+                <h1 id="composition">Composition of components</h1>
+                <p>
+                    Compositions groups components and invoke one by one
+                    with given args list, then computed value is assign to
+                    meta data using component name as attribute name, or
+                    alias if defined.
+                </p>
+                <p>
+                    Building Composition is as easy as extend <a href="api/class-Pawelzny.MetaClass.MetaCompose.html"><code>\Pawelzny\MetaClass\MetaCompose</code></a> class
+                    with defined components and arguments.
+                </p>
+
+                <pre><code class="php">
+use \Pawelzny\MetaClass\MetaCompose;
+use \Pawelzny\MetaClass\Contracts\Composable;
+
+class CustomComposition extends MetaCompose implements Composable
+{
+    /**
+     * Custom component registry. Components are stacked
+     * as fully qualified class name with namespace.
+     * It may be plain string "\Nested\Namespace\CustomComponent",
+     * but better option is to use magic constant.
+     *
+     * @var array $components
+     */
+    protected $components = [
+        CustomComponent::class,
+        'alias_name' =>  CustomComponent::class,
+    ];
+
+    /**
+     * In this example, CustomComponent expected "value" argument.
+     *
+     * @var array $args
+     */
+    protected $args = ['value' => 23];
+}
+                </code></pre>
+
+                <p>
+                    Example above represents implementation of custom meta composition class.
+                </p>
+                <p>
+                    Compose invoke every component, passes args and gets it's computed value.
+                    Then the value is stored in meta attribute under namespace which is snake_case component's name.
+                </p>
+                <p>
+                    In this example, first component will be registered under "custom_component" namespace,
+                    and second under "alias_name" namespace.
+                </p>
+            </div>
+
+            <div class="row section">
+                <h1 id="using-composition">Using composition</h1>
+                <p>
+                    Now it's time to override default Meta class and declare
+                    newly created CustomComposition.
+                </p>
+
+                <pre><code class="php">
+class User
+{
+    use \Pawelzny\MetaClass\MetaClass;
+
+    /**
+     * MetaClass trait checks if $meta_class attribute exists.
+     * If yes, then creates Meta object from it instead of default MetaCompose class.
+     * Because CustomComposition class has components and args, all will be invoke one by one
+     * and result of components computation will be stored inside meta object.
+     *
+     * @var \Pawelzny\MetaClass\Contracts\Composable $meta_class
+     */
+    protected $meta_class = CustomComposition::class;
+
+    // rest of User model
+}
+
+$user = new User;
+assert($user->meta()->custom_component === 46); // 23 as input argument multiply by 2
+                </code></pre>
+            </div>
+        </div>
+    </div>
+    <footer class="row col-xs-12 text-center">
+        <span>Copyright 2017 &copy; Paweł Zadrożny</span>
+    </footer>
 </div>
 
-<div id="splitter"></div>
-
-<div id="right">
-	<div id="rightInner">
-<div id="content">
-	<h1>Overview</h1>
-
-
-		<div class="panel panel-default">
-            <div class="panel-heading"><h2>Namespaces summary</h2></div>
-			<table class="summary table table-bordered table-striped" id="namespaces">
-					<tr>
-						<td class="name"><a href="namespace-Pawelzny.html">Pawelzny</a></td>
-					</tr>
-					<tr>
-						<td class="name"><a href="namespace-Pawelzny.MetaClass.html">Pawelzny\MetaClass</a></td>
-					</tr>
-					<tr>
-						<td class="name"><a href="namespace-Pawelzny.MetaClass.Contracts.html">Pawelzny\MetaClass\Contracts</a></td>
-					</tr>
-					<tr>
-						<td class="name"><a href="namespace-Pawelzny.MetaClass.Exceptions.html">Pawelzny\MetaClass\Exceptions</a></td>
-					</tr>
-					<tr>
-						<td class="name"><a href="namespace-Pawelzny.Support.html">Pawelzny\Support</a></td>
-					</tr>
-			</table>
-		</div>
-
-
-</div>
-	</div>
-
-	<div id="footer">
-		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
-	</div>
-</div>
-<script src="resources/combined.js?96bcbeb67fd7786400552bcc545e97f7edf0baa7"></script>
-<script src="elementlist.js?4eca466e7bc25390c57cb4e3f31ee293d1a963ee"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="static/highlight/highlight.pack.js"></script>
+<!--suppress JSUnresolvedVariable -->
+<script>
+    $(document).ready(function() {
+        $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
+    });
+</script>
 </body>
 </html>

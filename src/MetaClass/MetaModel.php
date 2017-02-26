@@ -1,22 +1,34 @@
 <?php
-
+/**
+ * MetaModel class implementation.
+ * Allow to set model object used by meta object.
+ *
+ * @package Pawelzny\MetaClass
+ * @author  Paweł Zadrożny <pawel.zny@gmail.com>
+ * @license ISC https://opensource.org/licenses/ISC
+ */
 namespace Pawelzny\MetaClass;
 
 use Pawelzny\MetaClass\Contracts\MetaExpansible;
 
+/**
+ * Class MetaModel
+ *
+ * @package Pawelzny\MetaClass
+ */
 class MetaModel extends Meta implements MetaExpansible
 {
     /**
      * Model instance
      *
-     * @var $model
+     * @var mixed $model
      */
     protected $model;
 
     /**
      * Meta constructor.
      *
-     * @param $model
+     * @param mixed $model Any object.
      */
     public function __construct($model = null)
     {
@@ -26,8 +38,9 @@ class MetaModel extends Meta implements MetaExpansible
     /**
      * Sets model instance once
      *
+     * @param mixed $model Any object.
+     *
      * @api
-     * @param $model
      * @return static
      */
     public function setModel($model)

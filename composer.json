@@ -32,8 +32,9 @@
     },
     "autoload": {
         "files": [
+            "src/Support/mutation.php",
             "src/Support/normalization.php",
-            "src/Support/predicates.php"
+            "src/Support/predication.php"
         ],
         "psr-4": {
             "Pawelzny\\": "src/",

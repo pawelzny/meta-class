@@ -56,6 +56,11 @@
         .section {
             margin-bottom: 40px;
         }
+
+        .title-separator {
+            padding: 10px 15px;
+            display: block;
+        }
     </style>
     <title>MetaClass - Pawelzny</title>
 </head>
@@ -76,11 +81,21 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+                <li role="separator" class="visible-xs title-separator"><h4 class="text-info">Meta Class</h4></li>
                 <li><a href="api/index.html">API</a></li>
                 <li><a href="metrics/index.html">Metrics</a></li>
                 <li><a href="https://github.com/pawelzny/meta-class/">MetaClass on Github</a></li>
+
+                <li role="separator" class="visible-xs title-separator"><h4 class="text-info">Table of contents</h4></li>
+                <li class="visible-xs"><a href="#installation">Installation</a></li>
+                <li class="visible-xs"><a href="#basic-usage">Basic usage</a></li>
+                <li class="visible-xs"><a href="#meta-data-initialization">Meta data initialization</a></li>
+                <li class="visible-xs"><a href="#create-component">Create component</a></li>
+                <li class="visible-xs"><a href="#composition">Composition</a></li>
+                <li class="visible-xs"><a href="#using-composition">Using composition</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li role="separator" class="visible-xs title-separator"><h4 class="text-info">Social</h4></li>
                 <li><a href="https://twitter.com/pawelzny"><i class="fa fa-twitter-square"></i></a></li>
                 <li><a href="https://github.com/pawelzny"><i class="fa fa-github-square"></i></a></li>
             </ul>
@@ -89,7 +104,7 @@
 </nav>
 <div class="container-fluid" style="padding-top: 60px;">
     <div class="row">
-        <div class="hide-xs col-md-4 col-lg-2 menu">
+        <div class="hidden-xs col-md-4 col-lg-2 menu">
             <div data-spy="affix" data-offset-top="0" data-offset-bottom="30">
                 <h2>Table of contents</h2>
 
@@ -111,7 +126,7 @@
                 <p>Install package with Composer:</p>
                 <p>I assume, you have composer in your working PATH</p>
 
-<pre><code class="bash">
+                <pre><code class="bash">
 $ composer require pawelzny/meta-class
 
 </code></pre>
@@ -128,7 +143,7 @@ $ composer require pawelzny/meta-class
                     method which is an interface for meta data.
                 </p>
 
-<pre><code class="php">
+                <pre><code class="php">
 class User
 {
     use \Pawelzny\MetaClass\MetaClass;
@@ -159,7 +174,7 @@ $user->meta()->secretMethod = function () {
                     It's a perfect place to initialize basic meta data on startup.
                 </p>
 
-<pre><code class="php">
+                <pre><code class="php">
 class User
 {
     use \Pawelzny\MetaClass\MetaClass;
@@ -190,11 +205,11 @@ echo $user->meta()->booted_args['start_at'];
                 <p>
                     All components must implement <a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html"><code>Composable</code></a> interface
                     which exposes three public methods:
-                    <ul>
-                        <li><a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html#_with"><code>with()</code></a>: Arguments supply</li>
-                        <li><a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html#_compose"><code>compose()</code></a>: Perform computations</li>
-                        <li><a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html#_andReturn"><code>andReturn()</code></a>: And return value</li>
-                    </ul>
+                <ul>
+                    <li><a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html#_with"><code>with()</code></a>: Arguments supply</li>
+                    <li><a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html#_compose"><code>compose()</code></a>: Perform computations</li>
+                    <li><a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html#_andReturn"><code>andReturn()</code></a>: And return value</li>
+                </ul>
                 </p>
 
                 <pre><code class="php">

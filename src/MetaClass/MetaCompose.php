@@ -4,14 +4,15 @@
  *
  * @package Pawelzny\MetaClass
  * @author  Paweł Zadrożny <pawel.zny@gmail.com>
- * @license ISC https://github.com/pawelzny/meta-class/blob/master/LICENSE.md
+ * @license ISC https://opensource.org/licenses/ISC
  */
 namespace Pawelzny\MetaClass;
 
 use Pawelzny\MetaClass\Contracts\Composable;
 use Pawelzny\MetaClass\Contracts\MetaExpansible;
 use Pawelzny\MetaClass\Exceptions\ComposeException;
-use Pawelzny\Support;
+use Pawelzny\Support\Predication;
+use Pawelzny\Support\Mutation;
 
 /**
  * Class MetaCompose.
@@ -68,12 +69,12 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
              */
             $obj = new $class;
 
-            if (! Support\hasInterface($obj, Composable::class)) {
+            if (! Predication\hasInterface($obj, Composable::class)) {
                 throw new ComposeException(get_class($obj));
             }
 
             $composed_data = $obj->with($this->getArgs())->compose()->andReturn();
-            $this->setAttribute(Support\getClassName($class, $component), $composed_data);
+            $this->setAttribute(Mutation\getClassName($class, $component), $composed_data);
         }
 
         return $this;
@@ -146,7 +147,7 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
     public function setComponents($components)
     {
         foreach ((array) $components as $name => $component) {
-            $this->components[Support\getClassName($component, $name)] = $component;
+            $this->components[Mutation\getClassName($component, $name)] = $component;
         }
 
         return $this;

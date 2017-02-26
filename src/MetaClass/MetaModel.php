@@ -5,7 +5,7 @@
  *
  * @package Pawelzny\MetaClass
  * @author  Paweł Zadrożny <pawel.zny@gmail.com>
- * @license ISC https://github.com/pawelzny/meta-class/blob/master/LICENSE.md
+ * @license ISC https://opensource.org/licenses/ISC
  */
 namespace Pawelzny\MetaClass;
 

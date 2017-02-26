@@ -1,6 +1,6 @@
 <?php
 
-use Pawelzny\Support;
+use Pawelzny\Support\Normalization;
 use Pawelzny\Tests\Repository\Component\Component;
 use PHPUnit\Framework\TestCase;
 
@@ -34,20 +34,7 @@ class NormalizationTest extends TestCase
         ];
 
         foreach ($test_cases as $case => $expected) {
-            $this->assertEquals($expected, Support\toSnakeCase($case));
+            $this->assertEquals($expected, Normalization\toSnakeCase($case));
         }
-    }
-
-    public function testGetClassName()
-    {
-        $component = new Component;
-
-        $this->assertEquals('component', Support\getClassName($component));
-        $this->assertEquals('custom_component', Support\getClassName($component, 'custom_component'));
-        $this->assertEquals('component', Support\getClassName($component, '5'));
-        $this->assertEquals('component', Support\getClassName($component, 32));
-        $this->assertEquals('component', Support\getClassName($component, 12.1233));
-        $this->assertEquals('component', Support\getClassName($component, true));
-        $this->assertEquals('component', Support\getClassName($component, new stdClass));
     }
 }

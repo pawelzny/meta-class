@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 source="src"
-destination="docs"
+destination="docs/api"
 template="bootstrap"
 
 # if apigen installed globally generate docs and exit gracefully

@@ -4,12 +4,12 @@
  *
  * @package Pawelzny\MetaClass
  * @author  Paweł Zadrożny <pawel.zny@gmail.com>
- * @license ISC https://github.com/pawelzny/meta-class/blob/master/LICENSE.md
+ * @license ISC https://opensource.org/licenses/ISC
  */
 namespace Pawelzny\MetaClass;
 
 use Pawelzny\MetaClass\Contracts\Composable;
-use Pawelzny\Support;
+use Pawelzny\Support\Predication;
 
 /**
  * Class MetaClass
@@ -45,7 +45,7 @@ trait MetaClass
         if ($this->_meta_class === null) {
             $this->_meta_class = $this->_metaFactory();
 
-            if (Support\hasInterface($this->_meta_class, Composable::class)) {
+            if (Predication\hasInterface($this->_meta_class, Composable::class)) {
                 $this->_meta_class->compose();
             }
             $this->metaInit();

@@ -30,7 +30,7 @@ interface Composable
      * In example by default model object is passed as one of argument.
      * This method can be omitted.
      *
-     * @param array $args
+     * @param  array $args
      * @return \Pawelzny\MetaClass\Contracts\Composable
      */
     public function with(array $args = []);

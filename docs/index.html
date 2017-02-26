@@ -126,7 +126,7 @@
                 <p>Install package with Composer:</p>
                 <p>I assume, you have composer in your working PATH</p>
 
-                <pre><code class="bash">
+<pre><code class="bash">
 $ composer require pawelzny/meta-class
 
 </code></pre>
@@ -143,7 +143,7 @@ $ composer require pawelzny/meta-class
                     method which is an interface for meta data.
                 </p>
 
-                <pre><code class="php">
+<pre><code class="php">
 class User
 {
     use \Pawelzny\MetaClass\MetaClass;
@@ -174,7 +174,7 @@ $user->meta()->secretMethod = function () {
                     It's a perfect place to initialize basic meta data on startup.
                 </p>
 
-                <pre><code class="php">
+<pre><code class="php">
 class User
 {
     use \Pawelzny\MetaClass\MetaClass;
@@ -212,44 +212,26 @@ echo $user->meta()->booted_args['start_at'];
                 </ul>
                 </p>
 
-                <pre><code class="php">
+<pre><code class="php">
 use \Pawelzny\MetaClass\Contracts\Composable;
+use \Pawelzny\MetaClass\Component;
 
-class CustomComponent implements Composable
+/**
+ * @property mixed $result composed result value
+ */
+class CustomComponent extends Component implements Composable
 {
-    protected $args = [];
-    protected $output;
-
-    /**
-     * Args supplier
-     */
-    public function with(array $args = [])
-    {
-        $this->args = $args;
-
-        return $this;
-    }
-
-    /**
-     * Computations
-     */
     public function compose()
     {
         // let keep it simple for example purposes
-        $this->output = $this->args['value'] * 2;
+        // all computations must be stored in result variable.
+        $this->result = $this->args['value'] * 2;
 
         return $this;
     }
-
-    /**
-     * Return computed data
-     */
-    public function andReturn()
-    {
-        return $this->output;
-    }
 }
-                </code></pre>
+
+</code></pre>
             </div>
 
             <div class="row section">
@@ -265,7 +247,7 @@ class CustomComponent implements Composable
                     with defined components and arguments.
                 </p>
 
-                <pre><code class="php">
+<pre><code class="php">
 use \Pawelzny\MetaClass\MetaCompose;
 use \Pawelzny\MetaClass\Contracts\Composable;
 
@@ -291,7 +273,8 @@ class CustomComposition extends MetaCompose implements Composable
      */
     protected $args = ['value' => 23];
 }
-                </code></pre>
+
+</code></pre>
 
                 <p>
                     Example above represents implementation of custom meta composition class.
@@ -313,7 +296,7 @@ class CustomComposition extends MetaCompose implements Composable
                     newly created CustomComposition.
                 </p>
 
-                <pre><code class="php">
+<pre><code class="php">
 class User
 {
     use \Pawelzny\MetaClass\MetaClass;
@@ -333,7 +316,8 @@ class User
 
 $user = new User;
 assert($user->meta()->custom_component === 46); // 23 as input argument multiply by 2
-                </code></pre>
+
+</code></pre>
             </div>
         </div>
     </div>

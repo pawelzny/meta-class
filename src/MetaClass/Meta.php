@@ -13,7 +13,7 @@ use Pawelzny\MetaClass\Exceptions\MetaAttributeException;
 use Pawelzny\MetaClass\Exceptions\MetaMethodException;
 
 /**
- * Class Meta is an basic implementation.
+ * Meta is an basic implementation.
  * It's not an abstract but should be treated like one.
  *
  * @package Pawelzny\MetaClass

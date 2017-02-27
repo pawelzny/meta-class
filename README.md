@@ -27,7 +27,7 @@ Licensed under ISC condition Copyright (c) 2017, Paweł Zadrożny.
 
 **Order by priority**
 
-- [ ] Component abstraction
+- [X] Component abstraction
 - [X] Exceptions clean up
 - [X] Tests clean up, refactor and more cases
 - [ ] Working example code 

@@ -45,9 +45,14 @@ There is very high probability for breaking changes on every release before 1.0.
 ### Removed
 - ForbiddenException
 
-## [0.1.0] - 2016-12-31
+## 0.1.0 - 2016-12-31
 ### Added
 - Basic meta object implementation
 - MetaClass Trait with meta() interface
 - initMeta() interface
 - Basic model binding to meta object
+
+[Unreleased]: https://github.com/pawelzny/meta-class/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/pawelzny/meta-class/compare/v0.2.1...v0.3.0
+[0.2.1]: https://github.com/pawelzny/meta-class/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/pawelzny/meta-class/compare/v0.1.0...v0.2.0

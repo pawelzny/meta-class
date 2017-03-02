@@ -10,16 +10,15 @@
 namespace Pawelzny\MetaClass\Contracts;
 
 /**
- * Interface Composable
- * Every meta component should implement this interface.
+ * Composable is dedicated for MetaCompose and it's child classes.
+ * Provides set of methods which every Compose should implement.
  *
  * Composable expose with() method which supplies
  * extra arguments for component.
  * In fact whole set of args will be passed to every
  * registered component. These components may use them or not.
  *
- * compose() method is meant for computation andReturn() for
- * returning computed value.
+ * compose() method is meant for perform computation.
  *
  * @package Pawelzny\MetaClass\Contracts
  */
@@ -31,7 +30,7 @@ interface Composable
      * This method can be omitted.
      *
      * @param  array $args
-     * @return \Pawelzny\MetaClass\Contracts\Composable
+     * @return static
      */
     public function with(array $args = []);
 
@@ -40,14 +39,7 @@ interface Composable
      * store result in temporary variable then
      * close all used files and external connections.
      *
-     * @return \Pawelzny\MetaClass\Contracts\Composable
+     * @return static
      */
     public function compose();
-
-    /**
-     * Ends method chain and returns computed value.
-     *
-     * @return mixed
-     */
-    public function andReturn();
 }

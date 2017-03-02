@@ -8,6 +8,7 @@
  */
 namespace Pawelzny\MetaClass;
 
+use Pawelzny\MetaClass\Contracts\Composition;
 use Pawelzny\MetaClass\Contracts\Composable;
 use Pawelzny\MetaClass\Contracts\MetaExpansible;
 use Pawelzny\MetaClass\Exceptions\ComposeException;
@@ -64,11 +65,11 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
             /**
              * New instance of Component class.
              *
-             * @var Composable $obj Component instance.
+             * @var Composition $obj Component instance.
              */
             $obj = new $class;
 
-            if (! Predication\hasInterface($obj, Composable::class)) {
+            if (! Predication\hasInterface($obj, Composition::class)) {
                 throw new ComposeException(get_class($obj));
             }
 
@@ -96,18 +97,6 @@ class MetaCompose extends MetaModel implements MetaExpansible, Composable
     {
         $this->args = array_merge($this->args, $args);
 
-        return $this;
-    }
-
-    /**
-     * Returns compose computed value.
-     * This is dummy interface implementation.
-     * There is no usage in MetaCompose context.
-     *
-     * @return mixed
-     */
-    public function andReturn()
-    {
         return $this;
     }
 

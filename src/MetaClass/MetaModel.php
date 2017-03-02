@@ -12,7 +12,8 @@ namespace Pawelzny\MetaClass;
 use Pawelzny\MetaClass\Contracts\MetaExpansible;
 
 /**
- * Class MetaModel
+ * MetaModel can take another object as constructor argument
+ * and
  *
  * @package Pawelzny\MetaClass
  */
@@ -50,5 +51,16 @@ class MetaModel extends Meta implements MetaExpansible
         }
 
         return $this;
+    }
+
+    /**
+     * Returns model instance
+     *
+     * @api
+     * @return mixed $model
+     */
+    public function getModel()
+    {
+        return $this->model;
     }
 }

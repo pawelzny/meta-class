@@ -20,16 +20,5 @@ Licensed under ISC condition Copyright (c) 2017, Paweł Zadrożny.
 
 # Documentation
 
-* Manual: <a href="https://pawelzny.com/meta-class/">https://pawelzny.com/meta-class/</a>
-* API: <a href="https://pawelzny.com/meta-class/api">https://pawelzny.com/meta-class/api</a>
-
-# TODO
-
-**Order by priority**
-
-- [X] Component abstraction
-- [X] Exceptions clean up
-- [X] Tests clean up, refactor and more cases
-- [ ] Working example code 
-- [ ] Contribution guide
-- [X] Changelog
+* Usage: <a href="https://pawelzny.com/meta-class/">https://pawelzny.com/meta-class/</a>
+* API: <a href="https://pawelzny.com/meta-class/api">https://pawelzny.com/meta-class/api/</a>

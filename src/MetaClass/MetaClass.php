@@ -30,7 +30,7 @@ trait MetaClass
      * Cached MetaClass object
      * ensures single instance of MetaClass per Model.
      *
-     * @var \Pawelzny\MetaClass\Contracts\Composable $_meta_class
+     * @var \Pawelzny\MetaClass\Contracts\Composition $_meta_class
      */
     private $_meta_class;
 
@@ -38,7 +38,7 @@ trait MetaClass
      * MetaClass interface exposes meta object instance.
      *
      * @api
-     * @return \Pawelzny\MetaClass\Contracts\Composable
+     * @return \Pawelzny\MetaClass\Contracts\Composition
      */
     public function meta()
     {
@@ -71,7 +71,7 @@ trait MetaClass
      * If model does not declare meta_class, then factory will build default meta class
      * instance.
      *
-     * @return \Pawelzny\MetaClass\Contracts\Composable
+     * @return \Pawelzny\MetaClass\Contracts\Composition
      */
     private function _metaFactory()
     {

@@ -12,15 +12,11 @@ class MetaModelTest extends TestCase
         $model = new Model;
         $meta = new MetaModel($model);
 
-        $property = $this->getProtectedProperty($meta, 'model');
-        $this->assertEquals(Model::class, get_class($property->getValue($meta)));
-
-        // try to reset model instance
-        $model_2 = new ModelWithInitMethod;
+        $model_2 = new ModelWithInitMethod; // try to reset model instance
         $meta->setModel($model_2); // should not work. model has already been set
 
-        $property = $this->getProtectedProperty($meta, 'model');
-        $this->assertNotEquals(ModelWithInitMethod::class, get_class($property->getValue($meta)));
+        $this->assertEquals(Model::class, get_class($meta->getModel()));
+        $this->assertNotEquals(ModelWithInitMethod::class, $meta->getModel());
     }
 
     public function testModelSetterMethod()
@@ -31,16 +27,6 @@ class MetaModelTest extends TestCase
         // set model for the first time
         $meta->setModel($model);
 
-        $property = $this->getProtectedProperty($meta, 'model');
-        $this->assertEquals(Model::class, get_class($property->getValue($meta)));
-    }
-
-    private function getProtectedProperty($class, $property)
-    {
-        $class = new ReflectionClass($class);
-        $property = $class->getProperty($property);
-        $property->setAccessible(true);
-
-        return $property;
+        $this->assertEquals(Model::class, get_class($meta->getModel()));
     }
 }

@@ -119,8 +119,9 @@
 
 
 	<div class="description">
-	<p>Class Meta is an basic implementation.
-It's not an abstract but should be treated like one.</p>
+	<p>Meta is an basic implementation.
+It can be used as stdClass with extra features
+like setters and predicates.</p>
 	</div>
 
 	<dl class="tree well">
@@ -158,7 +159,7 @@ It's not an abstract but should be treated like one.</p>
 		<b>Namespace:</b> <a href="namespace-Pawelzny.html">Pawelzny</a>\<a href="namespace-Pawelzny.MetaClass.html">MetaClass</a><br>
 		<b>Package:</b> Pawelzny\MetaClass<br>
 
-			<b>Located at</b> <a href="source-class-Pawelzny.MetaClass.Meta.html#15-168" title="Go to source code">MetaClass/Meta.php</a>
+			<b>Located at</b> <a href="source-class-Pawelzny.MetaClass.Meta.html#15-170" title="Go to source code">MetaClass/Meta.php</a>
 		<br>
 	</div>
 
@@ -178,7 +179,7 @@ It's not an abstract but should be treated like one.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___call">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#37-57" title="Go to source code">__call</a>( <span>string <var>$method</var></span>, <span>array <var>$arguments</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#38-59" title="Go to source code">__call</a>( <span>string <var>$method</var></span>, <span>array <var>$arguments</var></span> )</code>
 
 			<div class="description short">
 				<p>Meta stores it's methods in registry to allow dynamic creation
@@ -229,7 +230,7 @@ Otherwise throws MetaMethodException.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___set">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#59-75" title="Go to source code">__set</a>( <span>string <var>$property</var></span>, <span>mixed <var>$value</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#61-77" title="Go to source code">__set</a>( <span>string <var>$property</var></span>, <span>mixed <var>$value</var></span> )</code>
 
 			<div class="description short">
 				<p>Detects if set value is callable and if it is, puts new method
@@ -269,7 +270,7 @@ in methods registry. Otherwise puts value in attributes registry.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___isset">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#77-88" title="Go to source code">__isset</a>( <span> <var>$name</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#79-90" title="Go to source code">__isset</a>( <span> <var>$name</var></span> )</code>
 
 			<div class="description short">
 				<p>Is used when isset() or empty() function are called on
@@ -311,7 +312,7 @@ meta object.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#___get">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#90-109" title="Go to source code">__get</a>( <span>string <var>$attribute</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#92-111" title="Go to source code">__get</a>( <span>string <var>$attribute</var></span> )</code>
 
 			<div class="description short">
 				<p>Meta stores it's attributes in registry to allow dynamic
@@ -360,7 +361,7 @@ Otherwise throws an MetaAttributeException.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_hasMethod">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#111-122" title="Go to source code">hasMethod</a>( <span>string <var>$name</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#113-124" title="Go to source code">hasMethod</a>( <span>string <var>$name</var></span> )</code>
 
 			<div class="description short">
 				<p>Predicates if Meta class has meta method in the registry.</p>
@@ -401,7 +402,7 @@ Otherwise throws an MetaAttributeException.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_hasAttribute">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#124-135" title="Go to source code">hasAttribute</a>( <span>string <var>$name</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#126-137" title="Go to source code">hasAttribute</a>( <span>string <var>$name</var></span> )</code>
 
 			<div class="description short">
 				<p>Predicates if Meta class has meta attribute in the registry.</p>
@@ -434,7 +435,7 @@ Otherwise throws an MetaAttributeException.</p>
 		<tr data-order="setMethod" id="_setMethod">
 
 			<td class="attributes"><code>
-				 protected 
+				 public 
 				static
 				
 				</code>
@@ -442,7 +443,7 @@ Otherwise throws an MetaAttributeException.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_setMethod">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#137-151" title="Go to source code">setMethod</a>( <span>string <var>$name</var></span>, <span>callable <var>$method</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#139-153" title="Go to source code">setMethod</a>( <span>string <var>$name</var></span>, <span>callable <var>$method</var></span> )</code>
 
 			<div class="description short">
 				<p>Adds new method to the registry.</p>
@@ -477,7 +478,7 @@ Otherwise throws an MetaAttributeException.</p>
 		<tr data-order="setAttribute" id="_setAttribute">
 
 			<td class="attributes"><code>
-				 protected 
+				 public 
 				static
 				
 				</code>
@@ -485,7 +486,7 @@ Otherwise throws an MetaAttributeException.</p>
 
 			<td class="name"><div>
 			<a class="anchor" href="#_setAttribute">#</a>
-			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#153-167" title="Go to source code">setAttribute</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
+			<code><a href="source-class-Pawelzny.MetaClass.Meta.html#155-169" title="Go to source code">setAttribute</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
 
 			<div class="description short">
 				<p>Adds new attribute to the registry.</p>
@@ -540,7 +541,7 @@ Otherwise throws an MetaAttributeException.</p>
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Pawelzny.MetaClass.Meta.html#23-28" title="Go to source code"><var>$methods</var></a>
+					<a href="source-class-Pawelzny.MetaClass.Meta.html#24-29" title="Go to source code"><var>$methods</var></a>
 
 				<div class="description short">
 					<p>Meta methods registry</p>
@@ -565,7 +566,7 @@ Otherwise throws an MetaAttributeException.</p>
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Pawelzny.MetaClass.Meta.html#30-35" title="Go to source code"><var>$attributes</var></a>
+					<a href="source-class-Pawelzny.MetaClass.Meta.html#31-36" title="Go to source code"><var>$attributes</var></a>
 
 				<div class="description short">
 					<p>Meta attributes registry</p>

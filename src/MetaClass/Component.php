@@ -2,9 +2,9 @@
 
 namespace Pawelzny\MetaClass;
 
-use Pawelzny\MetaClass\Contracts\Composable;
+use Pawelzny\MetaClass\Contracts\Composition;
 
-abstract class Component implements Composable
+abstract class Component implements Composition
 {
     /**
      * Arguments for compose
@@ -28,7 +28,7 @@ abstract class Component implements Composable
      * @param  array $args
      *
      * @api
-     * @return \Pawelzny\MetaClass\Contracts\Composable
+     * @return \Pawelzny\MetaClass\Contracts\Composition
      */
     public function with(array $args = [])
     {
@@ -43,7 +43,7 @@ abstract class Component implements Composable
      * close all used files and external connections.
      *
      * @api
-     * @return \Pawelzny\MetaClass\Contracts\Composable
+     * @return \Pawelzny\MetaClass\Contracts\Composition
      */
     abstract public function compose();
 

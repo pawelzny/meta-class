@@ -41,6 +41,11 @@
             padding-bottom: 40px;
         }
 
+        i.tree {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
         .blog-icon img {
             margin-top: -5px;
             padding-top: 0;
@@ -54,17 +59,22 @@
         }
 
         .section {
-            margin-bottom: 40px;
+            margin-bottom: -20px;
         }
 
         .title-separator {
             padding: 10px 15px;
             display: block;
         }
+
+        .fixed-spacer {
+            display: block;
+            height: 60px;
+        }
     </style>
     <title>MetaClass - Pawelzny</title>
 </head>
-<body>
+<body id="start">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -86,13 +96,19 @@
                 <li><a href="metrics/index.html">Metrics</a></li>
                 <li><a href="https://github.com/pawelzny/meta-class/">MetaClass on Github</a></li>
 
-                <li role="separator" class="visible-xs title-separator"><h4 class="text-info">Table of contents</h4></li>
+                <li role="separator" class="visible-xs title-separator"><h4 class="text-info">Get Started</h4></li>
                 <li class="visible-xs"><a href="#installation">Installation</a></li>
                 <li class="visible-xs"><a href="#basic-usage">Basic usage</a></li>
                 <li class="visible-xs"><a href="#meta-data-initialization">Meta data initialization</a></li>
+
+                <li role="separator" class="visible-xs title-separator"><h4 class="text-info">Components</h4></li>
                 <li class="visible-xs"><a href="#create-component">Create component</a></li>
                 <li class="visible-xs"><a href="#composition">Composition</a></li>
-                <li class="visible-xs"><a href="#using-composition">Using composition</a></li>
+                <li class="visible-xs"><a href="#composition-declaration">Composition declaration</a></li>
+
+                <li role="separator" class="visible-xs title-separator"><h4 class="text-info">Standalone</h4></li>
+                <li class="visible-xs"><a href="#meta">Meta class</a></li>
+                <li class="visible-xs"><a href="#meta-model">MetaModel class</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li role="separator" class="visible-xs title-separator"><h4 class="text-info">Social</h4></li>
@@ -102,9 +118,10 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div class="container-fluid" style="padding-top: 60px;">
+<div class="container-fluid">
     <div class="row">
         <div class="hidden-xs col-md-4 col-lg-2 menu">
+            <div class="fixed-spacer"></div>
             <div data-spy="affix" data-offset-top="0" data-offset-bottom="30">
                 <h2>Table of contents</h2>
 
@@ -116,24 +133,33 @@
                 <h3>Components</h3>
                 <a href="#create-component">Create component</a>
                 <a href="#composition">Composition</a>
-                <a href="#using-composition">Using composition</a>
+                <a href="#composition-declaration"><i class="fa fa-level-up fa-rotate-90 tree"></i> Composition declaration</a>
+
+                <h3>Standalone</h3>
+                <a href="#meta">Meta class</a>
+                <a href="#meta-model">MetaModel class</a>
+
+                <br>
+                <a href="#start">Go to top</a>
             </div>
         </div>
         <div class="col-xs-12 col-md-8 col-lg-8">
+            <div id="installation" class="fixed-spacer"></div>
             <div class="row section">
-                <h1 id="installation">Installation</h1>
+                <h1>Installation</h1>
 
                 <p>Install package with Composer:</p>
                 <p>I assume, you have composer in your working PATH</p>
 
 <pre><code class="bash">
-$ composer require pawelzny/meta-class
+$ composer require pawelzny/meta-class ^1.0
 
 </code></pre>
             </div>
 
+            <div id="basic-usage" class="fixed-spacer"></div>
             <div class="row section">
-                <h1 id="basic-usage">Basic Usage</h1>
+                <h1>Basic Usage</h1>
                 <p>Basic functionality is avzailable thanks to single Trait implemented in your class.</p>
                 <p>
                     Thanks to Trait
@@ -158,11 +184,11 @@ $user->meta()->secretMethod = function () {
 };
 
 </code></pre>
-
             </div>
 
+            <div id="meta-data-initialization" class="fixed-spacer"></div>
             <div class="row section">
-                <h1 id="meta-data-initialization">Meta data initialization</h1>
+                <h1>Meta data initialization</h1>
                 <p>
                     <a href="api/class-Pawelzny.MetaClass.MetaClass.html"><code>\Pawelzny\MetaClass\MetaClass</code></a>
                     uses protected method
@@ -189,14 +215,12 @@ $user = new User;
 echo $user->meta()->booted_args['start_at'];
 
 </code></pre>
-
-                <p>
-                    For booting complex meta data Components are more preferable.
-                </p>
+                <p>For booting complex meta data Components are more preferable.</p>
             </div>
 
+            <div id="create-component" class="fixed-spacer"></div>
             <div class="row section">
-                <h1 id="create-component">Create Component</h1>
+                <h1>Create Component</h1>
                 <p>
                     Components are preferable way to boot more complex logic.
                     They are booted on startup like <a href="api/class-Pawelzny.MetaClass.MetaClass.html#_metaInit"><code>metaInit()</code></a>,
@@ -205,21 +229,20 @@ echo $user->meta()->booted_args['start_at'];
                 <p>
                     All components must implement <a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html"><code>Composable</code></a> interface
                     which exposes three public methods:
+                </p>
                 <ul>
                     <li><a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html#_with"><code>with()</code></a>: Arguments supply</li>
                     <li><a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html#_compose"><code>compose()</code></a>: Perform computations</li>
-                    <li><a href="api/class-Pawelzny.MetaClass.Contracts.Composable.html#_andReturn"><code>andReturn()</code></a>: And return value</li>
                 </ul>
-                </p>
 
 <pre><code class="php">
-use \Pawelzny\MetaClass\Contracts\Composable;
+use \Pawelzny\MetaClass\Contracts\Composition;
 use \Pawelzny\MetaClass\Component;
 
 /**
  * @property mixed $result composed result value
  */
-class CustomComponent extends Component implements Composable
+class CustomComponent extends Component implements Composition
 {
     public function compose()
     {
@@ -234,8 +257,9 @@ class CustomComponent extends Component implements Composable
 </code></pre>
             </div>
 
+            <div id="composition" class="fixed-spacer"></div>
             <div class="row section">
-                <h1 id="composition">Composition of components</h1>
+                <h1>Composition</h1>
                 <p>
                     Compositions groups components and invoke one by one
                     with given args list, then computed value is assign to
@@ -275,10 +299,7 @@ class CustomComposition extends MetaCompose implements Composable
 }
 
 </code></pre>
-
-                <p>
-                    Example above represents implementation of custom meta composition class.
-                </p>
+                <p>Example above represents implementation of custom meta composition class.</p>
                 <p>
                     Compose invoke every component, passes args and gets it's computed value.
                     Then the value is stored in meta attribute under namespace which is snake_case component's name.
@@ -289,8 +310,9 @@ class CustomComposition extends MetaCompose implements Composable
                 </p>
             </div>
 
+            <div id="composition-declaration" class="fixed-spacer"></div>
             <div class="row section">
-                <h1 id="using-composition">Using composition</h1>
+                <h1>Composition declaration</h1>
                 <p>
                     Now it's time to override default Meta class and declare
                     newly created CustomComposition.
@@ -317,6 +339,64 @@ class User
 $user = new User;
 assert($user->meta()->custom_component === 46); // 23 as input argument multiply by 2
 
+</code></pre>
+            </div>
+
+            <div id="meta" class="fixed-spacer"></div>
+            <div class="row section">
+                <h1>Meta class</h1>
+                <p>Stand alone Meta class can be used as stdClass with extra features.</p>
+
+<pre><code class="php">
+use \Pawelzny\MetaClass\Meta
+
+$meta = new Meta;
+
+// using setters (preferable)
+
+$meta->setAttribute('multiplier', 2);
+$meta->setMethod('multiply', function ($a, $self) {
+    return $a * $self->multiplier;
+});
+
+assert($meta->hasAttribute('multiplier'));
+assert($meta->hasMethod('multiply'));
+assert($meta->multiply(2) === 4);
+
+// using direct assignment
+
+$meta->divider = 3;
+$meta->divide = function ($a, $self) {
+    return $a / $self->divider;
+};
+
+assert($meta->hasAttribute('divider'));
+assert($meta->hasMethod('divide'));
+assert($meta->divide(6) === 2);
+
+</code></pre>
+            </div>
+
+            <div id="meta-model" class="fixed-spacer"></div>
+            <div class="row section">
+                <h1>MetaModel class</h1>
+                <p>MetaModel class holds model reference which can be accessible inside meta methods.</p>
+                <p>This feature can be easily used as Decorator Pattern.</p>
+
+<pre><code class="php">
+use \Pawelzny\MetaClass\MetaModel;
+
+$model = new User;
+$model->first_name = "Pawelzny";
+
+$meta = new Meta;
+$meta->setModel($model);
+
+$meta->setMethod('nameToLower', function ($self) {
+    return strtolower($self->getModel()->first_name);
+});
+
+assert($meta->nameToLower() === "pawelzny");
 </code></pre>
             </div>
         </div>

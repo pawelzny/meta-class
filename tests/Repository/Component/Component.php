@@ -2,13 +2,13 @@
 
 namespace Pawelzny\Tests\Repository\Component;
 
-use Pawelzny\MetaClass\Contracts\Composable;
+use Pawelzny\MetaClass\Contracts\Composition;
 
 /**
  * Class Component
  * @package Pawelzny\Tests\Repository\Component
  */
-class Component extends \Pawelzny\MetaClass\Component implements Composable
+class Component extends \Pawelzny\MetaClass\Component implements Composition
 {
     public function compose()
     {

@@ -119,23 +119,17 @@
 
 
 	<div class="description">
-	<p>Interface Composable
-Every meta component should implement this interface.</p>
+	<p>Composition interface is dedicated for Components.</p>
 
-<p>Composable expose with() method which supplies
-extra arguments for component.
-In fact whole set of args will be passed to every
-registered component. These components may use them or not.</p>
-
-<p>compose() method is meant for computation andReturn() for
-returning computed value.</p>
+<p>Composition exposes methods inherited from Composable,
+and one more andReturn() used for returning computed value.</p>
 	</div>
 
 	<dl class="tree well">
 		<dd style="padding-left:0px">
 <b><span>Pawelzny\MetaClass\Component</span></b>			
 			 implements 
-				<a href="class-Pawelzny.MetaClass.Contracts.Composable.html"><span>Pawelzny\MetaClass\Contracts\Composable</span></a>
+				<a href="class-Pawelzny.MetaClass.Contracts.Composition.html"><span>Pawelzny\MetaClass\Contracts\Composition</span></a>
 			
 			
 		</dd>
@@ -167,7 +161,7 @@ returning computed value.</p>
 
 			<td class="attributes"><code>
 				 public 
-				<code><a href="class-Pawelzny.MetaClass.Contracts.Composable.html">Pawelzny\MetaClass\Contracts\Composable</a></code>
+				<code><a href="class-Pawelzny.MetaClass.Contracts.Composition.html">Pawelzny\MetaClass\Contracts\Composition</a></code>
 				
 				</code>
 			</td>
@@ -196,7 +190,7 @@ This method can be omitted.</p>
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-Pawelzny.MetaClass.Contracts.Composable.html">Pawelzny\MetaClass\Contracts\Composable</a></code>
+						<code><a href="class-Pawelzny.MetaClass.Contracts.Composition.html">Pawelzny\MetaClass\Contracts\Composition</a></code>
 					</div>
 
 
@@ -214,7 +208,7 @@ This method can be omitted.</p>
 
 			<td class="attributes"><code>
 				abstract public 
-				<code><a href="class-Pawelzny.MetaClass.Contracts.Composable.html">Pawelzny\MetaClass\Contracts\Composable</a></code>
+				<code><a href="class-Pawelzny.MetaClass.Contracts.Composition.html">Pawelzny\MetaClass\Contracts\Composition</a></code>
 				
 				</code>
 			</td>
@@ -238,7 +232,7 @@ close all used files and external connections.</p>
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><a href="class-Pawelzny.MetaClass.Contracts.Composable.html">Pawelzny\MetaClass\Contracts\Composable</a></code>
+						<code><a href="class-Pawelzny.MetaClass.Contracts.Composition.html">Pawelzny\MetaClass\Contracts\Composition</a></code>
 					</div>
 
 
@@ -286,7 +280,7 @@ close all used files and external connections.</p>
 
 
 					<h4>Implementation of</h4>
-					<div class="list"><code><a href="class-Pawelzny.MetaClass.Contracts.Composable.html#_andReturn">Pawelzny\MetaClass\Contracts\Composable::andReturn()</a></code></div>
+					<div class="list"><code><a href="class-Pawelzny.MetaClass.Contracts.Composition.html#_andReturn">Pawelzny\MetaClass\Contracts\Composition::andReturn()</a></code></div>
 			</div>
 			</div></td>
 		</tr>
@@ -296,6 +290,13 @@ close all used files and external connections.</p>
 
 
 
+		<div class="panel panel-default">
+            <div class="panel-heading"><h3>Magic methods inherited from <a href="class-Pawelzny.MetaClass.Contracts.Composition.html#methods">Pawelzny\MetaClass\Contracts\Composition</a></h3></div>
+			<p class="elementList">
+				<code><a href="class-Pawelzny.MetaClass.Contracts.Composition.html#m_compose">compose()</a></code>, 
+				<code><a href="class-Pawelzny.MetaClass.Contracts.Composition.html#m_with">with()</a></code>
+			</p>
+		</div>
 
 
 

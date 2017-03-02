@@ -14,7 +14,8 @@ use Pawelzny\MetaClass\Exceptions\MetaMethodException;
 
 /**
  * Meta is an basic implementation.
- * It's not an abstract but should be treated like one.
+ * It can be used as stdClass with extra features
+ * like setters and predicates.
  *
  * @package Pawelzny\MetaClass
  */
@@ -52,6 +53,8 @@ class Meta implements MetaExpansible
         if (! array_key_exists($method, $this->methods)) {
             throw new MetaMethodException($method);
         }
+
+        $arguments[] = $this;
 
         return call_user_func_array($this->methods[$method], $arguments);
     }
@@ -143,7 +146,7 @@ class Meta implements MetaExpansible
      * @api
      * @return static
      */
-    protected function setMethod($name, callable $method)
+    public function setMethod($name, callable $method)
     {
         $this->methods[$name] = $method;
 
@@ -159,7 +162,7 @@ class Meta implements MetaExpansible
      * @api
      * @return static
      */
-    protected function setAttribute($name, $value)
+    public function setAttribute($name, $value)
     {
         $this->attributes[$name] = $value;
 

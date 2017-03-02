@@ -55,6 +55,7 @@ class Meta implements MetaExpansible
         }
 
         $arguments[] = $this;
+
         return call_user_func_array($this->methods[$method], $arguments);
     }
 

@@ -8,8 +8,8 @@
  */
 namespace Pawelzny\MetaClass;
 
-use Pawelzny\MetaClass\Contracts\Composition;
 use Pawelzny\MetaClass\Contracts\Composable;
+use Pawelzny\MetaClass\Contracts\Composition;
 use Pawelzny\MetaClass\Contracts\MetaExpansible;
 use Pawelzny\MetaClass\Exceptions\ComposeException;
 use Pawelzny\Support\Mutation;
